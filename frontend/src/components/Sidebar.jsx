@@ -7,6 +7,7 @@ import {
   Person,
   Settings,
   Storefront,
+  AccountTree
 } from "@mui/icons-material";
 import {
   Box,
@@ -15,13 +16,14 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Paper,
   Switch,
 } from "@mui/material";
+import Add from "./Add";
 
 const Sidebar = ({mode, setMode}) => {
   return (
-    <Box flex={1}>
-      <Box position="fixed" gap='20px' bgcolor={"background.primary"}>
+      <Paper position="fixed" gap='20px' bgcolor={"background.primary"} sx={{height: '100%'}}>
         <List>
           <ListItem disablePadding>
             <ListItemButton component="a" href="#home">
@@ -32,35 +34,19 @@ const Sidebar = ({mode, setMode}) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#pages">
+            <ListItemButton component="a" href="#projects">
               <ListItemIcon>
-                <Pages />
+                <AccountTree />
               </ListItemIcon>
-              <ListItemText primary="Pages" />
+              <ListItemText primary="Projects" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#groups">
+            <ListItemButton component="a" href="#coworkers">
               <ListItemIcon>
                 <Group />
               </ListItemIcon>
-              <ListItemText primary="Groups" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#market">
-              <ListItemIcon>
-                <Storefront />
-              </ListItemIcon>
-              <ListItemText primary="Groups" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#friends">
-              <ListItemIcon>
-                <Person />
-              </ListItemIcon>
-              <ListItemText primary="Friends" />
+              <ListItemText primary="Personel" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
@@ -88,8 +74,8 @@ const Sidebar = ({mode, setMode}) => {
             </ListItemButton>
           </ListItem>
         </List>
-      </Box>
-    </Box>
+        <Add />
+      </Paper>
   );
 };
 

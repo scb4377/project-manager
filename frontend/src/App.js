@@ -21,13 +21,17 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper sx={{ height: "100vh" }}>
+      <Paper sx={{ height: "100%" }}>
         <Box>
           <Navbar />
-          <Stack direction="row" spacing={2} justifyContent="space-between">
-            <Sidebar setMode={setMode} mode={mode} />
-            <Home />
-          </Stack>
+          <Box flexDirection='row' spacing={2} justifyContent="space-between" sx={{display: 'flex'}} >
+            <Box flex={1}>
+              <Sidebar setMode={setMode} mode={mode} style={{height: '100%'}} />
+            </Box>
+            <Box flex={11} sx={{width: '100%',  }}>
+              <Home />
+            </Box>
+          </Box>
         </Box>
       </Paper>
     </ThemeProvider>
