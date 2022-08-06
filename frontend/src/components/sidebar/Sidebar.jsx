@@ -66,14 +66,17 @@ const Sidebar = ({ mode, setMode }) => {
           </ListItem>
         </StyledNavLink>
 
-        <ListItem disablePadding>
-          <ListItemButton component="a" href="#simple-list">
+        <StyledNavLink to="/settings">
+          <ListItem disablePadding>
+          <ListItemButton>
             <ListItemIcon>
               <Settings sx={{ color: "accent.primary" }} />
             </ListItemIcon>
             <ListItemText primary="Settings" />
           </ListItemButton>
         </ListItem>
+        </StyledNavLink>
+        
         <ListItem disablePadding>
           <ListItemButton component="a" href="#simple-list">
             <ListItemIcon>

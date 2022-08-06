@@ -1,9 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import PersonnelList from "./PersonnelList";
 
 const Personnel = ({ mode }) => {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", flexDirection: "column", marginRight: '8px' }}>
       <Box
         p={2}
         m={2}
@@ -23,6 +23,9 @@ const Personnel = ({ mode }) => {
         gap={3}
         boxShadow={5}
       >
+        <Typography pt={2} pl={2} fontWeight={400} variant="h6">
+          Teams
+        </Typography>
         <PersonnelList />
       </Box>
     </div>

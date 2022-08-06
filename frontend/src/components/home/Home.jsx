@@ -7,7 +7,7 @@ import Featured from "./Featured";
 const Home = ({mode}) => {
   return (
     <>
-      <Box flex={6} p={2} mr={2} gap={3} sx={{ display: "flex", }}>
+      <Box flex={6} p={2} gap={3} sx={{ display: "flex", scrollBehavior: 'smooth' }}>
         <Widget type="projects" mode={mode} />
         <Widget type="priority" mode={mode} />
         <Widget type="tasks" mode={mode} />
@@ -33,7 +33,7 @@ const Home = ({mode}) => {
         bgcolor={mode === 'dark' ? "background.dark" : "background.light"} 
           flex={4}
           p={2}
-          mr={4}
+          mr={2}
           sx={{
             borderRadius: "5px",
             boxShadow: 5,
@@ -51,7 +51,7 @@ const Home = ({mode}) => {
         flex={6}
         p={2}
         ml={2}
-        mr={4}
+        mr={2}
         mt={2}
         mb={2}
         sx={{
@@ -60,7 +60,7 @@ const Home = ({mode}) => {
         }}
       >
         <Typography mb={2} fontWeight={400} variant="h6">
-          Current Tickets
+          Needs Immeadiate Attention
         </Typography>
         <HomeList />
       </Box>

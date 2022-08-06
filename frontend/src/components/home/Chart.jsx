@@ -9,7 +9,7 @@ import {
   Area,
   ResponsiveContainer,
 } from "recharts";
-import { data } from "./Data";
+import { data } from "../Data";
 
 const Chart = () => {
   return (

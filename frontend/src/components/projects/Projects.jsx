@@ -74,7 +74,7 @@ const Projects = ({mode}) => {
   }
 
   return (
-    <Box p={2} m={2} mr={3} bgcolor={mode === 'dark' ? "background.dark" : "background.light"}  borderRadius="5px" gap={3} boxShadow={5}>
+    <Box p={2} m={2} mr={4} bgcolor={mode === 'dark' ? "background.dark" : "background.light"}  borderRadius="5px" gap={3} boxShadow={5}>
       <TableContainer>
         <Table>
           <TableHead>
@@ -126,17 +126,19 @@ const Projects = ({mode}) => {
               data,
               getComparator(direction, valueToOrderBy)
             ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((project, i) => (
-              <TableRow key={i}>
+              <TableRow key={i} sx={{cursor: 'pointer', ":hover": {backgroundColor: mode === 'dark' ? 'background.dark' : 'lightgray'}}}>
                 <TableCell>{project.name}</TableCell>
                 <TableCell>{project.created}</TableCell>
                 <TableCell>{project.sdlc}</TableCell>
-                <TableCell sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
+                <TableCell align="left">
+                  <div></div>
                     {project.team[0]}
-                    <AvatarGroup max={4}>
-                        {project.team[1].map(person => (
-                            <Avatar alt={person} src="" />
+                    
+                    {/* <AvatarGroup max={4}>
+                        {project.team[1].map((person, i) => (
+                            <Avatar key={i} alt={person} src="" />
                         ))}
-                    </AvatarGroup>
+                    </AvatarGroup> */}
                 </TableCell>
               </TableRow>
             ))}

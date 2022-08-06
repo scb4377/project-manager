@@ -1,17 +1,19 @@
 import {
   Box,
   createTheme,
+  CssBaseline,
   Paper,
-  Stack,
   ThemeProvider,
 } from "@mui/material";
 import { useState } from "react";
-import Home from "./components/Home";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
+import Home from "./components/home/Home";
+import Navbar from "./components/nav/Navbar";
+import Sidebar from "./components/sidebar/Sidebar";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Projects from "./components/Projects";
-import Personnel from "./components/Personnel";
+import Projects from "./components/projects/Projects";
+import Personnel from "./components/personnel/Personnel";
+import Settings from "./components/settings/Settings";
+import BugView from "./components/bug/BugView";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -30,6 +32,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Paper sx={{ height: "100%" }}>
         <Box>
           <Navbar />
@@ -43,6 +46,8 @@ function App() {
                   <Route path='/' element={<Home mode={mode} />} />
                   <Route path='/projects' element={<Projects mode={mode} />} />
                   <Route path="/personnel" element={<Personnel mode={mode}  />} />
+                  <Route path="/settings" element={<Settings mode={mode} />} />
+                  <Route path="/bugview" element={<BugView mode={mode} />} />
                 </Routes>
             </Box>
           </Box>

@@ -274,6 +274,7 @@ const data = [
               <Box sx={{ margin: 1 }}>
                 <Typography
                   variant="h6"
+                  mb={2}
                   fontWeight={400}
                   gutterBottom
                   component="div"
