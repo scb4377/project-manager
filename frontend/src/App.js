@@ -1,12 +1,12 @@
 import {
   Box,
   createTheme,
-  Divider,
   Paper,
   Stack,
   ThemeProvider,
 } from "@mui/material";
 import { useState } from "react";
+import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 
@@ -26,6 +26,7 @@ function App() {
           <Navbar />
           <Stack direction="row" spacing={2} justifyContent="space-between">
             <Sidebar setMode={setMode} mode={mode} />
+            <Home />
           </Stack>
         </Box>
       </Paper>
