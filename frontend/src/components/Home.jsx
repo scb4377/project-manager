@@ -3,7 +3,7 @@ import Widget from "./Widget"
 
 const Home = () => {
   return (
-    <Box flex={4} p={2} gap={20} sx={{display: 'flex'}}>
+    <Box flex={6} p={2} gap={10} sx={{display: 'flex'}}>
         <Widget />
         <Widget />
         <Widget />
