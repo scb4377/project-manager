@@ -25,23 +25,19 @@ import Add from "./Add";
 
 const StyledNavLink = styled(NavLink)({
   textDecoration: "none",
-  listStyleType: 'none',
-  color: 'gray',
+  listStyleType: "none",
+  color: "gray",
 });
 
 const Sidebar = ({ mode, setMode }) => {
   return (
-    <Paper
-      position="fixed"
-      gap="20px"
-      sx={{ height: "100%" }}
-    >
+    <Paper position="fixed" gap="20px" sx={{ height: "100%" }}>
       <List>
         <StyledNavLink to="/">
           <ListItem disablePadding>
             <ListItemButton>
-              <ListItemIcon >
-                <Home sx={{color: 'accent.primary'}}/>
+              <ListItemIcon>
+                <Home sx={{ color: "accent.primary" }} />
               </ListItemIcon>
               <ListItemText primary="Homepage" />
             </ListItemButton>
@@ -52,25 +48,28 @@ const Sidebar = ({ mode, setMode }) => {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <AccountTree sx={{color: 'accent.primary'}} />
+                <AccountTree sx={{ color: "accent.primary" }} />
               </ListItemIcon>
               <ListItemText primary="Projects" />
             </ListItemButton>
           </ListItem>
         </StyledNavLink>
 
-        <ListItem disablePadding>
-          <ListItemButton component="a" href="/projects">
-            <ListItemIcon>
-              <Group sx={{color: 'accent.primary'}} />
-            </ListItemIcon>
-            <ListItemText primary="Personel" />
-          </ListItemButton>
-        </ListItem>
+        <StyledNavLink to="/personnel">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <Group sx={{ color: "accent.primary" }} />
+              </ListItemIcon>
+              <ListItemText primary="Personnel" />
+            </ListItemButton>
+          </ListItem>
+        </StyledNavLink>
+
         <ListItem disablePadding>
           <ListItemButton component="a" href="#simple-list">
             <ListItemIcon>
-              <Settings sx={{color: 'accent.primary'}} />
+              <Settings sx={{ color: "accent.primary" }} />
             </ListItemIcon>
             <ListItemText primary="Settings" />
           </ListItemButton>
@@ -78,7 +77,7 @@ const Sidebar = ({ mode, setMode }) => {
         <ListItem disablePadding>
           <ListItemButton component="a" href="#simple-list">
             <ListItemIcon>
-              <AccountBox sx={{color: 'accent.primary'}} />
+              <AccountBox sx={{ color: "accent.primary" }} />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItemButton>
@@ -86,7 +85,7 @@ const Sidebar = ({ mode, setMode }) => {
         <ListItem disablePadding>
           <ListItemButton component="a" href="#simple-list">
             <ListItemIcon>
-              <ModeNight sx={{color: 'accent.primary'}} />
+              <ModeNight sx={{ color: "accent.primary" }} />
             </ListItemIcon>
             <Switch
               onChange={(e) => setMode(mode === "light" ? "dark" : "light")}

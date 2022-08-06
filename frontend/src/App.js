@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Projects from "./components/Projects";
+import Personnel from "./components/Personnel";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -41,6 +42,7 @@ function App() {
                 <Routes>
                   <Route path='/' element={<Home mode={mode} />} />
                   <Route path='/projects' element={<Projects mode={mode} />} />
+                  <Route path="/personnel" element={<Personnel mode={mode}  />} />
                 </Routes>
             </Box>
           </Box>
