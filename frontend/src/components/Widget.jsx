@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { KeyboardArrowUp, PersonOutlined } from "@mui/icons-material";
 
-const Widget = ({ type }) => {
+const Widget = ({ type, mode }) => {
   let data;
   let mongoData = {
     projects: 8
@@ -43,12 +43,12 @@ const Widget = ({ type }) => {
     default:
       break;
   }
-  console.log(data)
+  
   return (
     <Box
       justifyContent="space-between"
       flex={1}
-      bgcolor="background.default"
+      bgcolor={mode === 'dark' ? "background.dark" : "background.light"} 
       sx={{
         display: "flex",
         flexDirection: "row",

@@ -77,13 +77,14 @@ const HomeList = () => {
     <>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
+          <TableHead sx={{bgcolor: 'background.dark'}}>
+            <TableRow bgcolor="background.dark">
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  bgcolor="background.dark"
+                  style={{ minWidth: column.minWidth, }}
                 >
                   {column.label}
                 </TableCell>

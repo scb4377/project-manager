@@ -7,7 +7,7 @@ import {
   Person,
   Settings,
   Storefront,
-  AccountTree
+  AccountTree,
 } from "@mui/icons-material";
 import {
   Box,
@@ -17,65 +17,85 @@ import {
   ListItemIcon,
   ListItemText,
   Paper,
+  styled,
   Switch,
 } from "@mui/material";
+import { Link, NavLink } from "react-router-dom";
 import Add from "./Add";
 
-const Sidebar = ({mode, setMode}) => {
+const StyledNavLink = styled(NavLink)({
+  textDecoration: "none",
+  listStyleType: 'none',
+  color: 'gray',
+});
+
+const Sidebar = ({ mode, setMode }) => {
   return (
-      <Paper position="fixed" gap='20px' bgcolor={"background.primary"} sx={{height: '100%'}}>
-        <List>
+    <Paper
+      position="fixed"
+      gap="20px"
+      sx={{ height: "100%" }}
+    >
+      <List>
+        <StyledNavLink to="/">
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#home">
-              <ListItemIcon>
-                <Home />
+            <ListItemButton>
+              <ListItemIcon >
+                <Home sx={{color: 'accent.primary'}}/>
               </ListItemIcon>
               <ListItemText primary="Homepage" />
             </ListItemButton>
           </ListItem>
+        </StyledNavLink>
+
+        <StyledNavLink to="/projects">
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#projects">
+            <ListItemButton>
               <ListItemIcon>
-                <AccountTree />
+                <AccountTree sx={{color: 'accent.primary'}} />
               </ListItemIcon>
               <ListItemText primary="Projects" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#coworkers">
-              <ListItemIcon>
-                <Group />
-              </ListItemIcon>
-              <ListItemText primary="Personel" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Settings />
-              </ListItemIcon>
-              <ListItemText primary="Settings" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <AccountBox />
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <ModeNight />
-              </ListItemIcon>
-              <Switch onChange={(e) => setMode(mode === "light" ? "dark" : "light")} />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Add />
-      </Paper>
+        </StyledNavLink>
+
+        <ListItem disablePadding>
+          <ListItemButton component="a" href="/projects">
+            <ListItemIcon>
+              <Group sx={{color: 'accent.primary'}} />
+            </ListItemIcon>
+            <ListItemText primary="Personel" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton component="a" href="#simple-list">
+            <ListItemIcon>
+              <Settings sx={{color: 'accent.primary'}} />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton component="a" href="#simple-list">
+            <ListItemIcon>
+              <AccountBox sx={{color: 'accent.primary'}} />
+            </ListItemIcon>
+            <ListItemText primary="Profile" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton component="a" href="#simple-list">
+            <ListItemIcon>
+              <ModeNight sx={{color: 'accent.primary'}} />
+            </ListItemIcon>
+            <Switch
+              onChange={(e) => setMode(mode === "light" ? "dark" : "light")}
+            />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      <Add />
+    </Paper>
   );
 };
 
