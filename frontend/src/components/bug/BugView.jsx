@@ -31,7 +31,7 @@ const BugView = ({ mode }) => {
         bgcolor={mode === "dark" ? "background.dark" : "background.light"}
         sx={{ display: "flex", justifyContent: "space-evenly" }}
       >
-        <BugDetails />
+        <BugDetails bug={location.state} />
       </Box>
     </div>
   );

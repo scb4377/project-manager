@@ -31,7 +31,7 @@ const StyledNavLink = styled(NavLink)({
 
 const Sidebar = ({ mode, setMode }) => {
   return (
-    <Paper position="fixed" gap="20px" sx={{ height: "100%" }}>
+    <Paper position="fixed" gap="20px" sx={{ height: "calc(100vh - 70px)" }}>
       <List>
         <StyledNavLink to="/">
           <ListItem disablePadding>

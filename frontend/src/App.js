@@ -22,7 +22,8 @@ function App() {
     palette: {
       mode: mode,
       background: {
-        dark: 'rgba(255,255,255,.05)'
+        dark: 'rgba(255,255,255,.05)',
+        gray: 'lightgray'
       },
       accent: {
         primary: 'skyblue'
@@ -38,10 +39,10 @@ function App() {
           <Navbar />
           <Router>
             <Box flexDirection='row' spacing={2} justifyContent="space-between" sx={{display: 'flex'}} >
-            <Box flex={1} bgcolor={mode === 'dark' ? "background.dark" : "background.light"} >
-              <Sidebar setMode={setMode} mode={mode} style={{height: '100%'}} />
+            <Box flex={1} >
+              <Sidebar setMode={setMode} mode={mode} style={{height: 'calc(100vh - 70px)'}} />
             </Box>
-            <Box flex={11} sx={{width: '100%', minHeight: 'calc(100vh - 65px)', bgcolor: 'background.default'  }}>
+            <Box flex={11} sx={{width: '100%', height: 'calc(100vh - 70px)', minHeight: 'calc(100vh - 65px)', overflowY: 'scroll'  }}>
                 <Routes>
                   <Route path='/' element={<Home mode={mode} />} />
                   <Route path='/projects' element={<Projects mode={mode} />} />

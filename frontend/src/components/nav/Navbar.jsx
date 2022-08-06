@@ -39,7 +39,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" sx={{bgcolor: 'accent.primary'}}>
       <StyledToolbar>
         <Typography variant="h6">Dev</Typography>
         <Icons>

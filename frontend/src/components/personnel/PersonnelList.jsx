@@ -309,7 +309,7 @@ const data = [
     );
   };
 
-const PersonnelList = () => {
+const PersonnelList = ({ mode }) => {
   return (
     <TableContainer component={Paper}>
           <Table aria-label="collapsible table">
@@ -320,7 +320,7 @@ const PersonnelList = () => {
                 <TableCell align="center">Employees</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody sx={{ bgcolor: mode === 'dark' ? 'background.dark' : 'background.light'}}>
               {data.map((team, i) => (
                 <Row key={i} row={team} />
               ))}

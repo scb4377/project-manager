@@ -23,10 +23,10 @@ const Personnel = ({ mode }) => {
         gap={3}
         boxShadow={5}
       >
-        <Typography pt={2} pl={2} fontWeight={400} variant="h6">
+        <Typography pt={2} pl={2} mb={2} fontWeight={400} variant="h6">
           Teams
         </Typography>
-        <PersonnelList />
+        <PersonnelList mode={mode} />
       </Box>
     </div>
   );
