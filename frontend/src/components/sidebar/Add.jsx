@@ -43,9 +43,12 @@ const Add = () => {
           position: "fixed",
           bottom: 20,
           left: { xs: "calc(50% - 25px)", md: 60 },
+          backgroundColor: 'accent.primary',
+          color: 'white',
+          "&:hover": {backgroundColor: 'accent.hover'},
         }}
       >
-        <Fab color="primary" aria-label="add">
+        <Fab aria-label="add">
           <AddIcon />
         </Fab>
       </Tooltip>

@@ -10,6 +10,7 @@ import {
   TablePagination,
   TableRow,
   TableSortLabel,
+  Typography,
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
@@ -75,6 +76,9 @@ const Projects = ({mode}) => {
 
   return (
     <Box p={2} m={2} mr={4} bgcolor={mode === 'dark' ? "background.dark" : "background.light"}  borderRadius="5px" gap={3} boxShadow={5}>
+      <Typography mb={2} fontWeight={400} variant="h6">
+        Projects
+      </Typography>
       <TableContainer>
         <Table>
           <TableHead>

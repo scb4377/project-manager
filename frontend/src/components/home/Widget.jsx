@@ -55,7 +55,7 @@ const Widget = ({ type, mode }) => {
         padding: "10px",
         boxShadow: 5,
         borderRadius: "5px",
-        marginLeft: '0'
+        marginLeft: '0',
       }}
     >
       <div

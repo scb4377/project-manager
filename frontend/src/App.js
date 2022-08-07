@@ -9,7 +9,7 @@ import { useState } from "react";
 import Home from "./components/home/Home";
 import Navbar from "./components/nav/Navbar";
 import Sidebar from "./components/sidebar/Sidebar";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Projects from "./components/projects/Projects";
 import Personnel from "./components/personnel/Personnel";
 import Settings from "./components/settings/Settings";
@@ -22,12 +22,13 @@ function App() {
     palette: {
       mode: mode,
       background: {
-        dark: 'rgba(255,255,255,.05)',
-        gray: 'lightgray'
+        dark: "rgba(255,255,255,.05)",
+        gray: "lightgray",
       },
       accent: {
-        primary: 'skyblue'
-      }
+        primary: "#2D6675",
+        hover: "#3F8698",
+      },
     },
   });
 
@@ -38,22 +39,41 @@ function App() {
         <Box>
           <Navbar />
           <Router>
-            <Box flexDirection='row' spacing={2} justifyContent="space-between" sx={{display: 'flex'}} >
-            <Box flex={1} >
-              <Sidebar setMode={setMode} mode={mode} style={{height: 'calc(100vh - 70px)'}} />
-            </Box>
-            <Box flex={11} sx={{width: '100%', height: 'calc(100vh - 70px)', minHeight: 'calc(100vh - 65px)', overflowY: 'scroll'  }}>
+            <Box
+              flexDirection="row"
+              spacing={2}
+              justifyContent="space-between"
+              sx={{ display: "flex" }}
+            >
+              <Box flex={1}>
+                <Sidebar
+                  setMode={setMode}
+                  mode={mode}
+                  style={{ height: "calc(100vh - 70px)" }}
+                />
+              </Box>
+              <Box
+                flex={11}
+                sx={{
+                  width: "100%",
+                  height: "calc(100vh - 70px)",
+                  minHeight: "calc(100vh - 65px)",
+                  overflowY: "scroll",
+                }}
+              >
                 <Routes>
-                  <Route path='/' element={<Home mode={mode} />} />
-                  <Route path='/projects' element={<Projects mode={mode} />} />
-                  <Route path="/personnel" element={<Personnel mode={mode}  />} />
+                  <Route path="/" element={<Home mode={mode} />} />
+                  <Route path="/projects" element={<Projects mode={mode} />} />
+                  <Route
+                    path="/personnel"
+                    element={<Personnel mode={mode} />}
+                  />
                   <Route path="/settings" element={<Settings mode={mode} />} />
                   <Route path="/bugview" element={<BugView mode={mode} />} />
                 </Routes>
+              </Box>
             </Box>
-          </Box>
           </Router>
-          
         </Box>
       </Paper>
     </ThemeProvider>

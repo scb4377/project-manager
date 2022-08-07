@@ -37,6 +37,7 @@ const Home = ({mode}) => {
           sx={{
             borderRadius: "5px",
             boxShadow: 5,
+            backdropFilter: 'blur(20px) saturate(100%)'
           }}
         >
           <Typography mb={2} fontWeight={400} variant="h6">

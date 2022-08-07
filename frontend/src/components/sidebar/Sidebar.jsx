@@ -23,15 +23,18 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import Add from "./Add";
 
-const StyledNavLink = styled(NavLink)({
-  textDecoration: "none",
-  listStyleType: "none",
-  color: "gray",
-});
+
 
 const Sidebar = ({ mode, setMode }) => {
+
+  const StyledNavLink = styled(NavLink)({
+    textDecoration: "none",
+    listStyleType: "none",
+    color: mode === 'dark' ? 'white' : 'black'
+  });
+
   return (
-    <Paper position="fixed" gap="20px" sx={{ height: "calc(100vh - 70px)" }}>
+    <Paper position="fixed" gap="20px" sx={{ height: "calc(100vh - 60px)" }}>
       <List>
         <StyledNavLink to="/">
           <ListItem disablePadding>
