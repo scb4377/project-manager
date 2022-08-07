@@ -35,13 +35,13 @@ const UserBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Navbar = () => {
+const Navbar = ({mode}) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <AppBar position="sticky" sx={{bgcolor: 'accent.primary'}}>
-      <StyledToolbar>
-        <Typography variant="h6">Dev</Typography>
+    <AppBar position="sticky">
+      <StyledToolbar sx={{backgroundColor: mode === 'dark' ? 'background.dark' : 'accent.primary'}}>
+        <Typography p={1} m={0} variant="h6" sx={{backgroundColor: 'accent.primary', borderRadius: '5px'}}>Dev</Typography>
         <Icons>
           <Badge badgeContent={4} color="warning">
             <Notifications />

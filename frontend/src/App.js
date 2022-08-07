@@ -40,7 +40,8 @@ function App() {
       <CssBaseline />
       <Paper sx={{ height: "100%" }}>
         <Box>
-          <Navbar />
+            <Navbar mode={mode} />
+          
           <Router>
             <Box
               flexDirection="row"

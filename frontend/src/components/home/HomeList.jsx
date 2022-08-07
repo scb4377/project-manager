@@ -80,8 +80,8 @@ const HomeList = () => {
     <>
       <TableContainer >
         <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
+          <TableHead >
+            <TableRow >
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
