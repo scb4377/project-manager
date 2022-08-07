@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useLocation } from "react-router";
 import BugDetails from "./BugDetails";
+import MyLogs from "./MyLogs";
 
 const BugView = ({ mode }) => {
   const location = useLocation();
@@ -33,6 +34,7 @@ const BugView = ({ mode }) => {
       >
         <BugDetails bug={location.state} />
       </Box>
+      <MyLogs mode={mode} />
     </div>
   );
 };

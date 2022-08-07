@@ -25,6 +25,9 @@ function App() {
         dark: "rgba(255,255,255,.05)",
         gray: "lightgray",
       },
+      textInput: {
+        dark: "#FFF"
+      },
       accent: {
         primary: "#2D6675",
         hover: "#3F8698",
