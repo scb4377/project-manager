@@ -141,7 +141,6 @@ const ProjWidget = ({ mode, type }) => {
                   verticalAlign="middle"
                   align="left"
                 />
-                <Tooltip title="" />
               </RadialBarChart>
             </ResponsiveContainer>
           </Box>
