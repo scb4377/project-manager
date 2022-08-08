@@ -14,6 +14,7 @@ import Projects from "./components/projects/Projects";
 import Personnel from "./components/personnel/Personnel";
 import Settings from "./components/settings/Settings";
 import BugView from "./components/bug/BugView";
+import ProjectView from "./components/projects/ProjectView";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -49,7 +50,7 @@ function App() {
               justifyContent="space-between"
               sx={{ display: "flex" }}
             >
-              <Box flex={1}>
+              <Box >
                 <Sidebar
                   setMode={setMode}
                   mode={mode}
@@ -58,11 +59,14 @@ function App() {
               </Box>
               <Box
                 flex={11}
+                maxWidth="1100px"
+                
                 sx={{
                   width: "100%",
                   height: "calc(100vh - 70px)",
                   minHeight: "calc(100vh - 65px)",
                   overflowY: "scroll",
+                  margin: {xl: 'auto'}
                 }}
               >
                 <Routes>
@@ -74,6 +78,7 @@ function App() {
                   />
                   <Route path="/settings" element={<Settings mode={mode} />} />
                   <Route path="/bugview" element={<BugView mode={mode} />} />
+                  <Route path="/projectview" element={<ProjectView mode={mode} />} />
                 </Routes>
               </Box>
             </Box>

@@ -34,7 +34,7 @@ const Sidebar = ({ mode, setMode }) => {
   });
 
   return (
-    <Paper position="fixed" gap="20px" sx={{ height: "calc(100vh - 60px)" }}>
+    <Paper position="fixed" gap="20px" sx={{ height: "calc(100vh - 65px)" }}>
       <List sx={{backgroundColor: 'background.dark', height: '100%'}}>
         <StyledNavLink to="/">
           <ListItem disablePadding>

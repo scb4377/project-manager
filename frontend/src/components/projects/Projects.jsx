@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 
 const data = [
   { name: "Test Project", created: "06-07-2020", sdlc: 'Planning', team: ['A', ['Andrew', "Robert", "Amy"]] },
@@ -53,6 +54,12 @@ const Projects = ({mode}) => {
   const [valueToOrderBy, setValueToOrderBy] = useState("name");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const navigate = useNavigate()
+
+  const handleProjClick = (project) => {
+    navigate('/projectview', {state:project})
+  }
 
   const handleRequestSort = (e, prop) => {
     const isAscending = valueToOrderBy === prop && direction === "asc";
@@ -130,7 +137,7 @@ const Projects = ({mode}) => {
               data,
               getComparator(direction, valueToOrderBy)
             ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((project, i) => (
-              <TableRow key={i} sx={{cursor: 'pointer', ":hover": {backgroundColor: mode === 'dark' ? 'background.dark' : 'lightgray'}}}>
+              <TableRow onClick={() => handleProjClick(project)} key={i} sx={{cursor: 'pointer', ":hover": {backgroundColor: mode === 'dark' ? 'background.dark' : 'lightgray'}}} >
                 <TableCell>{project.name}</TableCell>
                 <TableCell>{project.created}</TableCell>
                 <TableCell>{project.sdlc}</TableCell>
