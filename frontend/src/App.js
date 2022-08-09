@@ -15,6 +15,7 @@ import Personnel from "./components/personnel/Personnel";
 import Settings from "./components/settings/Settings";
 import BugView from "./components/bug/BugView";
 import ProjectView from "./components/projects/ProjectView";
+import Profile from "./components/profile/Profile";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -89,6 +90,10 @@ function App() {
                     <Route
                       path="/projectview"
                       element={<ProjectView mode={mode} />}
+                    />
+                    <Route
+                      path="/profile"
+                      element={<Profile mode={mode} />}
                     />
                   </Routes>
                 </Box>
