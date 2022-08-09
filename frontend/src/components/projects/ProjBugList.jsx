@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router";
+import { Box } from "@mui/material";
 
 const columns = [
-  { field: "issue", headerName: "Issue", flex: 3 },
+  {
+    field: "issue",
+    headerName: "Issue",
+    headerClassName: "gridHeader",
+    flex: 3,
+  },
   {
     field: "priority",
     headerName: "Priority",
+    headerClassName: "gridHeader",
     flex: 1,
     align: "center",
     renderCell: (cellValues) => {
@@ -48,10 +55,11 @@ const columns = [
     },
   },
 
-  { field: "date", headerName: "Date", flex: 1 },
+  { field: "date", headerName: "Date", headerClassName: "gridHeader", flex: 1 },
   {
     field: "status",
     headerName: "Status",
+    headerClassName: "gridHeader",
     flex: 1,
     align: "center",
     renderCell: (cellValues) => {
@@ -99,7 +107,13 @@ const ProjBugList = () => {
   };
 
   return (
-    <div style={{ height: 370, width: "100%" }}>
+    <Box
+      sx={{
+        height: 370,
+        width: "100%",
+        "& .gridHeader": { color: "white", bgcolor: "accent.primary" },
+      }}
+    >
       <DataGrid
         rows={rows}
         columns={columns}
@@ -110,7 +124,7 @@ const ProjBugList = () => {
         disableSelectionOnClick={true}
         onRowClick={(e) => handleBugClick(e.row)}
       />
-    </div>
+    </Box>
   );
 };
 

@@ -64,7 +64,7 @@ const ProjectView = ({ mode }) => {
             borderRadius="5px"
             color="white"
             boxShadow={5}
-            bgcolor={"accent.hover"}
+            bgcolor={"accent.primary"}
           >
             <Typography fontWeight={200} variant="label">
               Project Stage

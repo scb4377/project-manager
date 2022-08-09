@@ -4,11 +4,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 const columns = [
-  { field: "project", headerName: "Project", flex: 2 },
-  { field: "issue", headerName: "Issue", flex: 3 },
+  { field: "project", headerName: "Project", headerClassName: 'gridHeader', flex: 2 },
+  { field: "issue", headerName: "Issue", headerClassName: 'gridHeader',  flex: 3 },
   {
     field: "priority",
     headerName: "Priority",
+    headerClassName: 'gridHeader', 
     flex: 1,
     align: "center",
     renderCell: (cellValues) => {
@@ -49,10 +50,11 @@ const columns = [
       );
     },
   },
-  { field: "date", headerName: "Date", flex: 1 },
+  { field: "date", headerName: "Date",  headerClassName: 'gridHeader',  flex: 1 },
   {
     field: "status",
     headerName: "Status",
+    headerClassName: 'gridHeader', 
     flex: 1,
     align: "center",
     renderCell: (cellValues) => {
@@ -179,7 +181,7 @@ const HomeList = () => {
   };
 
   return (
-    <Box height={400}>
+    <Box height={400} sx={{"& .gridHeader": { color: 'white', bgcolor: 'accent.primary'}}}>
       <DataGrid
         rows={rows}
         columns={columns}

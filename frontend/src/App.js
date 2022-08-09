@@ -20,6 +20,11 @@ function App() {
   const [mode, setMode] = useState("light");
 
   const theme = createTheme({
+    root: {
+      "&.MuiDataGrid-columnHeaders": {
+        color: "#2D6675"
+      }
+    },
     palette: {
       mode: mode,
       background: {
