@@ -29,7 +29,7 @@ function App() {
     palette: {
       mode: mode,
       primary: {
-        main: "#2D6675"
+        main: "#2D6675",
       },
       background: {
         dark: "rgba(255,255,255,.05)",
@@ -50,9 +50,8 @@ function App() {
       <CssBaseline />
       <Paper sx={{ height: "100%" }}>
         <Box>
-          <Navbar mode={mode} />
-
           <Router>
+            <Navbar mode={mode} />
             <Box
               flexDirection="row"
               spacing={2}

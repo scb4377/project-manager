@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -35,19 +36,36 @@ const UserBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Navbar = ({mode}) => {
+const Navbar = ({ mode }) => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleMenuClick = (e) => {
+    navigate("/profile");
+  };
 
   return (
     <AppBar position="sticky">
-      <StyledToolbar sx={{backgroundColor: mode === 'dark' ? 'background.dark' : 'accent.primary'}}>
-        <Typography p={1} m={0} variant="h6" sx={{backgroundColor: 'accent.primary', borderRadius: '5px'}}>Dev</Typography>
+      <StyledToolbar
+        sx={{
+          backgroundColor:
+            mode === "dark" ? "background.dark" : "accent.primary",
+        }}
+      >
+        <Typography
+          p={1}
+          m={0}
+          variant="h6"
+          sx={{ backgroundColor: "accent.primary", borderRadius: "5px" }}
+        >
+          Dev
+        </Typography>
         <Icons>
           <Badge badgeContent={4} color="warning">
             <Notifications />
           </Badge>
           <Avatar
-            onClick={e=>setOpen(true)}
+            onClick={(e) => setOpen(true)}
             sx={{ width: 30, height: 30 }}
             src="https://miro.medium.com/max/909/1*_iikfMGYF3RH4OZ0yeQYnQ.png"
           />
@@ -67,7 +85,7 @@ const Navbar = ({mode}) => {
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <MenuItem>Profile</MenuItem>
+        <MenuItem onClick={handleMenuClick}>Profile</MenuItem>
         <MenuItem>My Account</MenuItem>
         <MenuItem>Logout</MenuItem>
       </Menu>

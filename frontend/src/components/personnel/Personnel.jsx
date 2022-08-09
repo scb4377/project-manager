@@ -9,7 +9,6 @@ const Personnel = ({ mode }) => {
         mr={3}
         p={2}
         bgcolor={mode === "dark" ? "background.dark" : "background.light"}
-        borderRadius="5px"
         gap={3}
         boxShadow={5}
       >
