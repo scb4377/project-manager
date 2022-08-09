@@ -13,13 +13,15 @@ import {
 } from "recharts";
 
 const data = [
-    { name: 'Critical', value: 400 },
-    { name: 'Major', value: 300 },
-    { name: 'Minor', value: 300 },
-    { name: 'Low', value: 200 },
+    { name: 'Defining', value: 5 },
+    { name: 'Planning', value: 3 },
+    { name: 'Designing', value: 8 },
+    { name: 'Building', value: 4 },
+    { name: 'Deployment', value: 9 },
+    { name: 'Testing', value: 14 },
   ];
   
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF8042', '#FF8042'];
   
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {

@@ -25,13 +25,21 @@ const Chart = () => {
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <defs>
-            <linearGradient id="OpenTotal" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+            <linearGradient id="critical" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#ff2800" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#ff2800" stopOpacity={0.3} />
             </linearGradient>
-            <linearGradient id="ClosedTotal" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+            <linearGradient id="major" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#E18B16" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#E18B16" stopOpacity={0.3} />
+            </linearGradient>
+            <linearGradient id="minor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#F1E04A" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#F1E04A" stopOpacity={0.3} />
+            </linearGradient>
+            <linearGradient id="low" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#72B5BE" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#72B5BE" stopOpacity={0.3} />
             </linearGradient>
           </defs>
           <XAxis dataKey="name" />
@@ -40,17 +48,31 @@ const Chart = () => {
           <Tooltip />
           <Area
             type="monotone"
-            dataKey="OpenTotal"
-            stroke="#8884d8"
+            dataKey="critical"
+            stroke="#ff2800"
             fillOpacity={1}
-            fill="url(#OpenTotal)"
+            fill="url(#critical)"
           />
           <Area
             type="monotone"
-            dataKey="ClosedTotal"
-            stroke="#82ca9d"
+            dataKey="major"
+            stroke="#E18B16"
             fillOpacity={1}
-            fill="url(#ClosedTotal)"
+            fill="url(#major)"
+          />
+          <Area
+            type="monotone"
+            dataKey="minor"
+            stroke="#F1E04A"
+            fillOpacity={1}
+            fill="url(#minor)"
+          />
+          <Area
+            type="monotone"
+            dataKey="low"
+            stroke="#72B5BE"
+            fillOpacity={1}
+            fill="url(#low)"
           />
         </AreaChart>
       </ResponsiveContainer>
