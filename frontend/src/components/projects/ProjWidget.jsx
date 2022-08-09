@@ -1,4 +1,4 @@
-import { Box, Tooltip } from "@mui/material";
+import { Box, Tooltip, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import {
@@ -18,25 +18,25 @@ const data = [
     name: "Low",
     uv: 10,
     pv: 9800,
-    fill: "#82ca9d",
+    fill: "#55ff04",
   },
   {
     name: "Minor",
     uv: 9,
     pv: 1398,
-    fill: "#8dd1e1",
+    fill: "#eaf600",
   },
   {
     name: "Major",
     uv: 12,
     pv: 4567,
-    fill: "#F6AA00",
+    fill: "#ffae04",
   },
   {
     name: "Critical",
     uv: 5,
     pv: 2400,
-    fill: "#99180D",
+    fill: "#ff2800",
   },
 ];
 
@@ -106,14 +106,23 @@ const ProjWidget = ({ mode, type }) => {
         height="max-content"
         display={"flex"}
         justifyContent="space-between"
+        minWidth={type === "barchart" ? "612px" : "400px"}
         sx={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          overflow: "hidden",
         }}
       >
         {radBar === "radbar" && (
           <Box height={200} width={400}>
+            <Typography
+              variant="h6"
+              fontWeight={400}
+              sx={{ borderBottom: "0.5px solid gray", width: "max-content" }}
+            >
+              Priority
+            </Typography>
             <ResponsiveContainer>
               <RadialBarChart
                 width={400}
@@ -147,22 +156,24 @@ const ProjWidget = ({ mode, type }) => {
         )}
 
         {barchart && (
-          <Box height={200} width={580}>
+          <Box height="100%" width={580}>
+            <Typography mb={2} variant="h6" fontWeight={400} sx={{borderBottom: '0.5px solid gray', width: 'max-content'}}>Open/Close</Typography>
             <ResponsiveContainer>
               <BarChart
                 width={730}
                 height={250}
                 data={dataBar}
-                margin={{ left: 0 }}
+                margin={{ left: 0, top: 0, right: 0, bottom: 0 }}
                 barCategoryGap={3}
+                style={{ transform: "translateX(-4%)" }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="open" fill="#02a1ae" />
-                <Bar dataKey="closed" fill="#0f02ae" />
+                <Bar dataKey="open" fill="#5da56b" />
+                <Bar dataKey="closed" fill="#a8382c" />
               </BarChart>
             </ResponsiveContainer>
           </Box>

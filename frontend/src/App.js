@@ -22,8 +22,8 @@ function App() {
   const theme = createTheme({
     root: {
       "&.MuiDataGrid-columnHeaders": {
-        color: "#2D6675"
-      }
+        color: "#2D6675",
+      },
     },
     palette: {
       mode: mode,
@@ -32,7 +32,7 @@ function App() {
         gray: "lightgray",
       },
       textInput: {
-        dark: "#FFF"
+        dark: "#FFF",
       },
       accent: {
         primary: "#2D6675",
@@ -46,8 +46,8 @@ function App() {
       <CssBaseline />
       <Paper sx={{ height: "100%" }}>
         <Box>
-            <Navbar mode={mode} />
-          
+          <Navbar mode={mode} />
+
           <Router>
             <Box
               flexDirection="row"
@@ -55,36 +55,43 @@ function App() {
               justifyContent="space-between"
               sx={{ display: "flex" }}
             >
-              <Box >
+              <Box>
                 <Sidebar
                   setMode={setMode}
                   mode={mode}
                   style={{ height: "calc(100vh - 70px)" }}
                 />
               </Box>
-              <Box
-                flex={11}
-                maxWidth="1100px"
-                
-                sx={{
-                  width: "100%",
-                  height: "calc(100vh - 70px)",
-                  minHeight: "calc(100vh - 65px)",
-                  overflowY: "scroll",
-                  margin: {xl: 'auto'}
-                }}
-              >
-                <Routes>
-                  <Route path="/" element={<Home mode={mode} />} />
-                  <Route path="/projects" element={<Projects mode={mode} />} />
-                  <Route
-                    path="/personnel"
-                    element={<Personnel mode={mode} />}
-                  />
-                  <Route path="/settings" element={<Settings mode={mode} />} />
-                  <Route path="/bugview" element={<BugView mode={mode} />} />
-                  <Route path="/projectview" element={<ProjectView mode={mode} />} />
-                </Routes>
+              <Box sx={{overflowY: 'scroll', width: '100%', height: "calc(100vh - 70px)", minHeight: "100%",}}>
+                <Box
+                  flex={11}
+                  maxWidth="1100px"
+                  sx={{
+                    width: "100%",
+                    margin: 'auto',
+                  }}
+                >
+                  <Routes>
+                    <Route path="/" element={<Home mode={mode} />} />
+                    <Route
+                      path="/projects"
+                      element={<Projects mode={mode} />}
+                    />
+                    <Route
+                      path="/personnel"
+                      element={<Personnel mode={mode} />}
+                    />
+                    <Route
+                      path="/settings"
+                      element={<Settings mode={mode} />}
+                    />
+                    <Route path="/bugview" element={<BugView mode={mode} />} />
+                    <Route
+                      path="/projectview"
+                      element={<ProjectView mode={mode} />}
+                    />
+                  </Routes>
+                </Box>
               </Box>
             </Box>
           </Router>

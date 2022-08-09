@@ -8,8 +8,42 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useLocation } from "react-router-dom";
+import {
+  Legend,
+  RadialBar,
+  RadialBarChart,
+  ResponsiveContainer,
+} from "recharts";
 import ProjBugList from "./ProjBugList";
+import ProjCommentList from "./ProjCommentList";
 import ProjWidget from "./ProjWidget";
+
+const data = [
+  {
+    name: "Low",
+    uv: 10,
+    pv: 9800,
+    fill: "#55ff04",
+  },
+  {
+    name: "Minor",
+    uv: 9,
+    pv: 1398,
+    fill: "#eaf600",
+  },
+  {
+    name: "Major",
+    uv: 12,
+    pv: 4567,
+    fill: "#ffae04",
+  },
+  {
+    name: "Critical",
+    uv: 5,
+    pv: 2400,
+    fill: "#ff2800",
+  },
+];
 
 const StyledDiv = styled("div")({
   display: "flex",
@@ -32,16 +66,16 @@ const ProjectView = ({ mode }) => {
       margin="auto"
       gap={3}
     >
-      <StyledDiv>
+      {/* <StyledDiv>
         <ProjWidget mode={mode} type="barchart" />
         <ProjWidget mode={mode} type="radialbar" />
-      </StyledDiv>
+      </StyledDiv> */}
       <Box
         p={2}
         boxShadow={5}
         borderRadius="5px"
         bgcolor={mode === "dark" ? "background.dark" : "background.default"}
-        sx={{ width: "100%" }}
+        sx={{ width: "100%", position: "relative" }}
       >
         <span
           style={{
@@ -53,6 +87,7 @@ const ProjectView = ({ mode }) => {
           <Typography
             variant="h4"
             fontWeight={400}
+            sx={{ borderBottom: "0.5px solid gray", width: "max-content" }}
           >
             {state.name}
           </Typography>
@@ -72,6 +107,41 @@ const ProjectView = ({ mode }) => {
             <Typography>Design</Typography>
           </Box>
         </span>
+        <Box
+          height={300}
+          width={400}
+          sx={{ position: "absolute", top: 0, right: 0 }}
+        >
+          <ResponsiveContainer>
+            <RadialBarChart
+              width={400}
+              height={250}
+              innerRadius="20%"
+              outerRadius="100%"
+              data={data}
+              startAngle={180}
+              endAngle={0}
+              barCategoryGap={3}
+              cy={"80%"}
+            >
+              <RadialBar
+                minAngle={15}
+                label={{ fill: "#666", position: "insideStart" }}
+                background
+                clockWise={true}
+                dataKey="uv"
+              />
+              <Legend
+                iconSize={10}
+                width={120}
+                height={140}
+                layout="vertical"
+                verticalAlign="middle"
+                align="left"
+              />
+            </RadialBarChart>
+          </ResponsiveContainer>
+        </Box>
 
         <Box
           mb={2}
@@ -102,9 +172,11 @@ const ProjectView = ({ mode }) => {
           <Typography mb={2}>Assignees</Typography>
           <Stack
             direction="row"
-            spacing={2}
+            spacing={3}
             display="flex"
             flexWrap="wrap"
+            maxWidth={400}
+            height="max-content"
             sx={{ marginBottom: "40px" }}
           >
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
@@ -120,9 +192,9 @@ const ProjectView = ({ mode }) => {
             <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
           </Stack>
         </Box>
-
         <ProjBugList />
       </Box>
+      <ProjCommentList mode={mode} />
     </Box>
   );
 };

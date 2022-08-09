@@ -38,7 +38,7 @@ const Add = () => {
     <>
       <Tooltip
         onClick={(e) => setOpen(true)}
-        title="delete"
+        title="Add Bug"
         sx={{
           position: "fixed",
           bottom: 20,
