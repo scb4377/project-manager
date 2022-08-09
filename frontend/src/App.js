@@ -28,6 +28,9 @@ function App() {
     },
     palette: {
       mode: mode,
+      primary: {
+        main: "#2D6675"
+      },
       background: {
         dark: "rgba(255,255,255,.05)",
         gray: "lightgray",
@@ -63,13 +66,20 @@ function App() {
                   style={{ height: "calc(100vh - 70px)" }}
                 />
               </Box>
-              <Box sx={{overflowY: 'scroll', width: '100%', height: "calc(100vh - 70px)", minHeight: "100%",}}>
+              <Box
+                sx={{
+                  overflowY: "scroll",
+                  width: "100%",
+                  height: "calc(100vh - 70px)",
+                  minHeight: "100%",
+                }}
+              >
                 <Box
                   flex={11}
                   maxWidth="1100px"
                   sx={{
                     width: "100%",
-                    margin: 'auto',
+                    margin: "auto",
                   }}
                 >
                   <Routes>
@@ -91,10 +101,7 @@ function App() {
                       path="/projectview"
                       element={<ProjectView mode={mode} />}
                     />
-                    <Route
-                      path="/profile"
-                      element={<Profile mode={mode} />}
-                    />
+                    <Route path="/profile" element={<Profile mode={mode} />} />
                   </Routes>
                 </Box>
               </Box>

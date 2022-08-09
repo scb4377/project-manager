@@ -5,17 +5,6 @@ const Personnel = ({ mode }) => {
   return (
     <Box style={{ display: "flex", flexDirection: "column" }}>
       <Box
-        p={2}
-        m={2}
-        mr={3}
-        bgcolor={mode === "dark" ? "background.dark" : "background.light"}
-        borderRadius="5px"
-        gap={3}
-        boxShadow={5}
-      >
-        hello
-      </Box>
-      <Box
         m={2}
         mr={3}
         p={2}
