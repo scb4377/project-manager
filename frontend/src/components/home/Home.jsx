@@ -26,7 +26,7 @@ const Home = ({mode}) => {
             justifyContent: 'space-between',
           }}
         >
-          <Typography fontWeight={400} variant="h6">Priority</Typography>
+          <Typography fontWeight={400} variant="h6" sx={{borderBottom: '0.5px solid gray', width: 'max-content'}}>Priority</Typography>
           <Featured />
         </Box>
         <Box
@@ -40,7 +40,7 @@ const Home = ({mode}) => {
             backdropFilter: 'blur(20px) saturate(100%)'
           }}
         >
-          <Typography mb={2} fontWeight={400} variant="h6">
+          <Typography mb={2} fontWeight={400} variant="h6" sx={{borderBottom: '0.5px solid gray', width: 'max-content'}}>
             Last 6 Months
           </Typography>
           <Chart />
@@ -60,7 +60,7 @@ const Home = ({mode}) => {
           boxShadow: 5,
         }}
       >
-        <Typography mb={2} fontWeight={400} variant="h6">
+        <Typography mb={2} fontWeight={400} variant="h6" sx={{borderBottom: '0.5px solid gray', width: 'max-content'}}>
           Needs Immeadiate Attention
         </Typography>
         <HomeList />
