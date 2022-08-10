@@ -1,85 +1,9 @@
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-
-const columns = [
-  { field: "project", headerName: "Project", headerClassName: 'gridHeader', flex: 2 },
-  { field: "issue", headerName: "Issue", headerClassName: 'gridHeader',  flex: 3 },
-  {
-    field: "priority",
-    headerName: "Priority",
-    headerClassName: 'gridHeader', 
-    flex: 1,
-    align: "center",
-    renderCell: (cellValues) => {
-      return (
-        <div
-          style={{
-            color: "black",
-            minWidth: "100px",
-            textAlign: "center",
-            fontSize: ".8rem",
-            fontWeight: "400",
-            textTransform: "uppercase",
-            letterSpacing: "2px",
-            padding: "5px 0",
-            borderRadius: "5px",
-            backgroundColor:
-              cellValues.value === "4"
-                ? "#ff2800"
-                : cellValues.value === "3"
-                ? "#E18B16"
-                : cellValues.value === "2"
-                ? "#F1E04A"
-                : cellValues.value === "1"
-                ? "#72B5BE"
-                : "transparent",
-          }}
-        >
-          {cellValues.value === "4"
-            ? "Critical"
-            : cellValues.value === "3"
-            ? "Major"
-            : cellValues.value === "2"
-            ? "Minor"
-            : cellValues.value === "1"
-            ? "Low"
-            : null}
-        </div>
-      );
-    },
-  },
-  { field: "date", headerName: "Date",  headerClassName: 'gridHeader',  flex: 1 },
-  {
-    field: "status",
-    headerName: "Status",
-    headerClassName: 'gridHeader', 
-    flex: 1,
-    align: "center",
-    renderCell: (cellValues) => {
-      return (
-        <div
-          style={{
-            color: "white",
-            minWidth: "100px",
-            fontSize: ".8rem",
-            fontWeight: "400",
-            textTransform: "uppercase",
-            letterSpacing: "2px",
-            textAlign: "center",
-            padding: "5px 0",
-            borderRadius: "5px",
-            backgroundColor:
-              cellValues.value === "Open" ? "#5da56b" : "#a8382c",
-          }}
-        >
-          {cellValues.value}
-        </div>
-      );
-    },
-  },
-];
+import { columns, mobileColumns } from "./HomeListLayout";
 
 const rows = [
   {
@@ -175,21 +99,40 @@ const rows = [
 const HomeList = () => {
   const navigate = useNavigate();
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [columnLayout, setColumnLayout] = useState(columns);
+
+  useEffect(() => {
+    if (window.innerWidth < 500) {
+      setColumnLayout(mobileColumns);
+    }
+  }, [columnLayout]);
+
+  window.onresize = () => {
+    if (window.innerWidth < 500) {
+      setColumnLayout(mobileColumns);
+    } else {
+      setColumnLayout(columns)
+    }
+  }
 
   const handleBugClick = (bug) => {
     navigate("/bugview", { state: bug });
   };
 
   return (
-    <Box height={400} sx={{"& .gridHeader": { color: 'white', bgcolor: 'accent.primary'}}}>
+    <Box
+      height={400}
+      sx={{ "& .gridHeader": { color: "white", bgcolor: "accent.primary" } }}
+    >
       <DataGrid
         rows={rows}
-        columns={columns}
+        columns={columnLayout}
         pageSize={rowsPerPage}
         rowsPerPageOptions={[5, 10, 20, 50]}
         onPageSizeChange={(newPageSize) => setRowsPerPage(newPageSize)}
         disableSelectionOnClick={true}
         disableColumnSelector={true}
+        columnBuffer={2}
         onRowClick={(e) => handleBugClick(e.row)}
       />
     </Box>

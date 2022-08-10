@@ -11,13 +11,13 @@ const Home = ({ mode }) => {
         flex={6}
         p={2}
         gap={3}
-        sx={{ display: "flex", scrollBehavior: "smooth" }}
+        sx={{ display: "flex", scrollBehavior: "smooth", flexWrap: 'wrap', gap: {xs: '20px'} }}
       >
         <Widget type="projects" mode={mode} />
         <Widget type="priority" mode={mode} />
         <Widget type="tasks" mode={mode} />
       </Box>
-      <Box gap={3} sx={{ display: "flex" }}>
+      <Box gap={3} m={2} sx={{ display: "flex", flexWrap: 'wrap', gap: {xs: '20px'}, marginTop: {xs: '5px'}, }}>
         <Box
           bgcolor={mode === "dark" ? "background.dark" : "background.light"}
           flex={2}
@@ -29,12 +29,15 @@ const Home = ({ mode }) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
+            marginLeft: {xs: 0},
+            width:"300px",
+            minWidth: {xs: '100%', sm: '300px'}
           }}
         >
           <Typography
             fontWeight={400}
             variant="h6"
-            sx={{ borderBottom: "0.5px solid gray", width: "max-content" }}
+            sx={{ borderBottom: "0.5px solid gray", width: "max-content", }}
           >
             Stages
           </Typography>
@@ -49,6 +52,7 @@ const Home = ({ mode }) => {
             borderRadius: "5px",
             boxShadow: 5,
             backdropFilter: "blur(20px) saturate(100%)",
+            marginRight: {xs: 0}
           }}
         >
           <Typography
