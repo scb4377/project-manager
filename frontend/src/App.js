@@ -16,6 +16,7 @@ import Settings from "./components/settings/Settings";
 import BugView from "./components/bug/BugView";
 import ProjectView from "./components/projects/ProjectView";
 import Profile from "./components/profile/Profile";
+import MobileSpeedDial from "./components/sidebar/MobileSpeedDial";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -48,23 +49,24 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Paper sx={{ height: "100%" }}>
-        <Box>
+      <Paper sx={{ height: "100%", }}>
+        <Box minHeight="100vh">
           <Router>
             <Navbar mode={mode} />
             <Box
               flexDirection="row"
               spacing={2}
               justifyContent="space-between"
-              sx={{ display: "flex" }}
+              sx={{ display: "flex", height: {xs: '100vh', sm: '100%'}, minHeight: '100vh- 70px', }}
             >
-              <Box>
+              <Box >
                 <Sidebar
                   setMode={setMode}
                   mode={mode}
                   style={{ height: "calc(100vh - 70px)" }}
                 />
               </Box>
+              <MobileSpeedDial mode={mode} setMode={setMode} />
               <Box
                 sx={{
                   overflowY: "scroll",

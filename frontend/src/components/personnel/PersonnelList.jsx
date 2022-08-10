@@ -314,7 +314,6 @@ const Row = ({ row }) => {
 const PersonnelList = ({ mode }) => {
   return (
     <TableContainer
-      borderRadius={2}
       sx={{ border: "0.5px solid gray" }}
       component={Paper}
     >
