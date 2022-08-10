@@ -3,14 +3,12 @@ import PersonnelList from "./PersonnelList";
 
 const Personnel = ({ mode }) => {
   return (
-    <Box style={{ display: "flex", flexDirection: "column" }}>
       <Box
-        m={2}
-        mr={3}
         p={2}
         bgcolor={mode === "dark" ? "background.dark" : "background.light"}
         gap={3}
         boxShadow={5}
+        borderRadius={2}
       >
         <Typography
           mb={2}
@@ -22,7 +20,6 @@ const Personnel = ({ mode }) => {
         </Typography>
         <PersonnelList mode={mode} />
       </Box>
-    </Box>
   );
 };
 

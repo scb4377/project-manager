@@ -49,17 +49,21 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Paper sx={{ height: "100%", }}>
-        <Box minHeight="100vh">
+      <Paper sx={{ height: {xs: "100vh", sm: "100%"},  }}>
+        <Box sx={{ maxHeight: "100vh"}}>
           <Router>
             <Navbar mode={mode} />
             <Box
               flexDirection="row"
               spacing={2}
               justifyContent="space-between"
-              sx={{ display: "flex", height: {xs: '100vh', sm: '100%'}, minHeight: '100vh- 70px', }}
+              sx={{
+                display: "flex",
+                height: "100%",
+                minHeight: {xs: "calc(100vh - 56px)", sm: '100%'},
+              }}
             >
-              <Box >
+              <Box>
                 <Sidebar
                   setMode={setMode}
                   mode={mode}
@@ -71,7 +75,7 @@ function App() {
                 sx={{
                   overflowY: "scroll",
                   width: "100%",
-                  height: "calc(100vh - 70px)",
+                  height: "calc(100vh - 64px)",
                   minHeight: "100%",
                 }}
               >
@@ -82,6 +86,7 @@ function App() {
                   sx={{
                     width: "100%",
                     margin: "auto",
+                    height: "100%"
                   }}
                 >
                   <Routes>

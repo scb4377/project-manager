@@ -6,10 +6,7 @@ import {
   styled,
   TextField,
   Typography,
-  useTheme,
 } from "@mui/material";
-import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import { useEffect } from "react";
 
 const user = {
   firstName: "Jan",
@@ -30,20 +27,17 @@ const StyledSpan = styled("span")({
 });
 
 const Profile = ({ mode }) => {
-  const theme = useTheme();
   const [pic, setPic] = useState(null);
 
   const handlePictureUpload = (e) => {
     // setPic(e.target.files[0])
     // let temp = URL.createObjectURL(e.target.files[0])
-    setPic(e.target.files[0])
-  }
+    setPic(e.target.files[0]);
+  };
 
   return (
     <Box
       p={2}
-      m={2}
-      mr={4}
       bgcolor={mode === "dark" ? "background.dark" : "background.light"}
       borderRadius="5px"
       gap={3}
@@ -78,8 +72,12 @@ const Profile = ({ mode }) => {
                 marginBottom: "20px",
               }}
             ></Avatar>
-            <input type="file" name="picture" onChange={handlePictureUpload} />
-            
+            <input
+              type="file"
+              name="picture"
+              style={{ marginBottom: "20px" }}
+              onChange={handlePictureUpload}
+            />
           </span>
           <StyledSpan>
             <label className="label">First Name</label>

@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { columns, mobileColumns } from "./ProjectListLayout";
 
@@ -77,7 +77,7 @@ const Projects = ({ mode }) => {
       borderRadius="5px"
       gap={3}
       boxShadow={5}
-      sx={{ margin: { xs: 0 } }}
+      sx={{ margin: { xs: 0 }, height: '100%' }}
     >
       <Typography
         mb={2}

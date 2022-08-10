@@ -259,19 +259,21 @@ const Row = ({ row }) => {
         <TableCell component="th" scope="row">
           {row.team[0]}
         </TableCell>
-        <TableCell>
-          <AvatarGroup max={4} sx={{ justifyContent: "center" }}>
-            {row.team[1].map((person) => (
-              <Avatar key={person.id} alt={person.name} src="" />
-            ))}
-          </AvatarGroup>
-        </TableCell>
+        {window.innerWidth > 500 && (
+          <TableCell>
+            <AvatarGroup max={4} sx={{ justifyContent: "center" }}>
+              {row.team[1].map((person) => (
+                <Avatar key={person.id} alt={person.name} src="" />
+              ))}
+            </AvatarGroup>
+          </TableCell>
+        )}
       </TableRow>
 
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ padding: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
+            <Box sx={{ margin: 1, }}>
               <Typography
                 variant="h6"
                 mb={2}
@@ -313,16 +315,17 @@ const Row = ({ row }) => {
 
 const PersonnelList = ({ mode }) => {
   return (
-    <TableContainer
-      sx={{ border: "0.5px solid gray" }}
-      component={Paper}
-    >
+    <TableContainer sx={{ border: "0.5px solid gray" }} component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead sx={{ bgcolor: "accent.primary" }}>
           <TableRow>
             <TableCell />
-            <TableCell sx={{color: 'white'}}>Name</TableCell>
-            <TableCell align="center" sx={{color: 'white'}}>Employees</TableCell>
+            <TableCell sx={{ color: "white" }}>Team</TableCell>
+            {window.innerWidth > 500 && (
+              <TableCell align="center" sx={{ color: "white" }}>
+                Employees
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
         <TableBody
