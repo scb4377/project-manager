@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { columns, mobileColumns } from "./HomeListLayout";
@@ -99,21 +98,16 @@ const rows = [
 const HomeList = () => {
   const navigate = useNavigate();
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [columnLayout, setColumnLayout] = useState(columns);
-
-  useEffect(() => {
-    if (window.innerWidth < 500) {
-      setColumnLayout(mobileColumns);
-    }
-  }, [columnLayout]);
+  let initialState = window.innerHeight < 500 ? mobileColumns : columns;
+  const [columnLayout, setColumnLayout] = useState(initialState);
 
   window.onresize = () => {
     if (window.innerWidth < 500) {
       setColumnLayout(mobileColumns);
     } else {
-      setColumnLayout(columns)
+      setColumnLayout(columns);
     }
-  }
+  };
 
   const handleBugClick = (bug) => {
     navigate("/bugview", { state: bug });

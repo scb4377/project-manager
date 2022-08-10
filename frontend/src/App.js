@@ -78,6 +78,7 @@ function App() {
                 <Box
                   flex={11}
                   maxWidth="1100px"
+                  p={2}
                   sx={{
                     width: "100%",
                     margin: "auto",

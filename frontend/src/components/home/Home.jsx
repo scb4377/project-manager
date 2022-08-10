@@ -9,7 +9,6 @@ const Home = ({ mode }) => {
     <>
       <Box
         flex={6}
-        p={2}
         gap={3}
         sx={{ display: "flex", scrollBehavior: "smooth", flexWrap: 'wrap', gap: {xs: '20px'} }}
       >
@@ -17,7 +16,7 @@ const Home = ({ mode }) => {
         <Widget type="priority" mode={mode} />
         <Widget type="tasks" mode={mode} />
       </Box>
-      <Box gap={3} m={2} sx={{ display: "flex", flexWrap: 'wrap', gap: {xs: '20px'}, marginTop: {xs: '5px'}, }}>
+      <Box gap={3} mt={2}  sx={{ display: "flex", flexWrap: 'wrap', gap: {xs: '20px'}, }}>
         <Box
           bgcolor={mode === "dark" ? "background.dark" : "background.light"}
           flex={2}
@@ -71,10 +70,7 @@ const Home = ({ mode }) => {
         bgcolor={mode === "dark" ? "background.dark" : "background.light"}
         flex={6}
         p={2}
-        ml={2}
-        mr={2}
         mt={2}
-        mb={2}
         sx={{
           borderRadius: "5px",
           boxShadow: 5,
