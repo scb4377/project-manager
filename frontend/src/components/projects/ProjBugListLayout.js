@@ -1,11 +1,5 @@
 export const columns = [
   {
-    field: "project",
-    headerName: "Project",
-    headerClassName: "gridHeader",
-    flex: 2,
-  },
-  {
     field: "issue",
     headerName: "Issue",
     headerClassName: "gridHeader",
@@ -21,24 +15,24 @@ export const columns = [
       return (
         <div
           style={{
-            color: "white",
+            color: "black",
             minWidth: "73px",
             textAlign: "center",
+            padding: "5px",
+            borderRadius: "5px",
             fontSize: ".8rem",
             fontWeight: "400",
             textTransform: "uppercase",
             letterSpacing: "2px",
-            padding: "5px 0",
-            borderRadius: "5px",
             backgroundColor:
               cellValues.value === "4"
                 ? "#ff2800"
                 : cellValues.value === "3"
-                ? "#E18B16"
+                ? "#ffae04"
                 : cellValues.value === "2"
-                ? "#F1E04A"
+                ? "#eaf600"
                 : cellValues.value === "1"
-                ? "#72B5BE"
+                ? "#55ff04"
                 : "transparent",
           }}
         >
@@ -55,43 +49,73 @@ export const columns = [
       );
     },
   },
-];
 
-export const mobileColumns = [
+  { field: "date", headerName: "Date", headerClassName: "gridHeader" },
   {
-    field: "project",
-    headerName: "Project",
+    field: "status",
+    headerName: "Status",
     headerClassName: "gridHeader",
-
-  },
-  {
-    field: "priority",
-    headerName: "Priority",
-    headerClassName: "gridHeader",
+    flex: 1,
     align: "center",
-    flex: 2,
     renderCell: (cellValues) => {
       return (
         <div
           style={{
             color: "white",
-            minWidth: "73px",
-            textAlign: "center",
-            fontSize: ".8rem",
             fontWeight: "400",
             textTransform: "uppercase",
             letterSpacing: "2px",
+            fontSize: ".8rem",
+            minWidth: "73px",
+            textAlign: "center",
             padding: "5px 0",
             borderRadius: "5px",
+            backgroundColor:
+              cellValues.value === "Open" ? "#5da56b" : "#a8382c",
+          }}
+        >
+          {cellValues.value}
+        </div>
+      );
+    },
+  },
+];
+
+export const mobileColumns = [
+  {
+    field: "issue",
+    headerName: "Issue",
+    headerClassName: "gridHeader",
+    flex: 3,
+  },
+  {
+    field: "priority",
+    headerName: "Priority",
+    headerClassName: "gridHeader",
+    flex: 2,
+    align: "center",
+    renderCell: (cellValues) => {
+      return (
+        <div
+          style={{
+            color: "black",
+            minWidth: "72px",
+            textAlign: "center",
+            padding: "5px",
+            borderRadius: "5px",
+            fontSize: ".8rem",
+            fontWeight: "400",
+            textTransform: "uppercase",
+            letterSpacing: "1px",
             backgroundColor:
               cellValues.value === "4"
                 ? "#ff2800"
                 : cellValues.value === "3"
-                ? "#E18B16"
+                ? "#ffae04"
                 : cellValues.value === "2"
-                ? "#F1E04A"
+                ? "#eaf600"
                 : cellValues.value === "1"
-                ? "#72B5BE"
+                ? "#55ff04"
                 : "transparent",
           }}
         >

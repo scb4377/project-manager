@@ -42,7 +42,7 @@ const Add = () => {
         sx={{
           position: "fixed",
           bottom: 20,
-          left: { xs: "calc(50% - 25px)", md: 60 },
+          left: 60,
           backgroundColor: 'accent.primary',
           color: 'white',
           "&:hover": {backgroundColor: 'accent.hover'},

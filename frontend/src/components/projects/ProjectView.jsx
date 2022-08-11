@@ -58,13 +58,13 @@ const ProjectView = ({ mode }) => {
 
   return (
     <Box
-      p={2}
       display="flex"
       justifyContent="space-evenly"
       flexDirection="column"
       width="100%"
       margin="auto"
       gap={3}
+      height="100%"
     >
       {/* <StyledDiv>
         <ProjWidget mode={mode} type="barchart" />
@@ -75,24 +75,37 @@ const ProjectView = ({ mode }) => {
         boxShadow={5}
         borderRadius="5px"
         bgcolor={mode === "dark" ? "background.dark" : "background.default"}
-        sx={{ width: "100%", position: "relative" }}
+        sx={{
+          width: "100%",
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
-        <span
-          style={{
+        <Box
+          sx={{
             display: "flex",
             alignItems: "center",
             marginBottom: "20px",
+            flexWrap: "wrap",
+            gap: "20px",
+            maxWidth: { xs: "100%", sm: "50%" },
+            paddingRight: { xs: 0, sm: "10px" },
           }}
         >
           <Typography
-            variant="h4"
+            variant="h5"
             fontWeight={400}
-            sx={{ borderBottom: "0.5px solid gray", width: "max-content" }}
+            sx={{
+              borderBottom: "0.5px solid gray",
+              width: "max-content",
+              maxWidth: "100%",
+              wordWrap: "break-word",
+            }}
           >
-            {state.name}
+            {state.projName}
           </Typography>
           <Box
-            ml={4}
             p={1}
             pl={3}
             pr={3}
@@ -106,23 +119,30 @@ const ProjectView = ({ mode }) => {
             </Typography>
             <Typography>Design</Typography>
           </Box>
-        </span>
+        </Box>
         <Box
           height={300}
-          width={400}
-          sx={{ position: "absolute", top: 0, right: 0 }}
+          sx={{
+            top: 0,
+            right: 0,
+            width: { xs: "100%", sm: "45%" },
+            height: { xs: "170px" },
+            position: { xs: "relative", sm: "absolute" },
+          }}
         >
           <ResponsiveContainer>
             <RadialBarChart
               width={400}
               height={250}
               innerRadius="20%"
-              outerRadius="100%"
+              // outerRadius="100%"
               data={data}
               startAngle={180}
               endAngle={0}
               barCategoryGap={3}
               cy={"80%"}
+              cx={"60%"}
+              outerRadius="120%"
             >
               <RadialBar
                 minAngle={15}
@@ -149,7 +169,7 @@ const ProjectView = ({ mode }) => {
           display="flex"
           justifyContent="space-between"
           flexDirection="row"
-          width={400}
+          sx={{ width: { xs: "100%", sm: "50%" } }}
         >
           <span style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontWeight: "bold" }}>{state.name}</span>

@@ -18,7 +18,7 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose }) => {
           left: "50%",
           transform: "translate(-50%, -50%)",
           height: "max-content",
-          width: "50%",
+          width: {xs: "95%", sm: "400px"},
           bgcolor: "background.default",
           borderRadius: "5px",
           boxShadow: 24,

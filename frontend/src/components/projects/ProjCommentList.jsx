@@ -15,61 +15,73 @@ import ProjCommentModal from "./ProjCommentModal";
 
 const data = [
   {
+    id: 1,
     name: "Remy Sharp",
     subject: "Brunch this weekend?",
     description: "I'll be in your neighborhood doing errands this...",
   },
   {
+    id: 2,
     name: "Remy Sharp",
     subject: "Brunch this weekend?",
     description: "I'll be in your neighborhood doing errands this...",
   },
   {
+    id: 3,
     name: "Remy Sharp",
     subject: "Brunch this weekend?",
     description: "I'll be in your neighborhood doing errands this...",
   },
   {
+    id: 4,
     name: "Remy Sharp",
     subject: "Brunch this weekend?",
     description: "I'll be in your neighborhood doing errands this...",
   },
   {
+    id: 5,
     name: "Remy Sharp",
     subject: "Brunch this weekend?",
     description: "I'll be in your neighborhood doing errands this...",
   },
   {
+    id: 6,
     name: "Remy Sharp",
     subject: "Brunch this weekend?",
     description: "I'll be in your neighborhood doing errands this...",
   },
   {
+    id: 7,
     name: "Remy Sharp",
     subject: "Brunch this weekend?",
     description: "I'll be in your neighborhood doing errands this...",
   },
   {
+    id: 8,
     name: "Remy Sharp",
     subject: "Brunch this weekend?",
     description: "I'll be in your neighborhood doing errands this...",
   },
   {
+    id: 9,
     name: "Remy Sharp",
     subject: "Brunch this weekend?",
     description: "I'll be in your neighborhood doing errands this...",
   },
   {
+    id: 10,
     name: "Remy Sharp",
     subject: "Brunch this weekend?",
     description: "I'll be in your neighborhood doing errands this...",
   },
   {
+    id: 11,
     name: "Remy Sharp",
     subject: "Brunch this weekend?",
     description: "I'll be in your neighborhood doing errands this...",
   },
   {
+    id: 12,
     name: "Remy Sharp",
     subject: "Brunch this weekend?",
     description: "I'll be in your neighborhood doing errands this...",
@@ -126,8 +138,8 @@ const ProjCommentList = ({ mode }) => {
           overflowY: "scroll",
         }}
       >
-        {data.map((comment) => (
-          <>
+        {data.map((comment, i) => (
+          <div key={i + 1}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
                 <Avatar alt={comment.name} src="/static/images/avatar/1.jpg" />
@@ -151,7 +163,7 @@ const ProjCommentList = ({ mode }) => {
               />
             </ListItem>
             <Divider variant="inset" component="li" />
-          </>
+          </div>
         ))}
       </List>
       {commentModal && (
