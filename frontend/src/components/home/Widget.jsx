@@ -8,54 +8,85 @@ import {
   Tooltip,
   Area,
 } from "recharts";
-import { KeyboardArrowUp, PersonOutlined } from "@mui/icons-material";
+import {
+  KeyboardArrowUp,
+  PersonOutlined,
+  AccountTree,
+  BugReport,
+} from "@mui/icons-material";
+import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const Widget = ({ type, mode }) => {
   let data;
   let mongoData = {
-    projects: 8
-  }
+    projects: 8,
+  };
 
-  switch(type){
+  switch (type) {
     case "projects":
-      data={
+      data = {
         title: "Projects",
         link: "See all projects",
-        icon: "",
-        amt: mongoData.projects
+        amt: mongoData.projects,
       };
       break;
-    case "priority":
-      data={
-        title: "Priority",
-        link: "See all tickets",
-        icon: "",
+    case "issues":
+      data = {
+        title: "Issues",
+        link: "See all issues",
+        amt: 5,
       };
       break;
     case "tasks":
-      data={
+      data = {
         title: "Tasks",
         link: "See all tasks",
-        icon: "",
-        amt: 5
-      }
+        amt: 5,
+      };
       break;
     default:
       break;
   }
-  
+
+  const [isHover, setIsHover] = useState(false);
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    type === "projects" ? navigate("/projects") : type === "issues" ? navigate("/bugs") : navigate("/");
+  };
+
+  let style = isHover
+    ? {
+        fontSize: "12px",
+        borderBottom: "1px solid transparent",
+        width: "max-content",
+        backgroundColor: "#2D6675",
+        borderRadius: "3px",
+        cursor: "pointer",
+        padding: "0 2px",
+        color: "white",
+        transition: "0.2s all ease-in-out",
+      }
+    : {
+        fontSize: "12px",
+        borderBottom: "1px solid gray",
+        width: "max-content",
+        cursor: "pointer",
+      };
+
   return (
     <Box
       justifyContent="space-between"
       flex={1}
-      bgcolor={mode === 'dark' ? "background.dark" : "background.light"} 
+      bgcolor={mode === "dark" ? "background.dark" : "background.light"}
       sx={{
         display: "flex",
         flexDirection: "row",
         padding: "10px",
         boxShadow: 5,
         borderRadius: "5px",
-        marginLeft: '0',
+        marginLeft: "0",
       }}
     >
       <div
@@ -71,11 +102,10 @@ const Widget = ({ type, mode }) => {
         </span>
         <span style={{ fontSize: "28px", fontWeight: "300" }}>{data.amt}</span>
         <span
-          style={{
-            fontSize: "12px",
-            borderBottom: "1px solid gray",
-            width: "max-content",
-          }}
+          style={style}
+          onMouseEnter={() => setIsHover(true)}
+          onMouseLeave={() => setIsHover(false)}
+          onClick={handleClick}
         >
           {data.link}
         </span>
@@ -90,15 +120,40 @@ const Widget = ({ type, mode }) => {
       >
         <KeyboardArrowUp />
         <div>20%</div>
-        <PersonOutlined
-          sx={{
-            fontSize: "18px",
-            padding: "5px",
-            backgroundColor: "skyblue",
-            borderRadius: "5px",
-            alignSelf: "flex-end",
-          }}
-        />
+        {type === "projects" ? (
+          <AccountTree
+            sx={{
+              fontSize: "30px",
+              padding: "5px",
+              backgroundColor: "accent.primary",
+              borderRadius: "5px",
+              alignSelf: "flex-end",
+              color: "white",
+            }}
+          />
+        ) : type === "issues" ? (
+          <BugReport
+            sx={{
+              fontSize: "30px",
+              padding: "5px",
+              backgroundColor: "accent.primary",
+              borderRadius: "5px",
+              alignSelf: "flex-end",
+              color: "white",
+            }}
+          />
+        ) : (
+          <BugReport
+            sx={{
+              fontSize: "30px",
+              padding: "5px",
+              backgroundColor: "accent.primary",
+              borderRadius: "5px",
+              alignSelf: "flex-end",
+              color: "white",
+            }}
+          />
+        )}
       </div>
     </Box>
   );

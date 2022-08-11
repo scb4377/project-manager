@@ -18,7 +18,7 @@ const Home = ({ mode }) => {
         }}
       >
         <Widget type="projects" mode={mode} />
-        <Widget type="priority" mode={mode} />
+        <Widget type="issues" mode={mode} />
         <Widget type="tasks" mode={mode} />
       </Box>
       <Box
