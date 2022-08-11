@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { rows, columns, mobileColumns } from "./TasksLayout";
 
-const Tasks = ({mode}) => {
+const Tasks = ({ mode }) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const initialState = window.innerWidth < 500 ? mobileColumns : columns;
   const [columnLayout, setColumnLayout] = useState(initialState);
@@ -23,7 +23,15 @@ const Tasks = ({mode}) => {
   };
 
   return (
-    <Box borderRadius={2} boxShadow={5} p={2} sx={{bgcolor: mode === 'dark' ? "background.dark" : "background.default"}}>
+    <Box
+      borderRadius={2}
+      boxShadow={5}
+      p={2}
+      sx={{
+        bgcolor: mode === "dark" ? "background.dark" : "background.default",
+        "& .gridHeader": { color: "white", bgcolor: "accent.primary" },
+      }}
+    >
       <Typography
         mb={2}
         variant="h5"

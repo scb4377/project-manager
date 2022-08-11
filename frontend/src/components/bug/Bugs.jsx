@@ -17,10 +17,14 @@ const Bugs = ({ mode }) => {
       >
         Issues
       </Typography>
-      <Box height={500}>
+      <Box
+        height={500}
+        sx={{
+          "& .gridHeader": { color: "white", bgcolor: "accent.primary" },
+        }}
+      >
         <BugsList />
       </Box>
-      
     </Box>
   );
 };
