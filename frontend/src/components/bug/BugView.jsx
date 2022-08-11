@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useLocation } from "react-router";
+import BugComments from "./BugComments";
 import BugDetails from "./BugDetails";
 import MyLogs from "./MyLogs";
 
@@ -7,8 +8,8 @@ const BugView = ({ mode }) => {
   const location = useLocation();
 
   return (
-    <div style={{marginRight: '16px'}}>
-      <Box
+    <div>
+      {/* <Box
         flex={6}
         p={2}
         m={2}
@@ -22,11 +23,11 @@ const BugView = ({ mode }) => {
         <div>Bug</div>
         <div>Bug</div>
         <div>Bug</div>
-      </Box>
+      </Box> */}
       <Box
         flex={6}
         p={2}
-        m={2}
+        mb={2}
         boxShadow={5}
         borderRadius="5px"
         bgcolor={mode === "dark" ? "background.dark" : "background.light"}
@@ -35,6 +36,9 @@ const BugView = ({ mode }) => {
         <BugDetails bug={location.state} />
       </Box>
       <MyLogs mode={mode} />
+      <Box mt={2}>
+        <BugComments mode={mode} />
+      </Box>
     </div>
   );
 };

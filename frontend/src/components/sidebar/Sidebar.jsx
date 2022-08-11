@@ -3,14 +3,12 @@ import {
   Group,
   Home,
   ModeNight,
-  Pages,
-  Person,
   Settings,
-  Storefront,
   AccountTree,
+  Assignment,
+  BugReport
 } from "@mui/icons-material";
 import {
-  Box,
   List,
   ListItem,
   ListItemButton,
@@ -55,6 +53,28 @@ const Sidebar = ({ mode, setMode }) => {
           </ListItem>
         </StyledNavLink>
 
+        <StyledNavLink to="/bugs">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <BugReport sx={{ color: "accent.primary" }} />
+              </ListItemIcon>
+              <ListItemText primary="Issues" />
+            </ListItemButton>
+          </ListItem>
+        </StyledNavLink>
+
+        <StyledNavLink to="/tasks">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <Assignment sx={{ color: "accent.primary" }} />
+              </ListItemIcon>
+              <ListItemText primary="Tasks" />
+            </ListItemButton>
+          </ListItem>
+        </StyledNavLink>
+
         <StyledNavLink to="/personnel">
           <ListItem disablePadding>
             <ListItemButton>
@@ -66,7 +86,7 @@ const Sidebar = ({ mode, setMode }) => {
           </ListItem>
         </StyledNavLink>
 
-        <StyledNavLink to="/settings">
+        {/* <StyledNavLink to="/settings">
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -75,7 +95,7 @@ const Sidebar = ({ mode, setMode }) => {
               <ListItemText primary="Settings" />
             </ListItemButton>
           </ListItem>
-        </StyledNavLink>
+        </StyledNavLink> */}
 
         <StyledNavLink to="/profile">
           <ListItem disablePadding>

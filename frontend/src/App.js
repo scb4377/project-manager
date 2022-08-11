@@ -17,6 +17,8 @@ import BugView from "./components/bug/BugView";
 import ProjectView from "./components/projects/ProjectView";
 import Profile from "./components/profile/Profile";
 import MobileSpeedDial from "./components/sidebar/MobileSpeedDial";
+import Bugs from "./components/bug/Bugs";
+import Tasks from "./components/tasks/Tasks";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -35,6 +37,7 @@ function App() {
       background: {
         dark: "rgba(255,255,255,.05)",
         gray: "lightgray",
+        offWhite: "#f3f3f3"
       },
       textInput: {
         dark: "#FFF",
@@ -49,7 +52,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Paper sx={{ height: { xs: "100%", sm: "100%" }, overflowY: 'scroll' }}>
+      <Paper sx={{ height: { xs: "100%", sm: "100%" }, overflowY: "scroll" }}>
         <Box sx={{ maxHeight: "100vh" }}>
           <Router>
             <Navbar mode={mode} />
@@ -77,6 +80,7 @@ function App() {
                   width: "100%",
                   minHeight: { xs: "100%", sm: "max-content" },
                   maxHeight: { sm: "calc(100vh - 65px)" },
+                  bgcolor: mode === 'dark' ? "background.primary" : "background.offWhite"
                 }}
               >
                 <Box
@@ -109,6 +113,8 @@ function App() {
                       element={<ProjectView mode={mode} />}
                     />
                     <Route path="/profile" element={<Profile mode={mode} />} />
+                    <Route path="/bugs" element={<Bugs mode={mode} />} />
+                    <Route path="/tasks" element={<Tasks mode={mode} />} />
                   </Routes>
                 </Box>
               </Box>

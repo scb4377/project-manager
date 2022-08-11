@@ -38,7 +38,7 @@ const Profile = ({ mode }) => {
   return (
     <Box
       p={2}
-      bgcolor={mode === "dark" ? "background.dark" : "background.light"}
+      bgcolor={mode === "dark" ? "background.dark" : "background.default"}
       borderRadius="5px"
       gap={3}
       boxShadow={5}

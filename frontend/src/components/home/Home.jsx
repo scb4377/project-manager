@@ -33,7 +33,7 @@ const Home = ({ mode }) => {
         }}
       >
         <Box
-          bgcolor={mode === "dark" ? "background.dark" : "background.light"}
+          bgcolor={mode === "dark" ? "background.dark" : "background.default"}
           flex={2}
           p={2}
           sx={{
@@ -58,7 +58,7 @@ const Home = ({ mode }) => {
           <Featured />
         </Box>
         <Box
-          bgcolor={mode === "dark" ? "background.dark" : "background.light"}
+          bgcolor={mode === "dark" ? "background.dark" : "background.default"}
           flex={4}
           p={2}
           sx={{
@@ -81,7 +81,7 @@ const Home = ({ mode }) => {
       </Box>
 
       <Box
-        bgcolor={mode === "dark" ? "background.dark" : "background.light"}
+        bgcolor={mode === "dark" ? "background.dark" : "background.default"}
         flex={6}
         p={2}
         sx={{

@@ -1,18 +1,9 @@
 import { Box } from "@mui/material";
 import {
-  AreaChart,
-  YAxis,
-  XAxis,
-  linearGradient,
-  CartesianGrid,
-  Tooltip,
-  Area,
-} from "recharts";
-import {
   KeyboardArrowUp,
-  PersonOutlined,
   AccountTree,
   BugReport,
+  Assignment,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 import { useState } from "react";
@@ -53,7 +44,13 @@ const Widget = ({ type, mode }) => {
 
   const navigate = useNavigate();
   const handleClick = () => {
-    type === "projects" ? navigate("/projects") : type === "issues" ? navigate("/bugs") : navigate("/");
+    type === "projects"
+      ? navigate("/projects")
+      : type === "issues"
+      ? navigate("/bugs")
+      : type === "tasks"
+      ? navigate("/tasks")
+      : navigate("/");
   };
 
   let style = isHover
@@ -79,7 +76,7 @@ const Widget = ({ type, mode }) => {
     <Box
       justifyContent="space-between"
       flex={1}
-      bgcolor={mode === "dark" ? "background.dark" : "background.light"}
+      bgcolor={mode === "dark" ? "background.dark" : "background.default"}
       sx={{
         display: "flex",
         flexDirection: "row",
@@ -143,7 +140,7 @@ const Widget = ({ type, mode }) => {
             }}
           />
         ) : (
-          <BugReport
+          <Assignment
             sx={{
               fontSize: "30px",
               padding: "5px",

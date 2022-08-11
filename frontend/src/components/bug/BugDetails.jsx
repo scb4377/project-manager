@@ -1,5 +1,4 @@
 import { Avatar, styled, Typography } from "@mui/material";
-import React from "react";
 
 const StyledDiv = styled("div")({
   display: "flex",
@@ -35,7 +34,7 @@ const BugDetails = ({ bug }) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            textAlign: 'right',
+            textAlign: "right",
             marginBottom: "16px",
             minWidth: "200px",
             maxWidth: "50%",
@@ -43,37 +42,66 @@ const BugDetails = ({ bug }) => {
           }}
         >
           <StyledDiv sx={{ flex: 4, gap: "100px", marginBottom: "8px" }}>
-            <label style={{fontWeight: '500'}}>Title:</label>
-            <span>
-              Lorem ipsum dolor sit amet consectetur aeriam, perspiciatis
-              incidunt blanditiis ex, ad corrupti ea voluptate, soluta{" "}
-            </span>
+            <label style={{ fontWeight: "500" }}>Title:</label>
+            <span>Lorem ipsum dolor sit amet consectetur aeriam, </span>
           </StyledDiv>
-          <StyledDiv sx={{ flex: 1, gap: "50px", marginLeft: 'auto' }}>
-            <label style={{textAlign: 'left', minWidth: '100px', fontWeight: '500'}}>Created:</label>
-            <span style={{minWidth: '100px'}}>{bug.created}</span>
+          <StyledDiv sx={{ flex: 1, gap: "50px", marginLeft: "auto" }}>
+            <label
+              style={{
+                textAlign: "left",
+                minWidth: "100px",
+                fontWeight: "500",
+              }}
+            >
+              Status:
+            </label>
+            <span style={{ minWidth: "100px" }}>{bug.status}</span>
           </StyledDiv>
-          <StyledDiv sx={{ flex: 1, gap: "50px", marginLeft: 'auto' }}>
-            <label style={{textAlign: 'left', minWidth: '100px', fontWeight: '500'}}>Status:</label>
-            <span style={{minWidth: '100px'}}>{bug.status}</span>
+          <StyledDiv sx={{ flex: 1, gap: "50px", marginLeft: "auto" }}>
+            <label
+              style={{
+                textAlign: "left",
+                minWidth: "100px",
+                fontWeight: "500",
+              }}
+            >
+              Due By:
+            </label>
+            <span style={{ minWidth: "100px" }}>{bug.dueBy}</span>
           </StyledDiv>
-          <StyledDiv sx={{ flex: 1, gap: "50px", marginLeft: 'auto' }}>
-            <label style={{textAlign: 'left', minWidth: '100px', fontWeight: '500'}}>Due By:</label>
-            <span style={{minWidth: '100px'}}>{bug.dueBy}</span>
+          <StyledDiv sx={{ flex: 1, gap: "50px", marginLeft: "auto" }}>
+            <label
+              style={{
+                textAlign: "left",
+                minWidth: "100px",
+                fontWeight: "500",
+              }}
+            >
+              Created:
+            </label>
+            <span style={{ minWidth: "100px" }}>{bug.created}</span>
           </StyledDiv>
           <StyledDiv
             sx={{
               flex: 1,
               display: "flex",
               alignItems: "center",
-              gap: "50px", marginLeft: 'auto'
+              gap: "50px",
+              marginLeft: "auto",
             }}
           >
-            <label style={{textAlign: 'left', minWidth: '100px', fontWeight: '500'}}>Creator:</label>
-            <span style={{minWidth: '100px', }}>
-              <Avatar alt="replace" src="" sx={{marginLeft: 'auto'}} />
+            <label
+              style={{
+                textAlign: "left",
+                minWidth: "100px",
+                fontWeight: "500",
+              }}
+            >
+              Creator:
+            </label>
+            <span style={{ minWidth: "100px" }}>
+              <Avatar alt="replace" src="" sx={{ marginLeft: "auto" }} />
             </span>
-            
           </StyledDiv>
         </div>
         <div>Statistics</div>

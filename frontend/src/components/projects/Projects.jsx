@@ -73,7 +73,7 @@ const Projects = ({ mode }) => {
       p={2}
       m={2}
       mr={4}
-      bgcolor={mode === "dark" ? "background.dark" : "background.light"}
+      bgcolor={mode === "dark" ? "background.dark" : "background.default"}
       borderRadius="5px"
       gap={3}
       boxShadow={5}
