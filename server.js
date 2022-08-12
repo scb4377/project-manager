@@ -1,0 +1,21 @@
+const express = require("express");
+const dotenv = require("dotenv").config();
+const { errorHandler } = require('./middleware/errorMiddleware')
+
+const mongoose = require("mongoose");
+const User = require("./model/UserModel");
+
+// mongoose.connect();
+
+const app = express();
+
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+
+app.use('/api/user', require('./routes/userRoutes'))
+
+app.use(errorHandler)
+
+app.listen(process.env.PORT || 5000, () =>
+  console.log(`Server started on port ${process.env.PORT || 5000}`)
+);
