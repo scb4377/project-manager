@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const teamSchema = mongoose.Schema(
   {
@@ -8,14 +9,14 @@ const teamSchema = mongoose.Schema(
     },
     empIds: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         required: true,
         ref: "Team",
       },
     ],
     projIds: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Project",
       },
     ],

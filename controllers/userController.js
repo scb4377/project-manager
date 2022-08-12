@@ -33,7 +33,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
-      userName: user.username,
+      username: user.username,
       email: user.email,
       token: generateToken(user._id),
     });
@@ -43,11 +43,18 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-// desc:    Get User
+// desc:    Get Users
 // @route:   GET /api/user
 // @access: Private
-const getUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "get user" });
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find()
+
+  if (users) {
+    res.status(201).json(users)
+  } else {
+    res.status(400)
+    throw new Error("No users found")
+  }
 });
 
 // desc:    Create User
@@ -88,7 +95,7 @@ const createUser = asyncHandler(async (req, res) => {
       _id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
-      userName: user.username,
+      username: user.username,
       email: user.email,
       token: generateToken(user._id),
     });
@@ -99,17 +106,40 @@ const createUser = asyncHandler(async (req, res) => {
 });
 
 // desc:    Update User
-// @route:   PUT /api/user/:id
+// @route:   PUT /api/user/
 // @access: Private
 const updateUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Update user ${req.params.id}` });
+  const user = await User.findByIdAndUpdate(req.user.id, req.body, {
+    new: true,
+  })
+
+  if (!user) {
+    res.status(400)
+    throw new Error('User not found')
+  } else {
+    res.status(200).json(user)
+  }
 });
 
 // desc:    Delete User
 // @route:   DELETE /api/user/:id
 // @access: Private
 const deleteUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Delete user ${req.params.id}` });
+  const authorizedUser = User.findById(req.user.id)
+
+  if (!authorizedUser) {
+    res.status(400)
+    throw new Error('Not Authorized')
+  }
+  
+  const user = await User.findByIdAndDelete(req.params.id)
+
+  if (user) {
+    res.status(200).send({message: 'Deleted User'})
+  } else {
+    res.status(400)
+    throw new Error('Failed to delete user')
+  }
 });
 
 // Generate JWT
@@ -120,7 +150,7 @@ const generateToken = (id) => {
 };
 
 module.exports = {
-  getUser,
+  getUsers,
   createUser,
   updateUser,
   deleteUser,

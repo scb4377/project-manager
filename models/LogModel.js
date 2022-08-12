@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const logSchema = mongoose.Schema(
+const logSchema = new Schema(
   {
     user: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },
     bug: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Bug",
     },
   },

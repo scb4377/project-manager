@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const projectSchema = mongoose.Schema(
+const projectSchema = new Schema(
   {
     user: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
     },
     team: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       required: true,
       ref: "Team",
     },
@@ -22,7 +23,7 @@ const projectSchema = mongoose.Schema(
     comments: [
       {
         author: String,
-        date: Date.now(),
+        date: () => Date.now(),
         body: String,
       },
     ],

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const bugSchema = mongoose.Schema(
+const bugSchema = new Schema(
   {
     issue: {
       type: String,
@@ -19,25 +20,25 @@ const bugSchema = mongoose.Schema(
       required: true,
     },
     creator: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },
     comments: [
       {
         author: String,
-        date: Date.now(),
+        date: () => Date.now(),
         body: String,
       },
     ],
     projId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       required: true,
       ref: "Project",
     },
     logIds: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Log",
       },
     ],
