@@ -7,6 +7,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useEffect } from "react";
+import { getMyProfile, updateProfile } from "./ProfileService";
 
 const user = {
   firstName: "Jan",
@@ -28,12 +30,54 @@ const StyledSpan = styled("span")({
 
 const Profile = ({ mode }) => {
   const [pic, setPic] = useState(null);
+  const initialState = {
+    username: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    img: '',
+  }
+  const [formInput, setFormInput] = useState(initialState)
+
+  const setProfile = async () => {
+    let user = await getMyProfile()
+
+    if (user) {
+      setFormInput(user)
+    } else {
+      console.log('error')
+    }
+  }
+
+  useEffect(() => {
+    setProfile()
+  }, [])
 
   const handlePictureUpload = (e) => {
     // setPic(e.target.files[0])
-    // let temp = URL.createObjectURL(e.target.files[0])
-    setPic(e.target.files[0]);
+    let temp = URL.createObjectURL(e.target.files[0])
+    setFormInput({
+      ...formInput,
+      img: temp
+    })
   };
+
+  const handleChange = (e) => {
+    setFormInput({
+      ...formInput,
+      [e.target.name]: e.target.value
+    })
+  }
+
+
+  const handleUpdate = async () => {
+    let response = await updateProfile(formInput)
+
+    if (!response) {
+      console.log('error updating')
+    }
+  }
 
   return (
     <Box
@@ -64,7 +108,7 @@ const Profile = ({ mode }) => {
             <label>Profile Image</label>
             <Avatar
               alt="name"
-              src={pic !== null ? URL.createObjectURL(pic) : user.picture}
+              src={formInput.img}
               sx={{
                 width: "100px",
                 height: "100px",
@@ -74,7 +118,7 @@ const Profile = ({ mode }) => {
             ></Avatar>
             <input
               type="file"
-              name="picture"
+              name="img"
               style={{ marginBottom: "20px" }}
               onChange={handlePictureUpload}
             />
@@ -83,32 +127,50 @@ const Profile = ({ mode }) => {
             <label className="label">First Name</label>
             <TextField
               variant="filled"
-              value={user.firstName}
+              value={formInput.firstName}
+              name="firstName"
               fullWidth
+              onChange={handleChange}
             ></TextField>
           </StyledSpan>
           <StyledSpan>
             <label className="label">Last Name</label>
             <TextField
               variant="filled"
-              value={user.lastName}
+              value={formInput.lastName}
+              name="lastName"
               fullWidth
+              onChange={handleChange}
+            ></TextField>
+          </StyledSpan>
+          <StyledSpan>
+            <label className="label">Username</label>
+            <TextField
+              variant="filled"
+              value={formInput.username}
+              name="username"
+              fullWidth
+              onChange={handleChange}
             ></TextField>
           </StyledSpan>
           <StyledSpan>
             <label className="label">Email Address</label>
             <TextField
               variant="filled"
-              value={user.email}
+              value={formInput.email}
+              name="email"
               fullWidth
+              onChange={handleChange}
             ></TextField>
           </StyledSpan>
           <StyledSpan>
             <label className="label">Phone</label>
             <TextField
               variant="filled"
-              value={user.phone}
+              value={formInput.phone}
+              name="phone"
               fullWidth
+              onChange={handleChange}
             ></TextField>
           </StyledSpan>
           <Button
@@ -119,6 +181,7 @@ const Profile = ({ mode }) => {
               color: "white",
               "&:hover": { bgcolor: "accent.hover" },
             }}
+            onClick={handleUpdate}
           >
             Update
           </Button>

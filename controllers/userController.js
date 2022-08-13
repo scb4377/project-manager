@@ -8,13 +8,16 @@ const User = require("../models/UserModel");
 // @route:   GET /api/user/me
 // @access: Private
 const getMe = asyncHandler(async (req, res) => {
-  const { _id, firstName, lastName, email } = await User.findById(req.user.id);
+  const { _id, username, firstName, lastName, email, phone, img } = await User.findById(req.user.id);
 
   res.status(200).json({
     id: _id,
+    username,
     firstName,
     lastName,
     email,
+    phone,
+    img
   });
 });
 
@@ -112,7 +115,7 @@ const createUser = asyncHandler(async (req, res) => {
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(req.user.id, req.body, {
     new: true,
-  });
+  }).select("-password");
 
   if (!user) {
     res.status(400);
