@@ -29,12 +29,13 @@ const loginUser = asyncHandler(async (req, res) => {
 
   // check password
   if (user && (await bcrypt.compare(password, user.password))) {
-    res.json({
+    res.status(200).json({
       _id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
       username: user.username,
       email: user.email,
+      phone: user.phone,
       token: generateToken(user._id),
     });
   } else {
@@ -47,13 +48,13 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route:   GET /api/user
 // @access: Private
 const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find()
+  const users = await User.find();
 
   if (users) {
-    res.status(201).json(users)
+    res.status(201).json(users);
   } else {
-    res.status(400)
-    throw new Error("No users found")
+    res.status(400);
+    throw new Error("No users found");
   }
 });
 
@@ -111,13 +112,13 @@ const createUser = asyncHandler(async (req, res) => {
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(req.user.id, req.body, {
     new: true,
-  })
+  });
 
   if (!user) {
-    res.status(400)
-    throw new Error('User not found')
+    res.status(400);
+    throw new Error("User not found");
   } else {
-    res.status(200).json(user)
+    res.status(200).json(user);
   }
 });
 
@@ -125,24 +126,41 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route:   DELETE /api/user/:id
 // @access: Private
 const deleteUser = asyncHandler(async (req, res) => {
-  const authorizedUser = User.findById(req.user.id)
+  const authorizedUser = User.findById(req.user.id);
 
   if (!authorizedUser) {
-    res.status(400)
-    throw new Error('Not Authorized')
+    res.status(400);
+    throw new Error("Not Authorized");
   }
-  
-  const user = await User.findByIdAndDelete(req.params.id)
+
+  const user = await User.findByIdAndDelete(req.params.id);
 
   if (user) {
-    res.status(200).send({message: 'Deleted User'})
+    res.status(200).send({ message: "Deleted User" });
   } else {
-    res.status(400)
-    throw new Error('Failed to delete user')
+    res.status(400);
+    throw new Error("Failed to delete user");
   }
 });
 
-// Generate JWT
+// const generateCookie = asyncHandler(async (req, res, token) => {
+//   res.cookie("token", token, {
+//     httpOnly: false,
+//   });
+// });
+
+// const generateToken = (id) => {
+//   const token = jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
+//   if (token) {
+//     generateCookie(token);
+//   } else {
+//     res.status(400);
+//     throw new Error("Not Authorized");
+//   }
+// };
+
+// // Generate JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "1d",
