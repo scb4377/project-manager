@@ -47,3 +47,7 @@ export const updateProfile = async (formInput) => {
         return response.data;
     }
 }
+
+export const logout = () => {
+    localStorage.removeItem('token')
+}

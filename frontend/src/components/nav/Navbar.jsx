@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { logout } from "../profile/ProfileService";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -36,12 +37,27 @@ const UserBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Navbar = ({ mode }) => {
-  const [open, setOpen] = useState(false);
+const Navbar = ({ mode, setAuth }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
   const navigate = useNavigate();
 
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const handleMenuClick = (e) => {
+    setAnchorEl(null)
     navigate("/profile");
+  };
+
+  const handleLogout = () => {
+    logout();
+    setAuth(false);
   };
 
   return (
@@ -65,29 +81,31 @@ const Navbar = ({ mode }) => {
             <Notifications />
           </Badge>
           <Avatar
-            onClick={(e) => setOpen(true)}
+            onClick={handleClick}
             sx={{ width: 30, height: 30 }}
             src="https://miro.medium.com/max/909/1*_iikfMGYF3RH4OZ0yeQYnQ.png"
           />
           <Typography variant="span">Jan</Typography>
         </Icons>
-        <UserBox onClick={(e) => setOpen(true)}>
+        <UserBox>
           <Avatar
             sx={{ width: 30, height: 30 }}
             src="https://miro.medium.com/max/909/1*_iikfMGYF3RH4OZ0yeQYnQ.png"
+            onClick={handleClick}
           />
         </UserBox>
       </StyledToolbar>
       <Menu
         id="demo-positioned-menu"
         open={open}
-        onClose={(e) => setOpen(false)}
+        anchorEl={anchorEl}
+        onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <MenuItem onClick={handleMenuClick}>Profile</MenuItem>
         <MenuItem>My Account</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </AppBar>
   );

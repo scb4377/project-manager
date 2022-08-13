@@ -60,7 +60,7 @@ function App() {
         <Paper sx={{ height: { xs: "100%", sm: "100%" }, overflowY: "scroll" }}>
           <Box sx={{ maxHeight: "100vh" }}>
             <Router>
-              <Navbar mode={mode} />
+              <Navbar mode={mode} setAuth={setAuth} />
               <Box
                 flexDirection="row"
                 spacing={2}
