@@ -1,15 +1,17 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
-import { rows, columns, mobileColumns } from "./BugsListLayout";
+import { columns, mobileColumns } from "./BugsListLayout";
+import { AppContext } from "../../context/Context";
 
 const BugsList = () => {
+  const { bugList } = useContext(AppContext);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const initialState = window.innerWidth < 500 ? mobileColumns : columns
-  const [columnLayout, setColumnLayout] = useState(initialState)
+  const initialState = window.innerWidth < 500 ? mobileColumns : columns;
+  const [columnLayout, setColumnLayout] = useState(initialState);
 
   const navigate = useNavigate();
-  
+
   const handleBugClick = (bug) => {
     navigate("/bugview", { state: bug });
   };
@@ -22,10 +24,9 @@ const BugsList = () => {
     }
   };
 
-
   return (
     <DataGrid
-      rows={rows}
+      rows={bugList}
       columns={columnLayout}
       pageSize={rowsPerPage}
       rowsPerPageOptions={[5, 10, 20, 50]}

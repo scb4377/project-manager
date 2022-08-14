@@ -1,58 +1,29 @@
 import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useContext } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/Context";
 import { columns, mobileColumns } from "./ProjectListLayout";
 
-const rows = [
-  {
-    id: 1,
-    projName: "Snow",
-    phase: "Deployment",
-    startdate: 35,
-    team: "DevOps",
-  },
-  {
-    id: 2,
-    projName: "Lannister",
-    phase: "Testing",
-    startdate: 42,
-    team: "Quality Assurance",
-  },
-  {
-    id: 3,
-    projName: "Lannister",
-    phase: "Building",
-    startdate: 45,
-    team: "Development",
-  },
-  {
-    id: 4,
-    projName: "Stark",
-    phase: "Designing",
-    startdate: 16,
-    team: "Design",
-  },
-  {
-    id: 5,
-    projName: "Targaryen",
-    phase: "Defining",
-    startdate: 54,
-    team: "Defining",
-  },
-  {
-    id: 6,
-    projName: "Melisandre",
-    phase: "Planning",
-    startdate: 150,
-    team: "Strategic",
-  },
-];
-
 const Projects = () => {
-  const { mode, projList } = useContext(AppContext);
+  const { mode, projList, teamList } = useContext(AppContext);
+
+  let tempList = projList
+  
+  useEffect(() => {
+    for (let i = 0; i < tempList.length; i++) {
+      let date = new Date(tempList[i].createdAt)
+      tempList[i].createdAt = date.toString().split('2022 ')[0]
+      for (let k = 0; k < teamList.length; k++) {
+        if (tempList[i].team === teamList[k]._id) {
+          tempList[i].team = teamList[k].teamName
+        }
+      }
+    }
+
+  }, [projList])
 
   const [rowsPerPage, setRowsPerPage] = useState(10);
   let initialState = window.innerWidth < 500 ? mobileColumns : columns;
@@ -109,7 +80,7 @@ const Projects = () => {
             textAlign: "center",
           }}
         >
-          <span style={{ fontWeight: "bold" }}>{rows.length}</span>
+          <span style={{ fontWeight: "bold" }}>{projList.length}</span>
           <label>Projects</label>
         </span>
         <span
@@ -168,7 +139,7 @@ const Projects = () => {
         sx={{ "& .gridHeader": { color: "white", bgcolor: "accent.primary" } }}
       >
         <DataGrid
-          rows={projList}
+          rows={tempList}
           columns={columnLayout}
           pageSize={rowsPerPage}
           rowsPerPageOptions={[5, 10, 20, 50]}

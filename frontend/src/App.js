@@ -21,37 +21,43 @@ import Bugs from "./components/bug/Bugs";
 import Tasks from "./components/tasks/Tasks";
 import Login from "./components/login/Login";
 import { AppContext } from "./context/Context";
-import { getBugs, getProjects, getTasks, getTeams, getUsers } from './context/BugContext'
+import {
+  getBugs,
+  getProjects,
+  getTasks,
+  getTeams,
+  getUsers,
+} from "./context/BugContext";
 
 function App() {
   const [mode, setMode] = useState("light");
   const [auth, setAuth] = useState(false);
-  const [userList, setUserList] = useState([])
-  const [bugList, setBugList] = useState([])
-  const [projList, setProjList] = useState([])
-  const [teamList, setTeamList] = useState([])
-  const [taskList, setTaskList] = useState([])
+  const [userList, setUserList] = useState([]);
+  const [bugList, setBugList] = useState([]);
+  const [projList, setProjList] = useState([]);
+  const [teamList, setTeamList] = useState([]);
+  const [taskList, setTaskList] = useState([]);
 
   useEffect(() => {
     if (auth) {
       (async () => {
-        let bugs = await getBugs()
-        setBugList(bugs)
+        let bugs = await getBugs();
+        setBugList(bugs);
 
-        let projects = await getProjects()
-        setProjList(projects)
+        let projects = await getProjects();
+        setProjList(projects);
 
-        let teams = await getTeams()
-        setTeamList(teams)
+        let teams = await getTeams();
+        setTeamList(teams);
 
-        let tasks = await getTasks()
-        setTaskList(tasks)
+        let tasks = await getTasks();
+        setTaskList(tasks);
 
-        let users = await getUsers()
-        setUserList(users)
-      })()
+        let users = await getUsers();
+        setUserList(users);
+      })();
     }
-  }, [auth])
+  }, [auth]);
 
   const theme = createTheme({
     root: {
@@ -82,7 +88,19 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppContext.Provider value={{ mode, setMode, auth, setAuth, bugList, taskList, projList, teamList, userList }}>
+      <AppContext.Provider
+        value={{
+          mode,
+          setMode,
+          auth,
+          setAuth,
+          bugList,
+          taskList,
+          projList,
+          teamList,
+          userList,
+        }}
+      >
         {!auth ? (
           <Login />
         ) : (

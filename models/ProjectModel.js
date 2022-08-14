@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 
 const projectSchema = new Schema(
   {
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
     team: {
       type: Schema.Types.ObjectId,
       required: true,

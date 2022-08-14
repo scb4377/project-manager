@@ -43,6 +43,12 @@ export const getProjects = async () => {
   const response = await axios.get(API_URL + '/projects', config);
   const projects = await response.data;
 
+  projects.map(project => {
+    project["id"] = project["_id"];
+    delete project["_id"]
+    return project
+  })
+
   if (!response) {
     console.log('error')
   } else {
