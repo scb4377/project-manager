@@ -1,7 +1,9 @@
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { AppContext } from "../../context/Context";
 import { columns, mobileColumns } from "./HomeListLayout";
 
 const rows = [
@@ -96,6 +98,8 @@ const rows = [
 ];
 
 const HomeList = () => {
+  const { bugList } = useContext(AppContext)
+
   const navigate = useNavigate();
   const [rowsPerPage, setRowsPerPage] = useState(10);
   let initialState = window.innerHeight < 500 ? mobileColumns : columns;
@@ -119,7 +123,7 @@ const HomeList = () => {
       sx={{ "& .gridHeader": { color: "white", bgcolor: "accent.primary" } }}
     >
       <DataGrid
-        rows={rows}
+        rows={bugList}
         columns={columnLayout}
         pageSize={rowsPerPage}
         rowsPerPageOptions={[5, 10, 20, 50]}

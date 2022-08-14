@@ -8,7 +8,8 @@ const User = require("../models/UserModel");
 // @route:   GET /api/user/me
 // @access: Private
 const getMe = asyncHandler(async (req, res) => {
-  const { _id, username, firstName, lastName, email, phone, img } = await User.findById(req.user.id);
+  const { _id, username, firstName, lastName, email, phone, img } =
+    await User.findById(req.user.id);
 
   res.status(200).json({
     id: _id,
@@ -17,7 +18,7 @@ const getMe = asyncHandler(async (req, res) => {
     lastName,
     email,
     phone,
-    img
+    img,
   });
 });
 
@@ -51,7 +52,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route:   GET /api/user
 // @access: Private
 const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find();
+  const users = await User.find({}, { password: 0, createdAt: 0, updatedAt: 0, _v: 0})
 
   if (users) {
     res.status(201).json(users);

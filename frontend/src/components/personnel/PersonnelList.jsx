@@ -15,6 +15,9 @@ import {
 } from "@mui/material";
 import { KeyboardArrowUp, KeyboardArrowDown } from "@mui/icons-material";
 import { useState } from "react";
+import { useContext } from "react";
+import { AppContext } from "../../context/Context";
+import { useEffect } from "react";
 
 const data = [
   {
@@ -241,8 +244,21 @@ const data = [
   },
 ];
 
-const Row = ({ row }) => {
+const Row = ({ team }) => {
+  const { userList, teamList } = useContext(AppContext);
+
   const [open, setOpen] = useState(false);
+  let employees = [];
+
+  if (team && userList) {
+    for (let i = 0; i < team.empIds.length; i++) {
+      for (let k = 0; k < userList.length; k++) {
+        if (team.empIds[i] === userList[k]._id) {
+          employees.push(userList[k]);
+        }
+      }
+    }
+  }
 
   return (
     <>
@@ -257,14 +273,19 @@ const Row = ({ row }) => {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.team[0]}
+          {team.teamName}
         </TableCell>
         {window.innerWidth > 500 && (
           <TableCell>
             <AvatarGroup max={4} sx={{ justifyContent: "center" }}>
-              {row.team[1].map((person) => (
-                <Avatar key={person.id} alt={person.name} src="" />
-              ))}
+              {employees.length > 0 &&
+                employees.map((person) => (
+                  <Avatar
+                    key={person._id}
+                    alt={person.firstName}
+                    src={person.img}
+                  />
+                ))}
             </AvatarGroup>
           </TableCell>
         )}
@@ -273,7 +294,7 @@ const Row = ({ row }) => {
       <TableRow>
         <TableCell style={{ padding: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1, }}>
+            <Box sx={{ margin: 1 }}>
               <Typography
                 variant="h6"
                 mb={2}
@@ -294,15 +315,20 @@ const Row = ({ row }) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.team[1].map((person) => (
-                    <TableRow key={person.id}>
-                      <TableCell component="th" scope="row">
-                        {person.name}
-                      </TableCell>
-                      <TableCell align="center">{person.role}</TableCell>
-                      <TableCell align="right">{person.phone}</TableCell>
-                    </TableRow>
-                  ))}
+                  {employees.length > 0 &&
+                    employees.map((person) => (
+                      <TableRow key={person._id}>
+                        <TableCell component="th" scope="row">
+                          {person.firstName}
+                        </TableCell>
+                        <TableCell align="center">
+                          {person.roles.User === 2001
+                            ? "Software Engineer 1"
+                            : "Role"}
+                        </TableCell>
+                        <TableCell align="right">{person.phone}</TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </Box>
@@ -314,6 +340,7 @@ const Row = ({ row }) => {
 };
 
 const PersonnelList = ({ mode }) => {
+  const { teamList } = useContext(AppContext);
   return (
     <TableContainer sx={{ border: "0.5px solid gray" }} component={Paper}>
       <Table aria-label="collapsible table">
@@ -333,8 +360,8 @@ const PersonnelList = ({ mode }) => {
             bgcolor: mode === "dark" ? "background.dark" : "background.light",
           }}
         >
-          {data.map((team, i) => (
-            <Row key={i} row={team} />
+          {teamList.map((team) => (
+            <Row key={team._id} team={team} />
           ))}
         </TableBody>
       </Table>

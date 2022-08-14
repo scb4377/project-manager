@@ -52,7 +52,7 @@ const rows = [
 ];
 
 const Projects = () => {
-  const { mode } = useContext(AppContext);
+  const { mode, projList } = useContext(AppContext);
 
   const [rowsPerPage, setRowsPerPage] = useState(10);
   let initialState = window.innerWidth < 500 ? mobileColumns : columns;
@@ -168,7 +168,7 @@ const Projects = () => {
         sx={{ "& .gridHeader": { color: "white", bgcolor: "accent.primary" } }}
       >
         <DataGrid
-          rows={rows}
+          rows={projList}
           columns={columnLayout}
           pageSize={rowsPerPage}
           rowsPerPageOptions={[5, 10, 20, 50]}

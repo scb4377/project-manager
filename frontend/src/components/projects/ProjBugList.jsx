@@ -3,6 +3,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router";
 import { Box } from "@mui/material";
 import { columns, mobileColumns } from "./ProjBugListLayout";
+import { useContext } from "react";
+import { AppContext } from "../../context/Context";
 
 
 
@@ -19,6 +21,8 @@ const rows = [
 ];
 
 const ProjBugList = () => {
+  const { projList } = useContext(AppContext)
+
   const navigate = useNavigate();
   const [rowsPerPage, setRowsPerPage] = useState(10);
   let initialState = window.innerHeight < 500 ? mobileColumns : columns;
@@ -36,8 +40,6 @@ const ProjBugList = () => {
     navigate("/bugview", { state: bug });
   };
 
-  console.log(columnLayout)
-
   return (
     <Box
       sx={{
@@ -47,7 +49,7 @@ const ProjBugList = () => {
       }}
     >
       <DataGrid
-        rows={rows}
+        rows={projList}
         sx={{'&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': { py: '20px' },}}
         getRowHeight={() => 'auto'} getEstimatedRowHeight={() => 200}
 

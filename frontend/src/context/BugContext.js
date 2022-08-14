@@ -87,3 +87,22 @@ export const getTasks = async () => {
     return tasks
   }
 }
+
+export const getUsers = async () => {
+  const token = JSON.parse(localStorage.getItem("token"));
+
+const config = {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+};
+
+const response = await axios.get(API_URL + '/user', config);
+const users = await response.data;
+
+if (!response) {
+  console.log('error')
+} else {
+  return users
+}
+}

@@ -21,11 +21,12 @@ import Bugs from "./components/bug/Bugs";
 import Tasks from "./components/tasks/Tasks";
 import Login from "./components/login/Login";
 import { AppContext } from "./context/Context";
-import { getBugs, getProjects, getTasks, getTeams } from './context/BugContext'
+import { getBugs, getProjects, getTasks, getTeams, getUsers } from './context/BugContext'
 
 function App() {
   const [mode, setMode] = useState("light");
   const [auth, setAuth] = useState(false);
+  const [userList, setUserList] = useState([])
   const [bugList, setBugList] = useState([])
   const [projList, setProjList] = useState([])
   const [teamList, setTeamList] = useState([])
@@ -45,6 +46,9 @@ function App() {
 
         let tasks = await getTasks()
         setTaskList(tasks)
+
+        let users = await getUsers()
+        setUserList(users)
       })()
     }
   }, [auth])
@@ -78,7 +82,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppContext.Provider value={{ mode, setMode, auth, setAuth }}>
+      <AppContext.Provider value={{ mode, setMode, auth, setAuth, bugList, taskList, projList, teamList, userList }}>
         {!auth ? (
           <Login />
         ) : (
