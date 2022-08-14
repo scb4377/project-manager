@@ -26,7 +26,14 @@ const deleteProject = asyncHandler(async (req, res) => {
 // @route   GET /api/project/
 // @access  Private
 const getProjects = asyncHandler(async (req, res) => {
+    const projects = await Project.find();
 
+  if (projects) {
+    res.status(201).json(projects);
+  } else {
+    res.status(400);
+    throw new Error("No projects found");
+  }
 })
 
 module.exports = {

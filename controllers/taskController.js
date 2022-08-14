@@ -4,7 +4,14 @@ const Task = require('../models/TaskModel')
 // @desc    Get tasks
 // @route   GET /api/tasks
 const getTasks = asyncHandler(async (req, res) => {
+    const tasks = await Task.find();
 
+  if (tasks) {
+    res.status(201).json(tasks);
+  } else {
+    res.status(400);
+    throw new Error("No tasks found");
+  }
 })
 
 // @desc    Create tasks

@@ -5,7 +5,7 @@ import {
   Paper,
   ThemeProvider,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Home from "./components/home/Home";
 import Navbar from "./components/nav/Navbar";
 import Sidebar from "./components/sidebar/Sidebar";
@@ -21,10 +21,33 @@ import Bugs from "./components/bug/Bugs";
 import Tasks from "./components/tasks/Tasks";
 import Login from "./components/login/Login";
 import { AppContext } from "./context/Context";
+import { getBugs, getProjects, getTasks, getTeams } from './context/BugContext'
 
 function App() {
   const [mode, setMode] = useState("light");
   const [auth, setAuth] = useState(false);
+  const [bugList, setBugList] = useState([])
+  const [projList, setProjList] = useState([])
+  const [teamList, setTeamList] = useState([])
+  const [taskList, setTaskList] = useState([])
+
+  useEffect(() => {
+    if (auth) {
+      (async () => {
+        let bugs = await getBugs()
+        setBugList(bugs)
+
+        let projects = await getProjects()
+        setProjList(projects)
+
+        let teams = await getTeams()
+        setTeamList(teams)
+
+        let tasks = await getTasks()
+        setTaskList(tasks)
+      })()
+    }
+  }, [auth])
 
   const theme = createTheme({
     root: {

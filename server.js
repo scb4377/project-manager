@@ -17,8 +17,8 @@ app.use(cookieParser())
 app.use(cors())
 
 app.use("/api/user", require("./routes/userRoutes"));
-app.use("/api/team", require("./routes/teamRoutes"));
-app.use("/api/project", require("./routes/projectRoutes"));
+app.use("/api/teams", require("./routes/teamRoutes"));
+app.use("/api/projects", require("./routes/projectRoutes"));
 app.use("/api/bugs", require("./routes/bugRoutes"));
 app.use("/api/tasks", require("./routes/taskRoutes"));
 app.use("/api/logs", require("./routes/logRoutes"));
