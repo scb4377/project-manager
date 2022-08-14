@@ -11,18 +11,14 @@ export const getBugs = async () => {
     },
   };
 
-  const response = await axios.get(API_URL + '/bugs', config);
+  const response = await axios.get(API_URL + "/bugs", config);
   const bugs = await response.data;
-  //   const {username, firstName, lastName, email, phone, img } = response.data;
 
-  //   const user = {
-  //     username,
-  //     firstName,
-  //     lastName,
-  //     email,
-  //     phone,
-  //     img
-  //   }
+  bugs.map((project) => {
+    project["id"] = project["_id"];
+    delete project["_id"];
+    return project;
+  });
 
   if (!response) {
     console.log("error");
@@ -40,24 +36,24 @@ export const getProjects = async () => {
     },
   };
 
-  const response = await axios.get(API_URL + '/projects', config);
+  const response = await axios.get(API_URL + "/projects", config);
   const projects = await response.data;
 
-  projects.map(project => {
+  projects.map((project) => {
     project["id"] = project["_id"];
-    delete project["_id"]
-    return project
-  })
+    delete project["_id"];
+    return project;
+  });
 
   if (!response) {
-    console.log('error')
+    console.log("error");
   } else {
-    return projects
+    return projects;
   }
 };
 
 export const getTeams = async () => {
-    const token = JSON.parse(localStorage.getItem("token"));
+  const token = JSON.parse(localStorage.getItem("token"));
 
   const config = {
     headers: {
@@ -65,18 +61,18 @@ export const getTeams = async () => {
     },
   };
 
-  const response = await axios.get(API_URL + '/teams', config);
+  const response = await axios.get(API_URL + "/teams", config);
   const teams = await response.data;
 
   if (!response) {
-    console.log('error')
+    console.log("error");
   } else {
-    return teams
+    return teams;
   }
-}
+};
 
 export const getTasks = async () => {
-    const token = JSON.parse(localStorage.getItem("token"));
+  const token = JSON.parse(localStorage.getItem("token"));
 
   const config = {
     headers: {
@@ -84,31 +80,31 @@ export const getTasks = async () => {
     },
   };
 
-  const response = await axios.get(API_URL + '/tasks', config);
+  const response = await axios.get(API_URL + "/tasks", config);
   const tasks = await response.data;
 
   if (!response) {
-    console.log('error')
+    console.log("error");
   } else {
-    return tasks
+    return tasks;
   }
-}
+};
 
 export const getUsers = async () => {
   const token = JSON.parse(localStorage.getItem("token"));
 
-const config = {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(API_URL + "/user", config);
+  const users = await response.data;
+
+  if (!response) {
+    console.log("error");
+  } else {
+    return users;
+  }
 };
-
-const response = await axios.get(API_URL + '/user', config);
-const users = await response.data;
-
-if (!response) {
-  console.log('error')
-} else {
-  return users
-}
-}

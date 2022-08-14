@@ -41,7 +41,9 @@ const createProject = asyncHandler(async (req, res) => {
 // @desc    Update project
 // @route   PUT /api/project/:id
 // @access  Private
-const updateProject = asyncHandler(async (req, res) => {});
+const updateProject = asyncHandler(async (req, res) => {
+  
+});
 
 // @desc    Delete project
 // @route   DELETE /api/project/:id

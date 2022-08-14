@@ -8,6 +8,12 @@ const projectSchema = new Schema(
       required: true,
       ref: "Team",
     },
+    bugs: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Bug"
+      }
+    ],
     projTitle: {
       type: String,
       required: true,

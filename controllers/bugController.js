@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Bug = require("../models/BugModel");
+const Project = require("../models/ProjectModel");
 
 const getBugs = asyncHandler(async (req, res) => {
   const bugs = await Bug.find();
@@ -24,7 +25,9 @@ const createBug = asyncHandler(async (req, res) => {
     projId
   });
 
-  if (bug) {
+  const project = await Project.updateOne({_id: projId}, { $push: {bugs: bug._id}})
+
+  if (bug && project) {
     res.status(201).json({
       bug
     });
