@@ -1,7 +1,11 @@
 import { Box, Typography } from "@mui/material";
+import { useContext } from "react";
+import { AppContext } from "../../context/Context";
 import BugsList from "./BugsList";
 
-const Bugs = ({ mode }) => {
+const Bugs = () => {
+  const { mode } = useContext(AppContext)
+
   return (
     <Box
       p={2}

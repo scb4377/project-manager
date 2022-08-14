@@ -6,7 +6,7 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import {
   Legend,
@@ -14,6 +14,7 @@ import {
   RadialBarChart,
   ResponsiveContainer,
 } from "recharts";
+import { AppContext } from "../../context/Context";
 import ProjBugList from "./ProjBugList";
 import ProjCommentList from "./ProjCommentList";
 import ProjWidget from "./ProjWidget";
@@ -53,7 +54,9 @@ const StyledDiv = styled("div")({
   gap: "20px",
 });
 
-const ProjectView = ({ mode }) => {
+const ProjectView = () => {
+  const { mode } = useContext(AppContext);
+
   const { state } = useLocation();
 
   return (

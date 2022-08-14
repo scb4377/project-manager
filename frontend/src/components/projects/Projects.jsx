@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../context/Context";
 import { columns, mobileColumns } from "./ProjectListLayout";
 
 const rows = [
@@ -49,7 +51,9 @@ const rows = [
   },
 ];
 
-const Projects = ({ mode }) => {
+const Projects = () => {
+  const { mode } = useContext(AppContext);
+
   const [rowsPerPage, setRowsPerPage] = useState(10);
   let initialState = window.innerWidth < 500 ? mobileColumns : columns;
   const [columnLayout, setColumnLayout] = useState(initialState);
@@ -77,7 +81,7 @@ const Projects = ({ mode }) => {
       borderRadius="5px"
       gap={3}
       boxShadow={5}
-      sx={{ margin: { xs: 0 }, height: '100%' }}
+      sx={{ margin: { xs: 0 }, height: "100%" }}
     >
       <Typography
         mb={2}

@@ -18,10 +18,14 @@ import {
   styled,
   Switch,
 } from "@mui/material";
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AppContext } from "../../context/Context";
 import Add from "./Add";
 
-const Sidebar = ({ mode, setMode }) => {
+const Sidebar = () => {
+  const { mode, setMode } = useContext(AppContext)
+
   const StyledNavLink = styled(NavLink)({
     textDecoration: "none",
     listStyleType: "none",

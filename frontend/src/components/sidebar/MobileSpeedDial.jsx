@@ -12,6 +12,8 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { Add as AddIcon } from "@mui/icons-material";
+import { useContext } from "react";
+import { AppContext } from "../../context/Context";
 
 const actions = [
   { icon: <Home sx={{ color: "accent.primary" }} />, name: "Home" },
@@ -19,11 +21,13 @@ const actions = [
   { icon: <Group sx={{ color: "accent.primary" }} />, name: "Personnel" },
   { icon: <Settings sx={{ color: "accent.primary" }} />, name: "Settings" },
   { icon: <AccountBox sx={{ color: "accent.primary" }} />, name: "Profile" },
-  { icon: <AddIcon />, name: 'Add Bug'},
+  { icon: <AddIcon />, name: "Add Bug" },
   { icon: <Switch onChange />, name: "Night Mode" },
 ];
 
-const MobileSpeedDial = ({ mode, setMode }) => {
+const MobileSpeedDial = () => {
+  const { mode, setMode } = useContext(AppContext);
+
   const actions = [
     { icon: <Home sx={{ color: "accent.primary" }} />, name: "Home" },
     {
@@ -76,7 +80,7 @@ const MobileSpeedDial = ({ mode, setMode }) => {
         position: "absolute",
         bottom: "5px",
         right: "5px",
-        display: { xs: "block", sm: "none", },
+        display: { xs: "block", sm: "none" },
       }}
     >
       <Backdrop open={open} />

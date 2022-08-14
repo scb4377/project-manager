@@ -3,8 +3,11 @@ import login from "../../images/login.jpg";
 import React from "react";
 import { useState } from "react";
 import { loginFunc } from "./LoginService";
+import { useContext } from "react";
+import { AppContext } from "../../context/Context";
 
-const Login = ({setAuth}) => {
+const Login = () => {
+  const { setAuth } = useContext(AppContext)
     const initialState = {
         username: '',
         password: '',

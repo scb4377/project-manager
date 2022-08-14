@@ -3,8 +3,12 @@ import Widget from "./Widget";
 import Chart from "./Chart";
 import HomeList from "./HomeList";
 import Featured from "./Featured";
+import { useContext } from "react";
+import { AppContext } from "../../context/Context";
 
-const Home = ({ mode }) => {
+const Home = () => {
+  const { mode } = useContext(AppContext);
+
   return (
     <>
       <Box
@@ -45,7 +49,7 @@ const Home = ({ mode }) => {
             marginLeft: { xs: 0 },
             width: "300px",
             minWidth: { xs: "100%", sm: "300px" },
-            minHeight: "300px"
+            minHeight: "300px",
           }}
         >
           <Typography

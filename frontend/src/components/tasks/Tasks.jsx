@@ -1,10 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../context/Context";
 import { rows, columns, mobileColumns } from "./TasksLayout";
 
-const Tasks = ({ mode }) => {
+const Tasks = () => {
+  const { mode } = useContext(AppContext);
+
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const initialState = window.innerWidth < 500 ? mobileColumns : columns;
   const [columnLayout, setColumnLayout] = useState(initialState);

@@ -1,10 +1,14 @@
 import { Box, Typography } from "@mui/material";
+import { useContext } from "react";
 import { useLocation } from "react-router";
+import { AppContext } from "../../context/Context";
 import BugComments from "./BugComments";
 import BugDetails from "./BugDetails";
 import MyLogs from "./MyLogs";
 
-const BugView = ({ mode }) => {
+const BugView = () => {
+  const { mode } = useContext(AppContext);
+
   const location = useLocation();
 
   return (

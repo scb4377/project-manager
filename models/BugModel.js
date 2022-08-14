@@ -13,7 +13,6 @@ const bugSchema = new Schema(
     },
     status: {
       type: String,
-      required: true,
     },
     dueBy: {
       type: Date,

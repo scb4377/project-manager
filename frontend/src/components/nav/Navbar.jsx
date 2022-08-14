@@ -10,8 +10,10 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { AppContext } from "../../context/Context";
 import { logout } from "../profile/ProfileService";
 
 const StyledToolbar = styled(Toolbar)({
@@ -37,7 +39,8 @@ const UserBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Navbar = ({ mode, setAuth }) => {
+const Navbar = () => {
+  const { mode, setAuth } = useContext(AppContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -51,7 +54,7 @@ const Navbar = ({ mode, setAuth }) => {
   };
 
   const handleMenuClick = (e) => {
-    setAnchorEl(null)
+    setAnchorEl(null);
     navigate("/profile");
   };
 
@@ -61,7 +64,7 @@ const Navbar = ({ mode, setAuth }) => {
   };
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" sx={{ borderRadius: "0px" }}>
       <StyledToolbar
         sx={{
           backgroundColor:

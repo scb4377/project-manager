@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import { useEffect } from "react";
 import { getMyProfile, updateProfile } from "./ProfileService";
+import { useContext } from "react";
+import { AppContext } from "../../context/Context";
 
 const user = {
   firstName: "Jan",
@@ -28,56 +30,57 @@ const StyledSpan = styled("span")({
   },
 });
 
-const Profile = ({ mode }) => {
+const Profile = () => {
+  const { mode } = useContext(AppContext);
+
   const [pic, setPic] = useState(null);
   const initialState = {
-    username: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    img: '',
-  }
-  const [formInput, setFormInput] = useState(initialState)
+    username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    img: "",
+  };
+  const [formInput, setFormInput] = useState(initialState);
 
   const setProfile = async () => {
-    let user = await getMyProfile()
+    let user = await getMyProfile();
 
     if (user) {
-      setFormInput(user)
+      setFormInput(user);
     } else {
-      console.log('error')
+      console.log("error");
     }
-  }
+  };
 
   useEffect(() => {
-    setProfile()
-  }, [])
+    setProfile();
+  }, []);
 
   const handlePictureUpload = (e) => {
     // setPic(e.target.files[0])
-    let temp = URL.createObjectURL(e.target.files[0])
+    let temp = URL.createObjectURL(e.target.files[0]);
     setFormInput({
       ...formInput,
-      img: temp
-    })
+      img: temp,
+    });
   };
 
   const handleChange = (e) => {
     setFormInput({
       ...formInput,
-      [e.target.name]: e.target.value
-    })
-  }
-
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleUpdate = async () => {
-    let response = await updateProfile(formInput)
+    let response = await updateProfile(formInput);
 
     if (!response) {
-      console.log('error updating')
+      console.log("error updating");
     }
-  }
+  };
 
   return (
     <Box
