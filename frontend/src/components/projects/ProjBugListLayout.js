@@ -25,24 +25,24 @@ export const columns = [
             textTransform: "uppercase",
             letterSpacing: "2px",
             backgroundColor:
-              cellValues.value === "4"
+              cellValues.value === 4
                 ? "#ff2800"
-                : cellValues.value === "3"
+                : cellValues.value === 3
                 ? "#ffae04"
-                : cellValues.value === "2"
+                : cellValues.value === 2
                 ? "#eaf600"
-                : cellValues.value === "1"
+                : cellValues.value === 1
                 ? "#55ff04"
                 : "transparent",
           }}
         >
-          {cellValues.value === "4"
+          {cellValues.value === 4
             ? "Critical"
-            : cellValues.value === "3"
+            : cellValues.value === 3
             ? "Major"
-            : cellValues.value === "2"
+            : cellValues.value === 2
             ? "Minor"
-            : cellValues.value === "1"
+            : cellValues.value === 1
             ? "Low"
             : null}
         </div>
@@ -50,7 +50,7 @@ export const columns = [
     },
   },
 
-  { field: "date", headerName: "Date", headerClassName: "gridHeader" },
+  { field: "createdAt", headerName: "Date", headerClassName: "gridHeader" },
   {
     field: "status",
     headerName: "Status",
@@ -108,24 +108,24 @@ export const mobileColumns = [
             textTransform: "uppercase",
             letterSpacing: "1px",
             backgroundColor:
-              cellValues.value === "4"
+              cellValues.value === 4
                 ? "#ff2800"
-                : cellValues.value === "3"
+                : cellValues.value === 3
                 ? "#ffae04"
-                : cellValues.value === "2"
+                : cellValues.value === 2
                 ? "#eaf600"
-                : cellValues.value === "1"
+                : cellValues.value === 1
                 ? "#55ff04"
                 : "transparent",
           }}
         >
-          {cellValues.value === "4"
+          {cellValues.value === 4
             ? "Critical"
-            : cellValues.value === "3"
+            : cellValues.value === 3
             ? "Major"
-            : cellValues.value === "2"
+            : cellValues.value === 2
             ? "Minor"
-            : cellValues.value === "1"
+            : cellValues.value === 1
             ? "Low"
             : null}
         </div>

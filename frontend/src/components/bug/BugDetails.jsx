@@ -1,4 +1,6 @@
 import { Avatar, styled, Typography } from "@mui/material";
+import { useContext } from "react";
+import { AppContext } from "../../context/Context";
 
 const StyledDiv = styled("div")({
   display: "flex",
@@ -7,6 +9,7 @@ const StyledDiv = styled("div")({
 });
 
 const BugDetails = ({ bug }) => {
+  const { mode } = useContext(AppContext)
   const info =
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit sit voluptas qui vitae laudantium! Minus veniam dolor animi in rem aliquam quasi fugit tempora labore, explicabo magnam laboriosam doloribus vitae!";
 
@@ -24,7 +27,7 @@ const BugDetails = ({ bug }) => {
         fontWeight={400}
         align="left"
         mb={2}
-        sx={{ borderBottom: "0.5px solid gray", width: "max-content" }}
+        sx={{ borderBottom: "0.5px solid gray", width: "max-content",  }}
       >
         Bug Details
       </Typography>

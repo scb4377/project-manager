@@ -7,6 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useContext } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import {
   Legend,
@@ -55,9 +57,29 @@ const StyledDiv = styled("div")({
 });
 
 const ProjectView = () => {
-  const { mode } = useContext(AppContext);
+  const { mode, teamList, userList } = useContext(AppContext);
+  const [users, setUsers] = useState([])
 
   const { state } = useLocation();
+
+  let findTeam = teamList;
+
+  useEffect(() => {
+    findTeam = teamList.filter((team) => team.teamName === state.team);
+    let temp = findTeam[0]
+    let usersTemp = []
+    if (temp) {
+      for (let i = 0; i < temp.empIds.length; i++) {
+        let user;
+        for (let k = 0; k < userList.length; k++) {
+          if (temp.empIds[i] === userList[k]._id) {
+            usersTemp.push(userList[k])
+          }
+        }
+      }
+      setUsers(usersTemp)
+    }
+  }, [teamList]);
 
   return (
     <Box
@@ -106,7 +128,7 @@ const ProjectView = () => {
               wordWrap: "break-word",
             }}
           >
-            {state.projName}
+            {state.projTitle}
           </Typography>
           <Box
             p={1}
@@ -175,19 +197,19 @@ const ProjectView = () => {
           sx={{ width: { xs: "100%", sm: "50%" } }}
         >
           <span style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontWeight: "bold" }}>{state.name}</span>
+            <span style={{ fontWeight: "bold" }}>{state.company}</span>
             <label>Company</label>
           </span>
           <span style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontWeight: "bold" }}>{state.created}</span>
+            <span style={{ fontWeight: "bold" }}>{state.createdAt}</span>
             <label>Start Date</label>
           </span>
           <span style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontWeight: "bold" }}>32</span>
+            <span style={{ fontWeight: "bold" }}>{state.bugs.length}</span>
             <label>Issues</label>
           </span>
           <span style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontWeight: "bold" }}>32</span>
+            <span style={{ fontWeight: "bold" }}>{users.length}</span>
             <label>Assignees</label>
           </span>
         </Box>
@@ -202,20 +224,12 @@ const ProjectView = () => {
             height="max-content"
             sx={{ marginBottom: "40px" }}
           >
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+            {users.map(user => (
+              <Avatar key={user._id} alt={user.firstName + user.lastName} src={user.img} />
+            ))}
           </Stack>
         </Box>
-        <ProjBugList />
+        <ProjBugList state={state} />
       </Box>
       <ProjCommentList mode={mode} />
     </Box>

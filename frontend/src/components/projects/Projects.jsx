@@ -15,7 +15,8 @@ const Projects = () => {
   useEffect(() => {
     for (let i = 0; i < tempList.length; i++) {
       let date = new Date(tempList[i].createdAt)
-      tempList[i].createdAt = date.toString().split('2022 ')[0]
+      tempList[i].createdAt = date.toString().split('2022 ')
+      
       for (let k = 0; k < teamList.length; k++) {
         if (tempList[i].team === teamList[k]._id) {
           tempList[i].team = teamList[k].teamName

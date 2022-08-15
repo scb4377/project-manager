@@ -34,7 +34,7 @@ const BugView = () => {
         mb={2}
         boxShadow={5}
         borderRadius="5px"
-        bgcolor={mode === "dark" ? "background.dark" : "background.light"}
+        bgcolor={mode === "dark" ? "background.dark" : "background.default"}
         sx={{ display: "flex", justifyContent: "space-evenly" }}
       >
         <BugDetails bug={location.state} />
