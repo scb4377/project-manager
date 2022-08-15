@@ -1,4 +1,6 @@
 import { Avatar, Box, Divider, IconButton, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
+import { useContext } from 'react';
+import { AppContext } from '../../context/Context';
 
 const data = [
     {
@@ -75,7 +77,9 @@ const data = [
     },
   ];
 
-const BugComments = ({mode}) => {
+const BugComments = ({bug}) => {
+  const { mode } = useContext(AppContext)
+
   return (
     <Box
       p={2}
@@ -120,7 +124,7 @@ const BugComments = ({mode}) => {
           overflowY: "scroll",
         }}
       >
-        {data.map((comment, i) => (
+        {bug.comments.length > 0 && bug.comments.map((comment, i) => (
           <div key={i + 1}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>

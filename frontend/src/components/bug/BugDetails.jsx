@@ -1,4 +1,6 @@
 import { Avatar, styled, Typography } from "@mui/material";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 
@@ -9,9 +11,23 @@ const StyledDiv = styled("div")({
 });
 
 const BugDetails = ({ bug }) => {
-  const { mode } = useContext(AppContext)
+  const { mode, userList, formatDate } = useContext(AppContext);
+  const [dueBy, setDueBy] = useState(bug.dueBy);
+  const [creatorName, setCreatorName] = useState('')
+  const [creator, setCreator] = useState('');
   const info =
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit sit voluptas qui vitae laudantium! Minus veniam dolor animi in rem aliquam quasi fugit tempora labore, explicabo magnam laboriosam doloribus vitae!";
+  
+  useEffect(() => {
+    let temp = userList.filter((user) => user._id === bug.creator);
+    setCreator(temp[0]);
+    let dueBy = formatDate(bug.dueBy);
+
+    setDueBy(dueBy)
+
+    let name = creator !== '' ? creator.firstName.toString() + creator.lastName.toString() : ''
+    setCreatorName(name)
+  }, [bug]);
 
   return (
     <div
@@ -27,7 +43,7 @@ const BugDetails = ({ bug }) => {
         fontWeight={400}
         align="left"
         mb={2}
-        sx={{ borderBottom: "0.5px solid gray", width: "max-content",  }}
+        sx={{ borderBottom: "0.5px solid gray", width: "max-content" }}
       >
         Bug Details
       </Typography>
@@ -40,15 +56,14 @@ const BugDetails = ({ bug }) => {
             textAlign: "right",
             marginBottom: "16px",
             minWidth: "200px",
-            maxWidth: "50%",
             gap: "10px",
           }}
         >
           <StyledDiv sx={{ flex: 4, gap: "100px", marginBottom: "8px" }}>
             <label style={{ fontWeight: "500" }}>Title:</label>
-            <span>Lorem ipsum dolor sit amet consectetur aeriam, </span>
+            <span>{bug.issue}</span>
           </StyledDiv>
-          <StyledDiv sx={{ flex: 1, gap: "50px", marginLeft: "auto" }}>
+          <StyledDiv sx={{ flex: 1, gap: "50px" }}>
             <label
               style={{
                 textAlign: "left",
@@ -60,7 +75,7 @@ const BugDetails = ({ bug }) => {
             </label>
             <span style={{ minWidth: "100px" }}>{bug.status}</span>
           </StyledDiv>
-          <StyledDiv sx={{ flex: 1, gap: "50px", marginLeft: "auto" }}>
+          <StyledDiv sx={{ flex: 1, gap: "50px" }}>
             <label
               style={{
                 textAlign: "left",
@@ -70,9 +85,11 @@ const BugDetails = ({ bug }) => {
             >
               Due By:
             </label>
-            <span style={{ minWidth: "100px" }}>{bug.dueBy}</span>
+            <span style={{ minWidth: "100px" }}>
+              {dueBy}
+            </span>
           </StyledDiv>
-          <StyledDiv sx={{ flex: 1, gap: "50px", marginLeft: "auto" }}>
+          <StyledDiv sx={{ flex: 1, gap: "50px" }}>
             <label
               style={{
                 textAlign: "left",
@@ -82,15 +99,15 @@ const BugDetails = ({ bug }) => {
             >
               Created:
             </label>
-            <span style={{ minWidth: "100px" }}>{bug.created}</span>
+            <span style={{ minWidth: "100px" }}>{bug.createdAt}</span>
           </StyledDiv>
           <StyledDiv
             sx={{
               flex: 1,
               display: "flex",
               alignItems: "center",
+              justifyContent: "space-between",
               gap: "50px",
-              marginLeft: "auto",
             }}
           >
             <label
@@ -103,7 +120,11 @@ const BugDetails = ({ bug }) => {
               Creator:
             </label>
             <span style={{ minWidth: "100px" }}>
-              <Avatar alt="replace" src="" sx={{ marginLeft: "auto" }} />
+              <Avatar
+                alt={creatorName}
+                src={creator.img}
+                sx={{ marginLeft: "auto" }}
+              />
             </span>
           </StyledDiv>
         </div>
@@ -122,14 +143,7 @@ const BugDetails = ({ bug }) => {
           Information
         </h4>
         <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi
-          voluptates illum reprehenderit ab tenetur autem, fuga dignissimos
-          ipsum harum adipisci odit enim totam perspiciatis saepe repellat
-          ducimus obcaecati alias eveniet! Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Accusantium quia enim consequuntur
-          fugit! Esse qui repudiandae maxime. Temporibus consequatur illum
-          tempora dolores, ea quod, soluta nemo fugit consequuntur impedit
-          iusto.
+          {bug.description}
         </p>
       </div>
     </div>

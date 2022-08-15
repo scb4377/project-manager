@@ -38,13 +38,28 @@ function App() {
   const [teamList, setTeamList] = useState([]);
   const [taskList, setTaskList] = useState([]);
 
+  const formatDate = (date) => {
+    let temp = new Date(date)
+    let str = temp.toString()
+
+    let newDate = str.split(/\s\d{2}[:]/gi)[0]
+
+    return newDate;
+  };
+
   useEffect(() => {
     if (auth) {
       (async () => {
         let bugs = await getBugs();
+        for (let i = 0; i < bugs.length; i++) {
+          bugs[i].createdAt = formatDate(bugs[i].createdAt)
+        }
         setBugList(bugs);
 
         let projects = await getProjects();
+        for (let i = 0; i < projects.length; i++) {
+          projects[i].createdAt = formatDate(projects[i].createdAt)
+        }
         setProjList(projects);
 
         let teams = await getTeams();
@@ -85,6 +100,8 @@ function App() {
     },
   });
 
+  
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -99,6 +116,7 @@ function App() {
           projList,
           teamList,
           userList,
+          formatDate
         }}
       >
         {!auth ? (

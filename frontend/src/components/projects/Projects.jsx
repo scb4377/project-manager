@@ -8,17 +8,16 @@ import { AppContext } from "../../context/Context";
 import { columns, mobileColumns } from "./ProjectListLayout";
 
 const Projects = () => {
-  const { mode, projList, teamList } = useContext(AppContext);
+  const { mode, projList, teamList, formatDate } = useContext(AppContext);
   const [data, setData] = useState({})
 
   let tempList = projList
+
   
   useEffect(() => {
     // Changes team id to team name
     // Need to work on date 
     for (let i = 0; i < tempList.length; i++) {
-      let date = new Date(tempList[i].createdAt)
-      tempList[i].createdAt = date.toString().split('2022 ')
       
       for (let k = 0; k < teamList.length; k++) {
         if (tempList[i].team === teamList[k]._id) {

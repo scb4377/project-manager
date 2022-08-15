@@ -33,12 +33,11 @@ const ProjectView = () => {
   const { mode, teamList, userList, bugList } = useContext(AppContext);
   const [users, setUsers] = useState([]);
   const [lowPriority, setLowPriority] = useState(0)
+  const [filteredList, setFilteredList] = useState(bugList)
 
   const { state } = useLocation();
 
   let findTeam = teamList;
-
-  let filteredList = bugList;
 
   let minorPriority = 0;
 
@@ -97,7 +96,7 @@ const ProjectView = () => {
       setUsers(usersTemp);
     }
 
-    filteredList = bugList.filter((bug) => bug.projId === state.id);
+    setFilteredList(bugList.filter((bug) => bug.projId === state.projTitle));
     // calcPriorities(filteredList);
   }, [teamList, bugList]);
 
@@ -218,7 +217,10 @@ const ProjectView = () => {
           display="flex"
           justifyContent="space-between"
           flexDirection="row"
-          sx={{ width: { xs: "100%", sm: "50%" } }}
+          gap={4}
+          flexWrap="wrap"
+          textAlign="center"
+          sx={{ width: {xs: '100%', sm: 'max-content'} }}
         >
           <span style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontWeight: "bold" }}>{state.company}</span>
@@ -231,10 +233,6 @@ const ProjectView = () => {
           <span style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontWeight: "bold" }}>{state.bugs.length}</span>
             <label>Issues</label>
-          </span>
-          <span style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontWeight: "bold" }}>{users.length}</span>
-            <label>Assignees</label>
           </span>
         </Box>
         <Box mb={2} alignItems="left" sx={{ textAlign: "left" }}>

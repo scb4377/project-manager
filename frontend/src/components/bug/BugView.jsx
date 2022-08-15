@@ -41,7 +41,7 @@ const BugView = () => {
       </Box>
       <MyLogs mode={mode} />
       <Box mt={2}>
-        <BugComments mode={mode} />
+        <BugComments mode={mode} bug={location.state} />
       </Box>
     </div>
   );

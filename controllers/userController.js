@@ -26,25 +26,49 @@ const getMe = asyncHandler(async (req, res) => {
 // @route:   POST /api/user/login
 // @access: Private
 const loginUser = asyncHandler(async (req, res) => {
-  const { username, password } = req.body;
+  if (Object.keys(req.body).includes("demo")) {
+    const username = process.env.DEMO_USER;
+    const password = process.env.DEMO_PASSWORD;
 
-  // check for email
-  const user = await User.findOne({ username });
+    // check for email
+    const user = await User.findOne({ username });
 
-  // check password
-  if (user && (await bcrypt.compare(password, user.password))) {
-    res.status(200).json({
-      _id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      username: user.username,
-      email: user.email,
-      phone: user.phone,
-      token: generateToken(user._id),
-    });
+    // check password
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.status(200).json({
+        _id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        username: user.username,
+        email: user.email,
+        phone: user.phone,
+        token: generateToken(user._id),
+      });
+    } else {
+      res.status(400);
+      throw new Error("Invalid username or password combination!");
+    }
   } else {
-    res.status(400);
-    throw new Error("Invalid username or password combination!");
+    const { username, password } = req.body;
+
+    // check for email
+    const user = await User.findOne({ username });
+
+    // check password
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.status(200).json({
+        _id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        username: user.username,
+        email: user.email,
+        phone: user.phone,
+        token: generateToken(user._id),
+      });
+    } else {
+      res.status(400);
+      throw new Error("Invalid username or password combination!");
+    }
   }
 });
 
@@ -52,7 +76,10 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route:   GET /api/user
 // @access: Private
 const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({}, { password: 0, createdAt: 0, updatedAt: 0, _v: 0})
+  const users = await User.find(
+    {},
+    { password: 0, createdAt: 0, updatedAt: 0, _v: 0 }
+  );
 
   if (users) {
     res.status(201).json(users);
