@@ -9,10 +9,13 @@ import { columns, mobileColumns } from "./ProjectListLayout";
 
 const Projects = () => {
   const { mode, projList, teamList } = useContext(AppContext);
+  const [data, setData] = useState({})
 
   let tempList = projList
   
   useEffect(() => {
+    // Changes team id to team name
+    // Need to work on date 
     for (let i = 0; i < tempList.length; i++) {
       let date = new Date(tempList[i].createdAt)
       tempList[i].createdAt = date.toString().split('2022 ')
@@ -23,6 +26,37 @@ const Projects = () => {
         }
       }
     }
+
+    let defining = 0
+    let planning = 0
+    let designing = 0
+    let building = 0
+    let testing = 0
+
+    projList.forEach(proj => {
+      if (proj.stage === "Defining") {
+        defining += 1
+      } else if (proj.stage === "Planning") {
+        planning += 1
+      }
+       else if (proj.stage === "Designing") {
+        designing += 1
+      }
+       else if (proj.stage === "Building") {
+        building += 1
+      }
+       else if (proj.stage === "Testing") {
+        testing += 1
+      }
+    })
+
+    setData({
+      defining,
+      planning,
+      designing,
+      building,
+      testing
+    })
 
   }, [projList])
 
@@ -91,7 +125,7 @@ const Projects = () => {
             textAlign: "center",
           }}
         >
-          <span style={{ fontWeight: "bold" }}>4</span>
+          <span style={{ fontWeight: "bold" }}>{data.defining}</span>
           <label>Defining</label>
         </span>
         <span
@@ -101,7 +135,7 @@ const Projects = () => {
             textAlign: "center",
           }}
         >
-          <span style={{ fontWeight: "bold" }}>3</span>
+          <span style={{ fontWeight: "bold" }}>{data.planning}</span>
           <label>Planning</label>
         </span>
         <span
@@ -111,7 +145,7 @@ const Projects = () => {
             textAlign: "center",
           }}
         >
-          <span style={{ fontWeight: "bold" }}>32</span>
+          <span style={{ fontWeight: "bold" }}>{data.designing}</span>
           <label>Desigining</label>
         </span>
         <span
@@ -121,7 +155,7 @@ const Projects = () => {
             textAlign: "center",
           }}
         >
-          <span style={{ fontWeight: "bold" }}>32</span>
+          <span style={{ fontWeight: "bold" }}>{data.building}</span>
           <label>Building</label>
         </span>
         <span
@@ -131,7 +165,7 @@ const Projects = () => {
             textAlign: "center",
           }}
         >
-          <span style={{ fontWeight: "bold" }}>32</span>
+          <span style={{ fontWeight: "bold" }}>{data.testing}</span>
           <label>Testing</label>
         </span>
       </Box>

@@ -6,7 +6,7 @@ export const columns = [
       headerClassName: 'gridHeader'
     },
     { field: "createdAt", headerName: "Start Date", flex: 1, headerClassName: 'gridHeader' },
-    { field: "phase", headerName: "Phase", flex: 1, headerClassName: 'gridHeader' },
+    { field: "stage", headerName: "Stage", flex: 1, headerClassName: 'gridHeader' },
     { field: "team", headerName: "Team", flex: 1, headerClassName: 'gridHeader' },
   ];
 
