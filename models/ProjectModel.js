@@ -18,6 +18,10 @@ const projectSchema = new Schema(
       type: String,
       required: true,
     },
+    stage: {
+      type: String,
+      required: true,
+    },
     company: {
       type: String,
       required: true,

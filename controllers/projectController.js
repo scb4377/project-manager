@@ -5,10 +5,10 @@ const Project = require("../models/ProjectModel");
 // @route   POST /api/project/
 // @access  Private
 const createProject = asyncHandler(async (req, res) => {
-  const { teamId, projTitle, company } = req.body;
+  const { teamId, projTitle, company, stage } = req.body;
 
   // if required fields blank
-  if (!teamId || !projTitle || !company) {
+  if (!teamId || !projTitle || !company || !stage) {
     res.status(400);
     throw new Error("Please add all fields");
   }
@@ -26,6 +26,7 @@ const createProject = asyncHandler(async (req, res) => {
     team: teamId,
     projTitle,
     company,
+    stage
   });
 
   if (project) {
@@ -42,7 +43,16 @@ const createProject = asyncHandler(async (req, res) => {
 // @route   PUT /api/project/:id
 // @access  Private
 const updateProject = asyncHandler(async (req, res) => {
-  
+  const project = await Project.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  })
+
+  if (!project) {
+    res.status(400);
+    throw new Error("Project not found");
+  } else {
+    res.status(200).json(project);
+  }
 });
 
 // @desc    Delete project
@@ -54,10 +64,7 @@ const deleteProject = asyncHandler(async (req, res) => {});
 // @route   GET /api/project/
 // @access  Private
 const getProjects = asyncHandler(async (req, res) => {
-  const projects = await Project.find(
-    {},
-    { updatedAt: 0, _v: 0 }
-  );
+  const projects = await Project.find({}, { updatedAt: 0, _v: 0 });
 
   if (projects) {
     res.status(201).json(projects);
