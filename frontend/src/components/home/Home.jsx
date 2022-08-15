@@ -3,11 +3,39 @@ import Widget from "./Widget";
 import Chart from "./Chart";
 import HomeList from "./HomeList";
 import Featured from "./Featured";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/Context";
 
 const Home = () => {
-  const { mode } = useContext(AppContext);
+  const { mode, bugList } = useContext(AppContext);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    let critical = 0;
+    let major = 0;
+    let minor = 0;
+    let low = 0;
+    bugList.forEach((bug) => {
+      if (bug.priority === 4) {
+        critical += 1;
+      } else if (bug.priority === 3) {
+        major += 1;
+      } else if (bug.priority === 2) {
+        minor += 1;
+      } else if (bug.priority === 1) {
+        low += 1;
+      }
+    });
+
+    setData([
+      { name: "Mar", critical: 10, major: 9, minor: 2, low: 13 },
+      { name: "Apr", critical: 15, major: 13, minor: 18, low: 8 },
+      { name: "May", critical: 14, major: 16, minor: 13, low: 4 },
+      { name: "Jun", critical: 10, major: 7, minor: 4, low: 13 },
+      { name: "July", critical: 5, major: 3, minor: 11, low: 15 },
+      { name: "Aug", critical: critical, major: major, minor: minor, low: low },
+    ]);
+  }, [bugList]);
 
   return (
     <>
@@ -21,9 +49,9 @@ const Home = () => {
           gap: { xs: "20px" },
         }}
       >
-        <Widget type="projects" mode={mode} />
-        <Widget type="issues" mode={mode} />
-        <Widget type="tasks" mode={mode} />
+        <Widget type="projects" />
+        <Widget type="issues" />
+        <Widget type="tasks" />
       </Box>
       <Box
         gap={3}
@@ -80,7 +108,7 @@ const Home = () => {
           >
             Last 6 Months
           </Typography>
-          <Chart />
+          {Array.isArray(data) && data.length > 0 && <Chart data={data} />}
         </Box>
       </Box>
 

@@ -7,26 +7,27 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { useContext } from "react";
+import { AppContext } from "../../context/Context";
 
-const Widget = ({ type, mode }) => {
+const Widget = ({ type }) => {
+  const { mode, projList, bugList } = useContext(AppContext)
+
   let data;
-  let mongoData = {
-    projects: 8,
-  };
 
   switch (type) {
     case "projects":
       data = {
         title: "Projects",
         link: "See all projects",
-        amt: mongoData.projects,
+        amt: projList.length,
       };
       break;
     case "issues":
       data = {
         title: "Issues",
         link: "See all issues",
-        amt: 5,
+        amt: bugList.length,
       };
       break;
     case "tasks":
