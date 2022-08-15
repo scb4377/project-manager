@@ -9,11 +9,45 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
+import { useEffect } from "react";
 
 const Widget = ({ type }) => {
   const { mode, projList, bugList } = useContext(AppContext)
+  const [projectPer, setProjectPer] = useState(0)
 
   let data;
+  let pastMonthCount = 0;
+  let currentMonth = 0
+
+  let myFunc = () => {
+    let todaysDate = new Date()
+    let month = todaysDate.getMonth()
+
+    for (let i = 0; i < projList.length; i++) {
+      let tempDate = new Date(projList[i].createdAt)
+      let tempMonth = tempDate.getMonth()
+
+      if (tempMonth === month) {
+        currentMonth += 1
+      } else if ((tempMonth - 1) === (month - 1)) {
+        pastMonthCount += 1
+      }
+    }
+    
+    let total = pastMonthCount + currentMonth
+
+    let percentage = (currentMonth / total) * 100
+
+    setProjectPer(percentage)
+
+  }
+
+  useEffect(() => {
+    if (projList) {
+      myFunc()
+    }
+    
+  }, [projList])
 
   switch (type) {
     case "projects":
@@ -21,6 +55,7 @@ const Widget = ({ type }) => {
         title: "Projects",
         link: "See all projects",
         amt: projList.length,
+        percent: projectPer
       };
       break;
     case "issues":
@@ -117,7 +152,7 @@ const Widget = ({ type }) => {
         }}
       >
         <KeyboardArrowUp />
-        <div>20%</div>
+        <div>{data.percent}%</div>
         {type === "projects" ? (
           <AccountTree
             sx={{
