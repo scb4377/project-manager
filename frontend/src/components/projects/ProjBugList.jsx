@@ -7,14 +7,10 @@ import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 import { useEffect } from "react";
 
-const ProjBugList = ({ state }) => {
+const ProjBugList = ({ state, filteredList }) => {
   const { bugList } = useContext(AppContext);
 
-  let filteredList = bugList;
-
-  useEffect(() => {
-    filteredList = bugList.filter((bug) => bug.projId === state.id);
-  }, [bugList]);
+  
 
   const navigate = useNavigate();
   const [rowsPerPage, setRowsPerPage] = useState(10);

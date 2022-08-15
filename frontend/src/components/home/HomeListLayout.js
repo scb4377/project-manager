@@ -59,7 +59,7 @@ export const columns = [
 
 export const mobileColumns = [
   {
-    field: "project",
+    field: "projId",
     headerName: "Project",
     headerClassName: "gridHeader",
 

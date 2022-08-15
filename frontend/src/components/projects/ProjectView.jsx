@@ -21,33 +21,6 @@ import ProjBugList from "./ProjBugList";
 import ProjCommentList from "./ProjCommentList";
 import ProjWidget from "./ProjWidget";
 
-const data = [
-  {
-    name: "Low",
-    uv: 10,
-    pv: 9800,
-    fill: "#55ff04",
-  },
-  {
-    name: "Minor",
-    uv: 9,
-    pv: 1398,
-    fill: "#eaf600",
-  },
-  {
-    name: "Major",
-    uv: 12,
-    pv: 4567,
-    fill: "#ffae04",
-  },
-  {
-    name: "Critical",
-    uv: 5,
-    pv: 2400,
-    fill: "#ff2800",
-  },
-];
-
 const StyledDiv = styled("div")({
   display: "flex",
   width: "100%",
@@ -57,29 +30,77 @@ const StyledDiv = styled("div")({
 });
 
 const ProjectView = () => {
-  const { mode, teamList, userList } = useContext(AppContext);
-  const [users, setUsers] = useState([])
+  const { mode, teamList, userList, bugList } = useContext(AppContext);
+  const [users, setUsers] = useState([]);
+  const [lowPriority, setLowPriority] = useState(0)
 
   const { state } = useLocation();
 
   let findTeam = teamList;
 
+  let filteredList = bugList;
+
+  let minorPriority = 0;
+
+  // let data = [
+  //   {
+  //     name: "Low",
+  //     uv: lowPriority,
+  //     pv: 9800,
+  //     fill: "#55ff04",
+  //   },
+  //   {
+  //     name: "Minor",
+  //     uv: minorPriority,
+  //     pv: 1398,
+  //     fill: "#eaf600",
+  //   },
+  //   {
+  //     name: "Major",
+  //     uv: 12,
+  //     pv: 4567,
+  //     fill: "#ffae04",
+  //   },
+  //   {
+  //     name: "Critical",
+  //     uv: 5,
+  //     pv: 2400,
+  //     fill: "#ff2800",
+  //   },
+  // ];
+
+ 
+
+  // const calcPriorities = (list) => {
+  //   for (let i = 0; i < list.length; i++) {
+  //     if (list[i].priority === 1) {
+  //       setLowPriority(lowPriority += 1)
+  //     } else if (list[i].priority === 2) {
+  //       minorPriority += 1;
+  //     }
+  //   }
+  // };
+
   useEffect(() => {
     findTeam = teamList.filter((team) => team.teamName === state.team);
-    let temp = findTeam[0]
-    let usersTemp = []
+    let temp = findTeam[0];
+    let usersTemp = [];
     if (temp) {
       for (let i = 0; i < temp.empIds.length; i++) {
         let user;
         for (let k = 0; k < userList.length; k++) {
           if (temp.empIds[i] === userList[k]._id) {
-            usersTemp.push(userList[k])
+            usersTemp.push(userList[k]);
           }
         }
       }
-      setUsers(usersTemp)
+      setUsers(usersTemp);
     }
-  }, [teamList]);
+
+    filteredList = bugList.filter((bug) => bug.projId === state.id);
+    // calcPriorities(filteredList);
+  }, [teamList, bugList]);
+
 
   return (
     <Box
@@ -145,7 +166,7 @@ const ProjectView = () => {
             <Typography>Design</Typography>
           </Box>
         </Box>
-        <Box
+        {/* <Box
           height={300}
           sx={{
             top: 0,
@@ -155,38 +176,41 @@ const ProjectView = () => {
             position: { xs: "relative", sm: "absolute" },
           }}
         >
-          <ResponsiveContainer>
-            <RadialBarChart
-              width={400}
-              height={250}
-              innerRadius="20%"
-              // outerRadius="100%"
-              data={data}
-              startAngle={180}
-              endAngle={0}
-              barCategoryGap={3}
-              cy={"80%"}
-              cx={"60%"}
-              outerRadius="120%"
-            >
-              <RadialBar
-                minAngle={15}
-                label={{ fill: "#666", position: "insideStart" }}
-                background
-                clockWise={true}
-                dataKey="uv"
-              />
-              <Legend
-                iconSize={10}
-                width={120}
-                height={140}
-                layout="vertical"
-                verticalAlign="middle"
-                align="left"
-              />
-            </RadialBarChart>
-          </ResponsiveContainer>
-        </Box>
+          {console.log(data)}
+          {data.length > 0 && (
+            <ResponsiveContainer>
+              <RadialBarChart
+                width={400}
+                height={250}
+                innerRadius="20%"
+                // outerRadius="100%"
+                data={data}
+                startAngle={180}
+                endAngle={0}
+                barCategoryGap={3}
+                cy={"80%"}
+                cx={"60%"}
+                outerRadius="120%"
+              >
+                <RadialBar
+                  minAngle={15}
+                  label={{ fill: "#666", position: "insideStart" }}
+                  background
+                  clockWise={true}
+                  dataKey="uv"
+                />
+                <Legend
+                  iconSize={10}
+                  width={120}
+                  height={140}
+                  layout="vertical"
+                  verticalAlign="middle"
+                  align="left"
+                />
+              </RadialBarChart>
+            </ResponsiveContainer>
+          )}
+        </Box> */}
 
         <Box
           mb={2}
@@ -224,12 +248,16 @@ const ProjectView = () => {
             height="max-content"
             sx={{ marginBottom: "40px" }}
           >
-            {users.map(user => (
-              <Avatar key={user._id} alt={user.firstName + user.lastName} src={user.img} />
+            {users.map((user) => (
+              <Avatar
+                key={user._id}
+                alt={user.firstName + user.lastName}
+                src={user.img}
+              />
             ))}
           </Stack>
         </Box>
-        <ProjBugList state={state} />
+        <ProjBugList state={state} filteredList={filteredList} />
       </Box>
       <ProjCommentList mode={mode} />
     </Box>

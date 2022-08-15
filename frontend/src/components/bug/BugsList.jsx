@@ -20,7 +20,6 @@ const BugsList = () => {
         }
       }
     }
-    console.log(tempList)
   }, [bugList])
 
   const navigate = useNavigate();
