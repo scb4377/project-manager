@@ -32,7 +32,7 @@ import {
 function App() {
   const [mode, setMode] = useState("light");
   const [auth, setAuth] = useState(false);
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState("");
   const [userList, setUserList] = useState([]);
   const [bugList, setBugList] = useState([]);
   const [projList, setProjList] = useState([]);
@@ -40,38 +40,41 @@ function App() {
   const [taskList, setTaskList] = useState([]);
 
   const formatDate = (date) => {
-    let temp = new Date(date)
-    let str = temp.toString()
+    let temp = new Date(date);
+    let str = temp.toString();
 
-    let newDate = str.split(/\s\d{2}[:]/gi)[0]
+    let newDate = str.split(/\s\d{2}[:]/gi)[0];
 
     return newDate;
   };
 
+  const pullBugs = async () => {
+    let bugs = await getBugs();
+    for (let i = 0; i < bugs.length; i++) {
+      bugs[i].createdAt = formatDate(bugs[i].createdAt);
+    }
+    setBugList(bugs);
+
+    let projects = await getProjects();
+    for (let i = 0; i < projects.length; i++) {
+      projects[i].createdAt = formatDate(projects[i].createdAt);
+    }
+    setProjList(projects);
+
+    let teams = await getTeams();
+    setTeamList(teams);
+
+    let tasks = await getTasks();
+    setTaskList(tasks);
+
+    let users = await getUsers();
+    setUserList(users);
+
+  };
+
   useEffect(() => {
     if (auth) {
-      (async () => {
-        let bugs = await getBugs();
-        for (let i = 0; i < bugs.length; i++) {
-          bugs[i].createdAt = formatDate(bugs[i].createdAt)
-        }
-        setBugList(bugs);
-
-        let projects = await getProjects();
-        for (let i = 0; i < projects.length; i++) {
-          projects[i].createdAt = formatDate(projects[i].createdAt)
-        }
-        setProjList(projects);
-
-        let teams = await getTeams();
-        setTeamList(teams);
-
-        let tasks = await getTasks();
-        setTaskList(tasks);
-
-        let users = await getUsers();
-        setUserList(users);
-      })();
+      pullBugs()
     }
   }, [auth]);
 
@@ -117,7 +120,8 @@ function App() {
           userList,
           formatDate,
           user,
-          setUser
+          setUser,
+          pullBugs
         }}
       >
         {!auth ? (

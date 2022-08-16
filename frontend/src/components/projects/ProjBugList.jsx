@@ -7,13 +7,14 @@ import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 import { useEffect } from "react";
 
-const ProjBugList = ({ state, filteredList }) => {
+const ProjBugList = ({ state }) => {
   const { bugList } = useContext(AppContext);
 
   
 
   const navigate = useNavigate();
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [filteredList, setFilteredList] = useState(bugList)
   let initialState = window.innerHeight < 500 ? mobileColumns : columns;
   const [columnLayout, setColumnLayout] = useState(initialState);
 
@@ -25,9 +26,16 @@ const ProjBugList = ({ state, filteredList }) => {
     }
   };
 
+  useEffect(() => {
+    setFilteredList(bugList.filter((bug) => bug.projId === state.id));
+  }, [bugList])
+
   const handleBugClick = (bug) => {
     navigate("/bugview", { state: bug });
   };
+
+
+  
 
   return (
     <Box

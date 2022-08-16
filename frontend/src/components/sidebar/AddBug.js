@@ -7,15 +7,16 @@ export const createBug = async (data) => {
 
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     },
   };
 
-  const response = await axios.post(API_URL, config);
+  const response = await axios.post(API_URL, data, config);
 
   if (!response) {
     console.log('createBug error')
   } else {
+    console.log(response)
     return response
   }
 }

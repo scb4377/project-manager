@@ -14,7 +14,9 @@ const getBugs = asyncHandler(async (req, res) => {
 });
 
 const createBug = asyncHandler(async (req, res) => {
-  const { issue, priority, dueBy, creator, projId } = req.body;
+  const { issue, priority, dueBy, creator, projId, teamId, description } = req.body;
+
+  const status = "Open"
 
   // create the user
   const bug = await Bug.create({
@@ -22,14 +24,20 @@ const createBug = asyncHandler(async (req, res) => {
     priority,
     dueBy,
     creator,
-    projId
+    projId,
+    teamId,
+    description,
+    status
   });
 
-  const project = await Project.updateOne({_id: projId}, { $push: {bugs: bug._id}})
+  const project = await Project.updateOne(
+    { _id: projId },
+    { $push: { bugs: bug._id } }
+  );
 
   if (bug && project) {
     res.status(201).json({
-      bug
+      bug,
     });
   } else {
     res.status(400);

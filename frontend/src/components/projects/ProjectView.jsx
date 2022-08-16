@@ -32,8 +32,7 @@ const StyledDiv = styled("div")({
 const ProjectView = () => {
   const { mode, teamList, userList, bugList } = useContext(AppContext);
   const [users, setUsers] = useState([]);
-  const [lowPriority, setLowPriority] = useState(0)
-  const [filteredList, setFilteredList] = useState(bugList)
+  const [lowPriority, setLowPriority] = useState(0);
 
   const { state } = useLocation();
 
@@ -68,8 +67,6 @@ const ProjectView = () => {
   //   },
   // ];
 
- 
-
   // const calcPriorities = (list) => {
   //   for (let i = 0; i < list.length; i++) {
   //     if (list[i].priority === 1) {
@@ -84,22 +81,16 @@ const ProjectView = () => {
     findTeam = teamList.filter((team) => team.teamName === state.team);
     let temp = findTeam[0];
     let usersTemp = [];
-    if (temp) {
-      for (let i = 0; i < temp.empIds.length; i++) {
-        let user;
-        for (let k = 0; k < userList.length; k++) {
-          if (temp.empIds[i] === userList[k]._id) {
-            usersTemp.push(userList[k]);
-          }
-        }
-      }
-      setUsers(usersTemp);
-    }
 
-    setFilteredList(bugList.filter((bug) => bug.projId === state.projTitle));
+    for (let user in userList) {
+      if (temp.empIds.indexOf(userList[user]._id) !== -1) {
+        usersTemp.push(userList[user]);
+      }
+    }
+    setUsers(usersTemp);
+
     // calcPriorities(filteredList);
   }, [teamList, bugList]);
-
 
   return (
     <Box
@@ -220,7 +211,7 @@ const ProjectView = () => {
           gap={4}
           flexWrap="wrap"
           textAlign="center"
-          sx={{ width: {xs: '100%', sm: 'max-content'} }}
+          sx={{ width: { xs: "100%", sm: "max-content" } }}
         >
           <span style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontWeight: "bold" }}>{state.company}</span>
@@ -255,7 +246,7 @@ const ProjectView = () => {
             ))}
           </Stack>
         </Box>
-        <ProjBugList state={state} filteredList={filteredList} />
+        <ProjBugList state={state} />
       </Box>
       <ProjCommentList mode={mode} />
     </Box>

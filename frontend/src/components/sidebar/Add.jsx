@@ -27,7 +27,7 @@ import { AppContext } from "../../context/Context";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { createBug } from "./AddBug"
+import { createBug } from "./AddBug";
 
 const StyledModal = styled(Modal)({
   display: "flex",
@@ -44,7 +44,7 @@ const UserBox = styled(Box)({
 
 const Add = () => {
   const [value, setValue] = useState(null);
-  const { projList, teamList, mode, user } = useContext(AppContext);
+  const { projList, teamList, mode, user, pullBugs } = useContext(AppContext);
   const [open, setOpen] = useState(false);
   const initialState = {
     creator: user.id,
@@ -53,7 +53,7 @@ const Add = () => {
     dueBy: value,
     description: "",
     projId: "",
-    teamId: "",
+    teamId: "62f6b2e9eb86a1acd86885c1",
   };
   const [formInput, setFormInput] = useState(initialState);
 
@@ -65,15 +65,32 @@ const Add = () => {
     console.log(formInput);
   };
 
-  const handleSubmit = () => {
-    const { creator, issue, priority, dueBy, description, projId, teamId} = formInput;
+  const myAsyncFunc = async () => {
+    setOpen(false);
+    setFormInput(initialState);
+    await createBug(formInput);
 
-    if (creator === "" || issue === "" || priority === "" || dueBy === "" || description === "" || projId === "" || teamId === "") {
-      console.log('error')
+    await pullBugs();
+  };
+
+  const handleSubmit = () => {
+    const { creator, issue, priority, dueBy, description, projId, teamId } =
+      formInput;
+
+    if (
+      creator === "" ||
+      issue === "" ||
+      priority === "" ||
+      dueBy === "" ||
+      description === "" ||
+      projId === "" ||
+      teamId === ""
+    ) {
+      console.log("error");
     } else {
-      createBug(formInput)
+      myAsyncFunc();
     }
-  }
+  };
 
   return (
     <>
@@ -236,7 +253,7 @@ const Add = () => {
               onChange={(newValue) => {
                 setFormInput({
                   ...formInput,
-                  dueBy: newValue
+                  dueBy: newValue,
                 });
               }}
               renderInput={(params) => <TextField {...params} />}
