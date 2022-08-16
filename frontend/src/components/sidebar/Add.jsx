@@ -4,7 +4,11 @@ import {
   Button,
   ButtonGroup,
   Fab,
+  FormControl,
+  InputLabel,
+  MenuItem,
   Modal,
+  Select,
   Stack,
   styled,
   TextField,
@@ -18,6 +22,12 @@ import ImageIcon from "@mui/icons-material/Image";
 import VideoCameraBackIcon from "@mui/icons-material/VideoCameraBack";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import DateRange from "@mui/icons-material/DateRange";
+import { useContext } from "react";
+import { AppContext } from "../../context/Context";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { createBug } from "./AddBug"
 
 const StyledModal = styled(Modal)({
   display: "flex",
@@ -33,7 +43,38 @@ const UserBox = styled(Box)({
 });
 
 const Add = () => {
+  const [value, setValue] = useState(null);
+  const { projList, teamList, mode, user } = useContext(AppContext);
   const [open, setOpen] = useState(false);
+  const initialState = {
+    creator: user.id,
+    issue: "",
+    priority: 1,
+    dueBy: value,
+    description: "",
+    projId: "",
+    teamId: "",
+  };
+  const [formInput, setFormInput] = useState(initialState);
+
+  const handleChange = (e) => {
+    setFormInput({
+      ...formInput,
+      [e.target.name]: e.target.value,
+    });
+    console.log(formInput);
+  };
+
+  const handleSubmit = () => {
+    const { creator, issue, priority, dueBy, description, projId, teamId} = formInput;
+
+    if (creator === "" || issue === "" || priority === "" || dueBy === "" || description === "" || projId === "" || teamId === "") {
+      console.log('error')
+    } else {
+      createBug(formInput)
+    }
+  }
+
   return (
     <>
       <Tooltip
@@ -60,44 +101,162 @@ const Add = () => {
       >
         <Box
           width={400}
-          height={280}
+          height="max-content"
           bgcolor={"background.default"}
           color={"text.primary"}
           p={3}
+          gap={2}
           borderRadius={5}
+          display="flex"
+          flexDirection="column"
         >
           <Typography variant="h6" color="gray" textAlign="center">
             Create Bug
           </Typography>
           <UserBox>
-            <Avatar sx={{ width: 30, height: 30 }} />
+            <Avatar
+              alt={user.firstName + " " + user.lastName}
+              src={user.img}
+              sx={{ width: 30, height: 30 }}
+            />
             <Typography fontWeight={500} variant="span">
-              John Doe
+              {user.firstName + " " + user.lastName}
             </Typography>
           </UserBox>
           <TextField
+            required
             sx={{ width: "100%" }}
             id="standard-multiline-static"
             multiline
-            rows={3}
-            placeholder="What's on your mind?"
-            variant="standard"
+            label="Issue"
+            variant="filled"
+            name="issue"
+            onChange={handleChange}
           />
-          <Stack direction="row" gap={1} mt={2} mb={3}>
+          <TextField
+            required
+            sx={{ width: "100%" }}
+            id="standard-multiline-static"
+            multiline
+            label="Description"
+            variant="filled"
+            name="description"
+            onChange={handleChange}
+          />
+          <FormControl
+            fullWidth
+            sx={{
+              bgcolor: mode === "dark" ? "background.dark" : "background.light",
+            }}
+          >
+            <InputLabel
+              id="demo-simple-select-label"
+              variant="standard"
+              size="small"
+            >
+              Priority
+            </InputLabel>
+            <Select
+              required
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={formInput.priority}
+              name="priority"
+              onChange={handleChange}
+            >
+              <MenuItem value={1}>Low</MenuItem>
+              <MenuItem value={2}>Minor</MenuItem>
+              <MenuItem value={3}>Major</MenuItem>
+              <MenuItem value={4}>Critical</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl
+            fullWidth
+            sx={{
+              bgcolor:
+                mode === "dark" ? "background.dark" : "background.default",
+            }}
+          >
+            <InputLabel
+              id="demo-simple-select-label"
+              variant="standard"
+              size="small"
+            >
+              Project
+            </InputLabel>
+            <Select
+              required
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={formInput.projId}
+              name="projId"
+              onChange={handleChange}
+            >
+              {projList.map((proj) => (
+                <MenuItem key={proj.id} value={proj.id}>
+                  {proj.projTitle}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl
+            fullWidth
+            sx={{
+              bgcolor:
+                mode === "dark" ? "background.dark" : "background.default",
+            }}
+          >
+            <InputLabel
+              id="demo-simple-select-label"
+              variant="standard"
+              size="small"
+            >
+              Team
+            </InputLabel>
+            <Select
+              required
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={formInput.teamId}
+              name="teamId"
+              onChange={handleChange}
+            >
+              {teamList.map((team) => (
+                <MenuItem key={team._id} value={team._id}>
+                  {team.teamName}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label="Basic example"
+              value={formInput.dueBy}
+              name="dueBy"
+              onChange={(newValue) => {
+                setFormInput({
+                  ...formInput,
+                  dueBy: newValue
+                });
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+          {/* <Stack direction="row" gap={1} mt={2} mb={3}>
             <EmojiEmotionsIcon color="primary" />
             <ImageIcon color="secondary" />
             <VideoCameraBackIcon color="success" />
             <PersonAddIcon color="error" />
-          </Stack>
+          </Stack> */}
           <ButtonGroup
             fullWidth
             variant="contained"
             aria-label="outlined primary button group"
           >
-            <Button>Post</Button>
-            <Button sx={{ width: "100px" }}>
+            <Button onClick={handleSubmit}>Post</Button>
+            {/* <Button sx={{ width: "100px" }}>
               <DateRange />
-            </Button>
+            </Button> */}
           </ButtonGroup>
         </Box>
       </StyledModal>

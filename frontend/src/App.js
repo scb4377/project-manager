@@ -32,6 +32,7 @@ import {
 function App() {
   const [mode, setMode] = useState("light");
   const [auth, setAuth] = useState(false);
+  const [user, setUser] = useState('')
   const [userList, setUserList] = useState([]);
   const [bugList, setBugList] = useState([]);
   const [projList, setProjList] = useState([]);
@@ -100,8 +101,6 @@ function App() {
     },
   });
 
-  
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -116,7 +115,9 @@ function App() {
           projList,
           teamList,
           userList,
-          formatDate
+          formatDate,
+          user,
+          setUser
         }}
       >
         {!auth ? (

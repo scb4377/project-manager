@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 
 const Login = () => {
-  const { setAuth } = useContext(AppContext);
+  const { setAuth, setUser } = useContext(AppContext);
   const initialState = {
     username: "",
     password: "",
@@ -27,6 +27,7 @@ const Login = () => {
       let response = await loginFunc(formInput);
       if (response) {
         setAuth(true);
+        setUser(response)
       }
     } catch (err) {
       console.log("Login Error");
@@ -38,6 +39,7 @@ const Login = () => {
       let response = await demoFunc();
       if (response) {
         setAuth(true);
+        setUser(response)
       }
     } catch (err) {
       console.log("Login Error");

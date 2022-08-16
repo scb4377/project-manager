@@ -18,6 +18,15 @@ const bugSchema = new Schema(
       type: Date,
       required: true,
     },
+    description: {
+      type: String,
+      required: true
+    },
+    teamId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "Team"
+    },
     creator: {
       type: Schema.Types.ObjectId,
       required: true,
