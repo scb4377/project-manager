@@ -65,7 +65,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{ borderRadius: "0px" }}>
+    <AppBar position="sticky" sx={{ borderRadius: "0px", boxShadow: "10px" }}>
       <StyledToolbar
         sx={{
           backgroundColor:

@@ -36,7 +36,7 @@ const ProjectView = () => {
   const [users, setUsers] = useState([]);
   const [lowPriority, setLowPriority] = useState(0);
   const { state } = useLocation();
-  const [project, setProject] = useState(state);
+  const [project, setProject] = useState(null);
 
   let findTeam = teamList;
 
@@ -99,7 +99,7 @@ const ProjectView = () => {
     setUsers(usersTemp);
 
     // calcPriorities(filteredList);
-  }, [teamList, bugList]);
+  }, [teamList, bugList, state]);
 
   return (
     <Box
@@ -148,7 +148,7 @@ const ProjectView = () => {
               wordWrap: "break-word",
             }}
           >
-            {project.projTitle}
+            {project !== null && project.projTitle}
           </Typography>
           <Box
             p={1}
@@ -223,18 +223,18 @@ const ProjectView = () => {
           sx={{ width: { xs: "100%", sm: "max-content" } }}
         >
           <span style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontWeight: "bold" }}>{project.company}</span>
+            <span style={{ fontWeight: "bold" }}>{project !== null && project.company}</span>
             <label>Company</label>
           </span>
           <span style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontWeight: "bold" }}>
-              {formatDate(project.createdAt)}
+              {project !== null && formatDate(project.createdAt)}
             </span>
             <label>Start Date</label>
           </span>
           <span style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontWeight: "bold" }}>
-              {project && project.bugs.length}
+              {project !== null && project.bugs.length}
             </span>
             <label>Issues</label>
           </span>
@@ -250,7 +250,7 @@ const ProjectView = () => {
             height="max-content"
             sx={{ marginBottom: "40px" }}
           >
-            {users.map((user) => (
+            {userList.length > 0 && users.map((user) => (
               <Avatar
                 key={user._id}
                 alt={user.firstName + user.lastName}
@@ -259,7 +259,8 @@ const ProjectView = () => {
             ))}
           </Stack>
         </Box>
-        <ProjBugList state={project} />
+        {project !== null && <ProjBugList state={project} />}
+        
       </Box>
       <ProjCommentList state={project} />
     </Box>

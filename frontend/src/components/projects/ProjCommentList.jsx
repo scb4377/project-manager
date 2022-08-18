@@ -23,7 +23,7 @@ const ProjCommentList = ({ state }) => {
   const handleAddCommentClose = () => setCommentModal(false);
   const handleAddCommentOpen = () => setCommentModal(true);
 
-  useEffect(() => {}, [state.comments]);
+  useEffect(() => {}, [state]);
 
   return (
     <Box

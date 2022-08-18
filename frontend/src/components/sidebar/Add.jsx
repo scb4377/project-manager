@@ -62,14 +62,12 @@ const Add = () => {
       ...formInput,
       [e.target.name]: e.target.value,
     });
-    console.log(formInput);
   };
 
   const myAsyncFunc = async () => {
     setOpen(false);
     setFormInput(initialState);
     await createBug(formInput);
-
     await pullBugs();
   };
 
