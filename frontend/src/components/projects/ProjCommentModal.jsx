@@ -32,13 +32,13 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose, state }) => {
     });
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (comment.subject === "" || comment.description === "") {
 
     } else {
-      AddComment(comment, state.id)
-      commentModalClose()
-      state.comments.push(comment)
+      await AddComment(comment, state._id)
+      await commentModalClose()
+      await state.comments.push(comment)
     }
   };
 

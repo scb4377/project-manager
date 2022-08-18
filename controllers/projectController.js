@@ -73,10 +73,9 @@ const updateProject = asyncHandler(async (req, res) => {
 // @route   PUT /api/projects/comment/:id
 // @access  Private
 const addProjComment = asyncHandler(async (req, res) => {
-  console.log(req.body);
   const project = await Project.findByIdAndUpdate(
     req.params.id,
-    { $addToSet: { comments: req.body } },
+    { $push: { comments: req.body } },
     { new: true }
   );
 
@@ -85,7 +84,7 @@ const addProjComment = asyncHandler(async (req, res) => {
     throw new Error("Project not found");
   } else {
     console.log(project);
-    res.status(200).send(true);
+    res.status(200).json(project);
   }
 });
 

@@ -17,6 +17,6 @@ export const AddComment = async (data, id) => {
 
     const response = await axios.put(id_url, data, config)
     if (!response) {
-        console.log("Error Ading Comment")
+        console.log("Error Adding Comment")
     }
 }

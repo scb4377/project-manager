@@ -69,7 +69,7 @@ const ProjCommentList = ({ state }) => {
           overflowY: "scroll",
         }}
       >
-        {state.comments.map((comment, i) => (
+        {state && state.comments && state.comments.map((comment, i) => (
           <div key={i + 1}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
