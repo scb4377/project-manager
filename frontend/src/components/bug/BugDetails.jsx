@@ -12,21 +12,16 @@ const StyledDiv = styled("div")({
 
 const BugDetails = ({ bug }) => {
   const { mode, userList, formatDate } = useContext(AppContext);
-  const [dueBy, setDueBy] = useState(bug.dueBy);
-  const [creatorName, setCreatorName] = useState('')
+  const [creatorName, setCreatorName] = useState(bug.creator)
   const [creator, setCreator] = useState('');
-  const info =
-    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit sit voluptas qui vitae laudantium! Minus veniam dolor animi in rem aliquam quasi fugit tempora labore, explicabo magnam laboriosam doloribus vitae!";
   
   useEffect(() => {
-    let temp = userList.filter((user) => user._id === bug.creator);
-    setCreator(temp[0]);
-    let dueBy = formatDate(bug.dueBy);
+    let temp = userList.filter(user => user.id === bug.id)
 
-    setDueBy(dueBy)
-
-    let name = creator !== '' ? creator.firstName.toString() + creator.lastName.toString() : ''
-    setCreatorName(name)
+    setCreator(temp)
+    
+    let fullName = temp.firstName + " " + temp.lastName
+    setCreatorName(fullName)
   }, [bug]);
 
   return (
@@ -86,7 +81,7 @@ const BugDetails = ({ bug }) => {
               Due By:
             </label>
             <span style={{ minWidth: "100px" }}>
-              {dueBy}
+              {formatDate(bug.dueBy)}
             </span>
           </StyledDiv>
           <StyledDiv sx={{ flex: 1, gap: "50px" }}>
@@ -99,7 +94,7 @@ const BugDetails = ({ bug }) => {
             >
               Created:
             </label>
-            <span style={{ minWidth: "100px" }}>{bug.createdAt}</span>
+            <span style={{ minWidth: "100px" }}>{formatDate(bug.createdAt)}</span>
           </StyledDiv>
           <StyledDiv
             sx={{

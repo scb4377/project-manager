@@ -1,15 +1,30 @@
 import { Box, Typography } from "@mui/material";
-import { useContext } from "react";
+import { useEffect } from "react";
+import { useContext, useState } from "react";
 import { useLocation } from "react-router";
 import { AppContext } from "../../context/Context";
 import BugComments from "./BugComments";
 import BugDetails from "./BugDetails";
 import MyLogs from "./MyLogs";
+import { GetBug } from "./GetBug"
 
 const BugView = () => {
   const { mode } = useContext(AppContext);
+  const {state} = useLocation();
+  const [bug, setBug] = useState(state)
 
-  const location = useLocation();
+  const getState = async () => {
+    const resp = await GetBug(state.id);
+    console.log(resp)
+    setBug(resp);
+  };
+
+  useEffect(() => {
+    getState()
+  }, [])
+
+
+  
 
   return (
     <div>
@@ -37,11 +52,11 @@ const BugView = () => {
         bgcolor={mode === "dark" ? "background.dark" : "background.default"}
         sx={{ display: "flex", justifyContent: "space-evenly" }}
       >
-        <BugDetails bug={location.state} />
+        <BugDetails bug={bug} />
       </Box>
       <MyLogs mode={mode} />
       <Box mt={2}>
-        <BugComments mode={mode} bug={location.state} />
+        <BugComments mode={mode} bug={bug} />
       </Box>
     </div>
   );

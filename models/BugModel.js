@@ -34,9 +34,7 @@ const bugSchema = new Schema(
     },
     comments: [
       {
-        author: String,
-        date: () => Date.now(),
-        body: String,
+        
       },
     ],
     projId: {

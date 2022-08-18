@@ -8,6 +8,6 @@ export const GetProject = async (id) => {
   if (!response) {
     console.log("Something went wrong");
   } else {
-    return response.data;
+    return response;
   }
 };

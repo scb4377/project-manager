@@ -1,84 +1,103 @@
-import { Avatar, Box, Divider, IconButton, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
-import { useContext } from 'react';
-import { AppContext } from '../../context/Context';
+import { Add } from "@mui/icons-material";
+import {
+  Avatar,
+  Box,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../context/Context";
+import { AddBugComment } from "./AddBugComment";
+import { BugCommentModal } from "./BugCommentModal";
 
 const data = [
-    {
-      id: 1,
-      name: "Remy Sharp",
-      subject: "Brunch this weekend?",
-      description: "I'll be in your neighborhood doing errands this...",
-    },
-    {
-      id: 2,
-      name: "Remy Sharp",
-      subject: "Brunch this weekend?",
-      description: "I'll be in your neighborhood doing errands this...",
-    },
-    {
-      id: 3,
-      name: "Remy Sharp",
-      subject: "Brunch this weekend?",
-      description: "I'll be in your neighborhood doing errands this...",
-    },
-    {
-      id: 4,
-      name: "Remy Sharp",
-      subject: "Brunch this weekend?",
-      description: "I'll be in your neighborhood doing errands this...",
-    },
-    {
-      id: 5,
-      name: "Remy Sharp",
-      subject: "Brunch this weekend?",
-      description: "I'll be in your neighborhood doing errands this...",
-    },
-    {
-      id: 6,
-      name: "Remy Sharp",
-      subject: "Brunch this weekend?",
-      description: "I'll be in your neighborhood doing errands this...",
-    },
-    {
-      id: 7,
-      name: "Remy Sharp",
-      subject: "Brunch this weekend?",
-      description: "I'll be in your neighborhood doing errands this...",
-    },
-    {
-      id: 8,
-      name: "Remy Sharp",
-      subject: "Brunch this weekend?",
-      description: "I'll be in your neighborhood doing errands this...",
-    },
-    {
-      id: 9,
-      name: "Remy Sharp",
-      subject: "Brunch this weekend?",
-      description: "I'll be in your neighborhood doing errands this...",
-    },
-    {
-      id: 10,
-      name: "Remy Sharp",
-      subject: "Brunch this weekend?",
-      description: "I'll be in your neighborhood doing errands this...",
-    },
-    {
-      id: 11,
-      name: "Remy Sharp",
-      subject: "Brunch this weekend?",
-      description: "I'll be in your neighborhood doing errands this...",
-    },
-    {
-      id: 12,
-      name: "Remy Sharp",
-      subject: "Brunch this weekend?",
-      description: "I'll be in your neighborhood doing errands this...",
-    },
-  ];
+  {
+    id: 1,
+    name: "Remy Sharp",
+    subject: "Brunch this weekend?",
+    description: "I'll be in your neighborhood doing errands this...",
+  },
+  {
+    id: 2,
+    name: "Remy Sharp",
+    subject: "Brunch this weekend?",
+    description: "I'll be in your neighborhood doing errands this...",
+  },
+  {
+    id: 3,
+    name: "Remy Sharp",
+    subject: "Brunch this weekend?",
+    description: "I'll be in your neighborhood doing errands this...",
+  },
+  {
+    id: 4,
+    name: "Remy Sharp",
+    subject: "Brunch this weekend?",
+    description: "I'll be in your neighborhood doing errands this...",
+  },
+  {
+    id: 5,
+    name: "Remy Sharp",
+    subject: "Brunch this weekend?",
+    description: "I'll be in your neighborhood doing errands this...",
+  },
+  {
+    id: 6,
+    name: "Remy Sharp",
+    subject: "Brunch this weekend?",
+    description: "I'll be in your neighborhood doing errands this...",
+  },
+  {
+    id: 7,
+    name: "Remy Sharp",
+    subject: "Brunch this weekend?",
+    description: "I'll be in your neighborhood doing errands this...",
+  },
+  {
+    id: 8,
+    name: "Remy Sharp",
+    subject: "Brunch this weekend?",
+    description: "I'll be in your neighborhood doing errands this...",
+  },
+  {
+    id: 9,
+    name: "Remy Sharp",
+    subject: "Brunch this weekend?",
+    description: "I'll be in your neighborhood doing errands this...",
+  },
+  {
+    id: 10,
+    name: "Remy Sharp",
+    subject: "Brunch this weekend?",
+    description: "I'll be in your neighborhood doing errands this...",
+  },
+  {
+    id: 11,
+    name: "Remy Sharp",
+    subject: "Brunch this weekend?",
+    description: "I'll be in your neighborhood doing errands this...",
+  },
+  {
+    id: 12,
+    name: "Remy Sharp",
+    subject: "Brunch this weekend?",
+    description: "I'll be in your neighborhood doing errands this...",
+  },
+];
 
-const BugComments = ({bug}) => {
-  const { mode } = useContext(AppContext)
+const BugComments = ({ bug }) => {
+  const { mode } = useContext(AppContext);
+  const [commentModal, setCommentModal] = useState(false);
+
+  const handleAddCommentClose = () => setCommentModal(false);
+  const handleAddCommentOpen = () => setCommentModal(true);
+
+  useEffect(() => {}, [bug.comments]);
 
   return (
     <Box
@@ -97,7 +116,7 @@ const BugComments = ({bug}) => {
         Comments
       </Typography>
 
-      {/* <IconButton
+      <IconButton
         edge="end"
         aria-label="add"
         title="Add Comment"
@@ -112,7 +131,7 @@ const BugComments = ({bug}) => {
         }}
       >
         <Add />
-      </IconButton> */}
+      </IconButton>
 
       <List
         sx={{
@@ -124,43 +143,49 @@ const BugComments = ({bug}) => {
           overflowY: "scroll",
         }}
       >
-        {bug.comments.length > 0 && bug.comments.map((comment, i) => (
-          <div key={i + 1}>
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar alt={comment.name} src="/static/images/avatar/1.jpg" />
-              </ListItemAvatar>
-              <ListItemText
-                primary="Brunch this weekend?"
-                secondary={
-                  <>
-                    <Typography
-                      sx={{ display: "inline" }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      {comment.name}
-                    </Typography>
-                    {" - "}
-                    {comment.description}
-                  </>
-                }
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-          </div>
-        ))}
+        {bug &&
+          bug.comments.length > 0 &&
+          bug.comments.map((comment, i) => (
+            <div key={i + 1}>
+              <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                  <Avatar
+                    alt={comment.name}
+                    src={comment.img}
+                  />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={comment.subject}
+                  secondary={
+                    <>
+                      <Typography
+                        sx={{ display: "inline" }}
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                        {comment.name}
+                      </Typography>
+                      {" - "}
+                      {comment.description}
+                    </>
+                  }
+                />
+              </ListItem>
+              <Divider variant="inset" component="li" />
+            </div>
+          ))}
       </List>
-      {/* {commentModal && (
-        <ProjCommentModal
+      {commentModal && (
+        <BugCommentModal
           mode={mode}
           isCommentModalOpen={commentModal}
           commentModalClose={handleAddCommentClose}
+          bug={bug}
         />
-      )} */}
+      )}
     </Box>
-  )
-}
+  );
+};
 
-export default BugComments
+export default BugComments;

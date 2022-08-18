@@ -69,7 +69,7 @@ const Navbar = () => {
       <StyledToolbar
         sx={{
           backgroundColor:
-            mode === "dark" ? "background.dark" : "accent.primary",
+            mode === "dark" ? "background.dark" : "background.default",
         }}
       >
         <Typography
@@ -82,7 +82,7 @@ const Navbar = () => {
         </Typography>
         <Icons>
           <Badge badgeContent={4} color="warning">
-            <Notifications />
+            <Notifications color="primary" />
           </Badge>
           <Avatar
             onClick={handleClick}

@@ -259,9 +259,9 @@ const ProjectView = () => {
             ))}
           </Stack>
         </Box>
-        <ProjBugList state={state} />
+        <ProjBugList state={project} />
       </Box>
-      <ProjCommentList state={state} />
+      <ProjCommentList state={project} />
     </Box>
   );
 };
