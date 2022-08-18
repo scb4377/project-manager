@@ -12,10 +12,10 @@ export const columns = [
 
   export const mobileColumns = [
     {
-      field: "projName",
+      field: "projTitle",
       headerName: "Project",
       flex: 2,
       headerClassName: 'gridHeader'
     },
-    { field: "phase", headerName: "Phase", flex: 1, headerClassName: 'gridHeader' },
+    { field: "stage", headerName: "Stage", flex: 1, headerClassName: 'gridHeader' },
   ];

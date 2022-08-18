@@ -9,6 +9,7 @@ import {
   Group,
   Home,
   Settings,
+  BugReport,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { Add as AddIcon } from "@mui/icons-material";
@@ -35,6 +36,7 @@ const MobileSpeedDial = () => {
       name: "Projects",
     },
     { icon: <Group sx={{ color: "accent.primary" }} />, name: "Personnel" },
+    { icon: <BugReport sx={{ color: "accent.primary" }} />, name: "Issues" },
     { icon: <Settings sx={{ color: "accent.primary" }} />, name: "Settings" },
     { icon: <AccountBox sx={{ color: "accent.primary" }} />, name: "Profile" },
     { icon: <AddIcon sx={{ color: "accent.primary" }} />, name: "Add Bug" },
@@ -62,6 +64,8 @@ const MobileSpeedDial = () => {
         ? "/projects"
         : link.name === "Personnel"
         ? "/personnel"
+        : link.name === "Issues"
+        ? "/bugs"
         : link.name === "Settings"
         ? "/settings"
         : link.name === "Profile"

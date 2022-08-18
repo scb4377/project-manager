@@ -23,16 +23,16 @@ const Chart = ({data}) => {
             <stop offset="95%" stopColor="#ff2800" stopOpacity={0.3} />
           </linearGradient>
           <linearGradient id="major" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#E18B16" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#E18B16" stopOpacity={0.3} />
+            <stop offset="5%" stopColor="#ffae04" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#ffae04" stopOpacity={0.3} />
           </linearGradient>
           <linearGradient id="minor" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#F1E04A" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#F1E04A" stopOpacity={0.3} />
+            <stop offset="5%" stopColor="#d1d800" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#d1d800" stopOpacity={0.3} />
           </linearGradient>
           <linearGradient id="low" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#72B5BE" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#72B5BE" stopOpacity={0.3} />
+            <stop offset="5%" stopColor="#006a13" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#006a13" stopOpacity={0.3} />
           </linearGradient>
         </defs>
         <XAxis dataKey="name" />
@@ -49,21 +49,21 @@ const Chart = ({data}) => {
         <Area
           type="monotone"
           dataKey="major"
-          stroke="#E18B16"
+          stroke="#ffae04"
           fillOpacity={1}
           fill="url(#major)"
         />
         <Area
           type="monotone"
           dataKey="minor"
-          stroke="#F1E04A"
+          stroke="#d1d800"
           fillOpacity={1}
           fill="url(#minor)"
         />
         <Area
           type="monotone"
           dataKey="low"
-          stroke="#72B5BE"
+          stroke="#006a13"
           fillOpacity={1}
           fill="url(#low)"
         />

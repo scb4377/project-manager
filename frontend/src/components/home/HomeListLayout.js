@@ -25,21 +25,21 @@ export const columns = [
             minWidth: "73px",
             textAlign: "center",
             fontSize: ".8rem",
-            fontWeight: "400",
+            fontWeight: "600",
             textTransform: "uppercase",
             letterSpacing: "2px",
             padding: "5px 0",
             borderRadius: "5px",
-            backgroundColor:
-              cellValues.value === 4
-                ? "#ff2800"
-                : cellValues.value === 3
-                ? "#E18B16"
-                : cellValues.value === 2
-                ? "#F1E04A"
-                : cellValues.value === 1
-                ? "#72B5BE"
-                : "transparent",
+            color:
+            cellValues.value === 4
+            ? "#ff2800"
+            : cellValues.value === 3
+            ? "#ffae04"
+            : cellValues.value === 2
+            ? "#a0a500"
+            : cellValues.value === 1
+            ? "#006a13"
+            : "transparent",
           }}
         >
           {cellValues.value === 4
@@ -78,21 +78,21 @@ export const mobileColumns = [
             minWidth: "73px",
             textAlign: "center",
             fontSize: ".8rem",
-            fontWeight: "400",
+            fontWeight: "600",
             textTransform: "uppercase",
             letterSpacing: "2px",
             padding: "5px 0",
             borderRadius: "5px",
-            backgroundColor:
-              cellValues.value === 4
-                ? "#ff2800"
-                : cellValues.value === 3
-                ? "#E18B16"
-                : cellValues.value === 2
-                ? "#F1E04A"
-                : cellValues.value === 1
-                ? "#72B5BE"
-                : "transparent",
+            color:
+            cellValues.value === 4
+            ? "#ff2800"
+            : cellValues.value === 3
+            ? "#ffae04"
+            : cellValues.value === 2
+            ? "#a0a500"
+            : cellValues.value === 1
+            ? "#006a13"
+            : "transparent",
           }}
         >
           {cellValues.value === 4

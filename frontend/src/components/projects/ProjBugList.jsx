@@ -7,12 +7,12 @@ import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 import { useEffect } from "react";
 
-const ProjBugList = ({ state }) => {
+const ProjBugList = ({ state, filteredList }) => {
   const { bugList } = useContext(AppContext);
 
   const navigate = useNavigate();
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [filteredList, setFilteredList] = useState(bugList);
+  
   let initialState = window.innerHeight < 500 ? mobileColumns : columns;
   const [columnLayout, setColumnLayout] = useState(initialState);
 
@@ -24,18 +24,13 @@ const ProjBugList = ({ state }) => {
     }
   };
 
-  const setList = async () => {
-    let temp = await bugList.filter((bug) => bug.projId === state._id)
-    setFilteredList(temp)
-  }
-
-  useEffect(() => {
-    setList()
-  }, [bugList, state]);
-
   const handleBugClick = (bug) => {
     navigate("/bugview", { state: bug });
   };
+
+  useEffect(() => {
+
+  }, [filteredList])
 
   return (
     <Box
@@ -45,8 +40,7 @@ const ProjBugList = ({ state }) => {
         "& .gridHeader": { color: "white", bgcolor: "accent.primary" },
       }}
     >
-      {console.log(filteredList)}
-      {state !== null && filteredList.length > 0 ? (
+      {state !== null && filteredList !== null && filteredList.length > 0 && (
         <DataGrid
           rows={filteredList}
           sx={{
@@ -64,8 +58,6 @@ const ProjBugList = ({ state }) => {
           disableSelectionOnClick={true}
           onRowClick={(e) => handleBugClick(e.row)}
         />
-      ) : (
-        <div>No bugs for this project</div>
       )}
     </Box>
   );

@@ -21,18 +21,18 @@ export const columns = [
             padding: "5px",
             borderRadius: "5px",
             fontSize: ".8rem",
-            fontWeight: "400",
+            fontWeight: "600",
             textTransform: "uppercase",
             letterSpacing: "2px",
-            backgroundColor:
+            color:
               cellValues.value === 4
                 ? "#ff2800"
                 : cellValues.value === 3
                 ? "#ffae04"
                 : cellValues.value === 2
-                ? "#eaf600"
+                ? "#a0a500"
                 : cellValues.value === 1
-                ? "#55ff04"
+                ? "#006a13"
                 : "transparent",
           }}
         >
@@ -62,7 +62,7 @@ export const columns = [
         <div
           style={{
             color: "white",
-            fontWeight: "400",
+            fontWeight: "600",
             textTransform: "uppercase",
             letterSpacing: "2px",
             fontSize: ".8rem",
@@ -70,8 +70,7 @@ export const columns = [
             textAlign: "center",
             padding: "5px 0",
             borderRadius: "5px",
-            backgroundColor:
-              cellValues.value === "Open" ? "#5da56b" : "#a8382c",
+            color: cellValues.value === "Open" ? "#5da56b" : "#a8382c",
           }}
         >
           {cellValues.value}
@@ -104,18 +103,18 @@ export const mobileColumns = [
             padding: "5px",
             borderRadius: "5px",
             fontSize: ".8rem",
-            fontWeight: "400",
+            fontWeight: "600",
             textTransform: "uppercase",
             letterSpacing: "1px",
-            backgroundColor:
+            color:
               cellValues.value === 4
                 ? "#ff2800"
                 : cellValues.value === 3
                 ? "#ffae04"
                 : cellValues.value === 2
-                ? "#eaf600"
+                ? "#a0a500"
                 : cellValues.value === 1
-                ? "#55ff04"
+                ? "#006a13"
                 : "transparent",
           }}
         >

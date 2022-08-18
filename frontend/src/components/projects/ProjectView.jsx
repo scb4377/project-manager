@@ -35,8 +35,19 @@ const ProjectView = () => {
     useContext(AppContext);
   const [users, setUsers] = useState([]);
   const [lowPriority, setLowPriority] = useState(0);
+  const [filteredList, setFilteredList] = useState(null);
   const { state } = useLocation();
   const [project, setProject] = useState(null);
+
+  const setList = async () => {
+    let temp = [];
+    for (let i = 0; i < state.bugs.length; i++) {
+      temp.push(bugList.find(obj => obj.id === state.bugs[i]))
+    }
+    setFilteredList(temp)
+  }
+
+  const check = filteredList === null
 
   let findTeam = teamList;
 
@@ -86,6 +97,7 @@ const ProjectView = () => {
 
   useEffect(() => {
     getState();
+    setList()
 
     findTeam = teamList.filter((team) => team.teamName === state.team);
     let temp = findTeam[0];
@@ -259,7 +271,7 @@ const ProjectView = () => {
             ))}
           </Stack>
         </Box>
-        {project !== null && <ProjBugList state={project} />}
+        {project !== null && <ProjBugList filteredList={filteredList} />}
         
       </Box>
       <ProjCommentList state={project} />
