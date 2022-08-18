@@ -8,11 +8,14 @@ const taskSchema = new Schema(
       required: true,
       ref: "User",
     },
-    bug: {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: "Bug",
+    subject: {
+      type: String,
+      required: true
     },
+    description: {
+      type: String,
+      required: true
+    }
   },
   {
     timestamps: true,

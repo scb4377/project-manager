@@ -4,66 +4,64 @@ import { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/Context";
+import Assigned from "./Assigned";
 import { rows, columns, mobileColumns } from "./TasksLayout";
+import TaskLogs from "./TaskLogs"
+import { useEffect } from "react";
 
 const Tasks = () => {
-  const { mode } = useContext(AppContext);
+  const { mode, bugList, user, teamList } = useContext(AppContext);
+  const [taskList, setTaskList] = useState([])
 
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const initialState = window.innerWidth < 500 ? mobileColumns : columns;
-  const [columnLayout, setColumnLayout] = useState(initialState);
+  useEffect(() => {
+      setTaskList(user.tasks)
+  }, [user])
 
-  const navigate = useNavigate();
-
-  const handleBugClick = (bug) => {
-    navigate("/bugview", { state: bug });
-  };
-  window.onresize = () => {
-    if (window.innerWidth < 500) {
-      setColumnLayout(mobileColumns);
-    } else {
-      setColumnLayout(columns);
-    }
-  };
+  
 
   return (
-    <Box
-      borderRadius={2}
-      boxShadow={5}
-      p={2}
-      sx={{
-        bgcolor: mode === "dark" ? "background.dark" : "background.default",
-        "& .gridHeader": { color: "white", bgcolor: "accent.primary" },
-      }}
-    >
-      <Typography
-        mb={2}
-        variant="h5"
-        fontWeight={400}
-        sx={{ borderBottom: "0.5px solid gray", width: "max-content" }}
+    <Box display="flex" gap={2} flexDirection="column">
+      <Box
+        borderRadius={2}
+        boxShadow={5}
+        p={2}
+        sx={{
+          bgcolor: mode === "dark" ? "background.dark" : "background.default",
+          "& .gridHeader": { color: "white", bgcolor: "accent.primary" },
+        }}
       >
-        Tasks
-      </Typography>
-      <Typography
-        mb={2}
-        variant="h6"
-        fontWeight={400}
-        sx={{ borderBottom: "0.5px solid gray", width: "max-content" }}
+        {console.log(taskList)}
+        <Typography
+          mb={2}
+          variant="h5"
+          fontWeight={400}
+          sx={{ borderBottom: "0.5px solid gray", width: "max-content" }}
+        >
+          Tasks
+        </Typography>
+        <TaskLogs tasks={taskList} setTasks={setTaskList} />
+      </Box>
+      <Box
+        borderRadius={2}
+        boxShadow={5}
+        p={2}
+        sx={{
+          bgcolor: mode === "dark" ? "background.dark" : "background.default",
+          "& .gridHeader": { color: "white", bgcolor: "accent.primary" },
+        }}
       >
-        Assigned
-      </Typography>
-      <Box height={700}>
-        <DataGrid
-          rows={rows}
-          columns={columnLayout}
-          pageSize={rowsPerPage}
-          rowsPerPageOptions={[5, 10, 20, 50]}
-          onPageSizeChange={(newPageSize) => setRowsPerPage(newPageSize)}
-          disableSelectionOnClick={true}
-          disableColumnSelector={true}
-          columnBuffer={2}
-          onRowClick={(e) => handleBugClick(e.row)}
-        />
+        <Typography
+          mb={2}
+          variant="h6"
+          fontWeight={400}
+          sx={{ borderBottom: "0.5px solid gray", width: "max-content" }}
+        >
+          Assigned
+        </Typography>
+        <Box height={500}>
+          <Assigned rows={rows} />
+        </Box>
+        
       </Box>
     </Box>
   );

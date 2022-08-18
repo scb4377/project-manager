@@ -37,7 +37,11 @@ const userSchema = new Schema(
       type: String,
     },
     projIds: [String],
-    taskIds: [String],
+    tasks: [
+      {
+        
+      }
+    ],
     logIds: [String],
     teamId: {
       type: Number,

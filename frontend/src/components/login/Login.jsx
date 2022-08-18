@@ -28,6 +28,7 @@ const Login = () => {
       if (response) {
         setAuth(true);
         setUser(response)
+        console.log(response)
       }
     } catch (err) {
       console.log("Login Error");
@@ -40,6 +41,7 @@ const Login = () => {
       if (response) {
         setAuth(true);
         setUser(response)
+        console.log(response)
       }
     } catch (err) {
       console.log("Login Error");

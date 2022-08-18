@@ -43,6 +43,7 @@ const loginUser = asyncHandler(async (req, res) => {
         email: user.email,
         phone: user.phone,
         img: user.img,
+        tasks: user.tasks,
         token: generateToken(user._id),
       });
     } else {
@@ -65,6 +66,7 @@ const loginUser = asyncHandler(async (req, res) => {
         email: user.email,
         phone: user.phone,
         img: user.img,
+        tasks: user.tasks,
         token: generateToken(user._id),
       });
     } else {
@@ -176,6 +178,21 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 });
 
+const addTask = asyncHandler(async (req, res) => {
+  const user = await User.findByIdAndUpdate(req.params.id, { $push: { tasks: req.body }}, {
+    new: true,
+  }).select("-password");
+
+  console.log(user)
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User not found");
+  } else {
+    res.status(200).json(user);
+  }
+})
+
 // const generateCookie = asyncHandler(async (req, res, token) => {
 //   res.cookie("token", token, {
 //     httpOnly: false,
@@ -207,4 +224,5 @@ module.exports = {
   deleteUser,
   getMe,
   loginUser,
+  addTask,
 };
