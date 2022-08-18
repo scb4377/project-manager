@@ -15,81 +15,6 @@ import { AppContext } from "../../context/Context";
 import { AddBugComment } from "./AddBugComment";
 import { BugCommentModal } from "./BugCommentModal";
 
-const data = [
-  {
-    id: 1,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 2,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 3,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 4,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 5,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 6,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 7,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 8,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 9,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 10,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 11,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 12,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-];
-
 const BugComments = ({ bug }) => {
   const { mode } = useContext(AppContext);
   const [commentModal, setCommentModal] = useState(false);
@@ -144,15 +69,13 @@ const BugComments = ({ bug }) => {
         }}
       >
         {bug &&
+          bug.comments &&
           bug.comments.length > 0 &&
           bug.comments.map((comment, i) => (
             <div key={i + 1}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                  <Avatar
-                    alt={comment.name}
-                    src={comment.img}
-                  />
+                  <Avatar alt={comment.name} src={comment.img} />
                 </ListItemAvatar>
                 <ListItemText
                   primary={comment.subject}
@@ -178,7 +101,6 @@ const BugComments = ({ bug }) => {
       </List>
       {commentModal && (
         <BugCommentModal
-          mode={mode}
           isCommentModalOpen={commentModal}
           commentModalClose={handleAddCommentClose}
           bug={bug}

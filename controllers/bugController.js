@@ -3,15 +3,15 @@ const Bug = require("../models/BugModel");
 const Project = require("../models/ProjectModel");
 
 const getBug = asyncHandler(async (req, res) => {
-  const bug = await Bug.findById(req.params.id)
+  const bug = await Bug.findById(req.params.id);
 
   if (!bug) {
     res.status(400);
-    throw new Error("Couldn't find bug!")
+    throw new Error("Couldn't find bug!");
   } else {
-    res.status(201).json(bug)
+    res.status(201).json(bug);
   }
-})
+});
 
 const getBugs = asyncHandler(async (req, res) => {
   const bugs = await Bug.find();
@@ -25,9 +25,10 @@ const getBugs = asyncHandler(async (req, res) => {
 });
 
 const createBug = asyncHandler(async (req, res) => {
-  const { issue, priority, dueBy, creator, projId, teamId, description } = req.body;
+  const { issue, priority, dueBy, creator, projId, teamId, description } =
+    req.body;
 
-  const status = "Open"
+  const status = "Open";
 
   // create the user
   const bug = await Bug.create({
@@ -38,7 +39,7 @@ const createBug = asyncHandler(async (req, res) => {
     projId,
     teamId,
     description,
-    status
+    status,
   });
 
   const project = await Project.updateOne(
@@ -60,7 +61,7 @@ const createBug = asyncHandler(async (req, res) => {
 const addComment = asyncHandler(async (req, res) => {
   const bug = await Bug.findByIdAndUpdate(
     req.params.id,
-    { $addToSet: { comments: req.body } },
+    { $push: { comments: req.body } },
     { new: true }
   );
 
@@ -68,9 +69,9 @@ const addComment = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Bug not found");
   } else {
-    res.status(200).send(true);
+    res.status(200).json(bug);
   }
-})
+});
 
 const updateBug = asyncHandler(async (req, res) => {
   console.log(req.body.id);
@@ -86,5 +87,5 @@ module.exports = {
   updateBug,
   deleteBug,
   addComment,
-  getBug
+  getBug,
 };

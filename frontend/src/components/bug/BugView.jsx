@@ -15,16 +15,12 @@ const BugView = () => {
 
   const getState = async () => {
     const resp = await GetBug(state.id);
-    console.log(resp)
     setBug(resp);
   };
 
   useEffect(() => {
     getState()
   }, [])
-
-
-  
 
   return (
     <div>
@@ -56,7 +52,7 @@ const BugView = () => {
       </Box>
       <MyLogs mode={mode} />
       <Box mt={2}>
-        <BugComments mode={mode} bug={bug} />
+        <BugComments bug={bug} />
       </Box>
     </div>
   );

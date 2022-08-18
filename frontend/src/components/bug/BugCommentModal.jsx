@@ -18,7 +18,7 @@ export const BugCommentModal = ({
   commentModalClose,
   bug,
 }) => {
-  const { user, pullBugs } = useContext(AppContext);
+  const { user, pullBugs, mode } = useContext(AppContext);
 
   const initialState = {
     name: user.firstName + " " + user.lastName,
@@ -36,14 +36,12 @@ export const BugCommentModal = ({
     });
   };
 
-  console.log(bug)
-
-  const handleClick = () => {
+  const handleClick = async () => {
     if (comment.subject === "" || comment.description === "") {
     } else {
-      AddBugComment(comment, bug._id);
-      commentModalClose();
-      bug.comments.push(comment);
+      await AddBugComment(comment, bug._id);
+      await commentModalClose();
+      await bug.comments.push(comment);
     }
   };
 
