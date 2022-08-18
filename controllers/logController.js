@@ -3,16 +3,16 @@ const Log = require("../models/LogModel")
 
 // test to see for logcreation
 
-// const getLogs = asyncHandler(async (req, res) => {
-//     const logs = await Log.find({})
+const getAllLogs = asyncHandler(async (req, res) => {
+    const logs = await Log.find({})
 
-//     if (!logs) {
-//         res.status(400)
-//         throw new Error("Could not find logs")
-//     } else {
-//         res.status(200).json(logs)
-//     }
-// })
+    if (!logs) {
+        res.status(400)
+        throw new Error("Could not find logs")
+    } else {
+        res.status(200).json(logs)
+    }
+})
 
 // @desc    Get Log
 // @route   GET /api/logs/:id
@@ -32,6 +32,8 @@ const getLogs = asyncHandler(async (req, res) => {
 // @route   POST /api/logs/:id
 const createLog = asyncHandler(async (req, res) => {
     const { subject, description, userId } = req.body;
+
+    console.log(req.body)
 
     const log = await Log.create({
         subject,
@@ -57,10 +59,18 @@ const updateLog = asyncHandler(async (req, res) => {
 // @desc    Delete Log
 // @route   DELETE /api/logs/:id
 const deleteLog = asyncHandler(async (req, res) => {
+    const log = await Log.findByIdAndDelete(req.params.id)
 
+    if (!log) {
+        res.status(400)
+        throw new Error('Log not found')
+    } else {
+        res.status(200).send("Log Deleted")
+    }
 })
 
 module.exports = {
+    getAllLogs,
     getLogs,
     createLog,
     updateLog,

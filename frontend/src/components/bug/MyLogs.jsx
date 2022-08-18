@@ -17,7 +17,7 @@ import LogModal from "./LogModal";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context"
 import { useEffect } from "react";
-import { GetLogs } from "./LogFuncs"
+import { GetLogs, AddLog, DeleteLog } from "./LogFuncs"
 
 const FRUITS = [
   "🍏 Apple",
@@ -27,7 +27,7 @@ const FRUITS = [
   "🍉 Watermelon",
 ];
 
-function renderItem({ item, handleRemoveLog }) {
+function renderItem({ item, handleRemoveLog, formatDate }) {
   return (
     <ListItem
       secondaryAction={
@@ -54,7 +54,7 @@ function renderItem({ item, handleRemoveLog }) {
               component="span"
               variant="body1"
             >
-              {item.date}
+              {formatDate(item.createdAt)}
               {" - "}
             </Typography>
             <Typography
@@ -71,45 +71,12 @@ function renderItem({ item, handleRemoveLog }) {
   );
 }
 
-const logData = [
-  {
-    id: 1,
-    subject:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, nulla!",
-    date: "04-07-27",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta natus asperiores quod, a exercitationem ullam est repudiandae. Eos, dolorem inventore.",
-  },
-  {
-    id: 2,
-    subject:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, nulla!",
-    date: "04-07-27",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta natus asperiores quod, a exercitationem ullam est repudiandae. Eos, dolorem inventore.",
-  },
-  {
-    id: 3,
-    subject:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, nulla!",
-    date: "04-07-27",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta natus asperiores quod, a exercitationem ullam est repudiandae. Eos, dolorem inventore.",
-  },
-  {
-    id: 4,
-    subject:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, nulla!",
-    date: "04-07-27",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta natus asperiores quod, a exercitationem ullam est repudiandae. Eos, dolorem inventore.",
-  },
-];
-
 const MyLogs = ({ bug }) => {
-  const { mode, user } = useContext(AppContext)
+  const { mode, user, formatDate } = useContext(AppContext)
   const [logs, setLogs] = useState("");
   const [logModalOpen, setLogModalOpen] = useState(false);
+
+  
 
   const getLogs = async () => {
     const resp = await GetLogs(bug._id, user.id)
@@ -125,9 +92,8 @@ const MyLogs = ({ bug }) => {
   }, [bug])
 
   const logInitialState = {
-    id: 1,
+    userId: user.id,
     subject: "",
-    date: "04-20-2021",
     description: "",
   };
 
@@ -149,6 +115,10 @@ const MyLogs = ({ bug }) => {
     }
   };
 
+  const addLog = async () => {
+    const resp = await AddLog(bug._id, logFormInput)
+  }
+
   const handleAddLog = () => {
     const nextHiddenItem = logFormInput;
     if (
@@ -156,8 +126,8 @@ const MyLogs = ({ bug }) => {
       logFormInput.subject !== "" &&
       logFormInput.description !== ""
     ) {
-      logFormInput.id = Math.floor(Math.random() * 1000);
       inputValidation();
+      addLog()
       setLogs((prev) => [...prev, nextHiddenItem]);
       setLogFormInput(logInitialState);
       setLogModalOpen(false);
@@ -169,6 +139,7 @@ const MyLogs = ({ bug }) => {
 
   const handleRemoveLog = (item) => {
     setLogs((prev) => [...prev.filter((i) => i._id !== item._id)]);
+    DeleteLog(item._id)
   };
 
   const addLogButton = (
@@ -227,7 +198,7 @@ const MyLogs = ({ bug }) => {
             {logs &&
               logs.map((item) => (
                 <Collapse key={item._id} sx={{borderBottom: '0.5px solid gray'}}>
-                  {renderItem({ item, handleRemoveLog })}
+                  {renderItem({ item, handleRemoveLog, formatDate })}
                 </Collapse>
               ))}
           </TransitionGroup>
