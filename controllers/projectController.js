@@ -1,6 +1,20 @@
 const asyncHandler = require("express-async-handler");
 const Project = require("../models/ProjectModel");
 
+// @desc    get project
+// @route   GET /api/project/
+// @access  Private
+const getProject = asyncHandler(async (req, res) => {
+  const project = await Project.findById(req.params.id);
+
+  if (!project) {
+    res.status(400);
+    throw new Error("Project not found");
+  } else {
+    res.status(200).json(project);
+  }
+});
+
 // @desc    Create project
 // @route   POST /api/project/
 // @access  Private
@@ -26,7 +40,7 @@ const createProject = asyncHandler(async (req, res) => {
     team: teamId,
     projTitle,
     company,
-    stage
+    stage,
   });
 
   if (project) {
@@ -40,18 +54,38 @@ const createProject = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update project
-// @route   PUT /api/project/:id
+// @route   PUT /api/projects/:id
 // @access  Private
 const updateProject = asyncHandler(async (req, res) => {
   const project = await Project.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
-  })
+  });
 
   if (!project) {
     res.status(400);
     throw new Error("Project not found");
   } else {
     res.status(200).json(project);
+  }
+});
+
+// @desc    Add comment
+// @route   PUT /api/projects/comment/:id
+// @access  Private
+const addProjComment = asyncHandler(async (req, res) => {
+  console.log(req.body);
+  const project = await Project.findByIdAndUpdate(
+    req.params.id,
+    { $addToSet: { comments: req.body } },
+    { new: true }
+  );
+
+  if (!project) {
+    res.status(400);
+    throw new Error("Project not found");
+  } else {
+    console.log(project);
+    res.status(200).send(true);
   }
 });
 
@@ -79,4 +113,6 @@ module.exports = {
   getProjects,
   updateProject,
   deleteProject,
+  addProjComment,
+  getProject,
 };

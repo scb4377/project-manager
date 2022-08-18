@@ -20,6 +20,7 @@ import { AppContext } from "../../context/Context";
 import ProjBugList from "./ProjBugList";
 import ProjCommentList from "./ProjCommentList";
 import ProjWidget from "./ProjWidget";
+import { GetProject } from "./GetProject";
 
 const StyledDiv = styled("div")({
   display: "flex",
@@ -30,11 +31,12 @@ const StyledDiv = styled("div")({
 });
 
 const ProjectView = () => {
-  const { mode, teamList, userList, bugList } = useContext(AppContext);
+  const { mode, teamList, userList, bugList, formatDate } =
+    useContext(AppContext);
   const [users, setUsers] = useState([]);
   const [lowPriority, setLowPriority] = useState(0);
-
   const { state } = useLocation();
+  const [project, setProject] = useState(state);
 
   let findTeam = teamList;
 
@@ -77,7 +79,14 @@ const ProjectView = () => {
   //   }
   // };
 
+  const getState = async () => {
+    const resp = await GetProject(state.id);
+    setProject(resp);
+  };
+
   useEffect(() => {
+    getState();
+
     findTeam = teamList.filter((team) => team.teamName === state.team);
     let temp = findTeam[0];
     let usersTemp = [];
@@ -139,7 +148,7 @@ const ProjectView = () => {
               wordWrap: "break-word",
             }}
           >
-            {state.projTitle}
+            {project.projTitle}
           </Typography>
           <Box
             p={1}
@@ -214,15 +223,19 @@ const ProjectView = () => {
           sx={{ width: { xs: "100%", sm: "max-content" } }}
         >
           <span style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontWeight: "bold" }}>{state.company}</span>
+            <span style={{ fontWeight: "bold" }}>{project.company}</span>
             <label>Company</label>
           </span>
           <span style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontWeight: "bold" }}>{state.createdAt}</span>
+            <span style={{ fontWeight: "bold" }}>
+              {formatDate(project.createdAt)}
+            </span>
             <label>Start Date</label>
           </span>
           <span style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontWeight: "bold" }}>{state.bugs.length}</span>
+            <span style={{ fontWeight: "bold" }}>
+              {project && project.bugs.length}
+            </span>
             <label>Issues</label>
           </span>
         </Box>
@@ -248,7 +261,7 @@ const ProjectView = () => {
         </Box>
         <ProjBugList state={state} />
       </Box>
-      <ProjCommentList mode={mode} />
+      <ProjCommentList state={state} />
     </Box>
   );
 };

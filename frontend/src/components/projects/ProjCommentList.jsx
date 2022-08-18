@@ -10,89 +10,20 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import { useEffect } from "react";
+import { useContext } from "react";
 import { useState } from "react";
+import { AppContext } from "../../context/Context";
 import ProjCommentModal from "./ProjCommentModal";
 
-const data = [
-  {
-    id: 1,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 2,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 3,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 4,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 5,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 6,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 7,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 8,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 9,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 10,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 11,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-  {
-    id: 12,
-    name: "Remy Sharp",
-    subject: "Brunch this weekend?",
-    description: "I'll be in your neighborhood doing errands this...",
-  },
-];
-
-const ProjCommentList = ({ mode }) => {
+const ProjCommentList = ({ state }) => {
+  const { mode } = useContext(AppContext);
   const [commentModal, setCommentModal] = useState(false);
 
   const handleAddCommentClose = () => setCommentModal(false);
   const handleAddCommentOpen = () => setCommentModal(true);
+
+  useEffect(() => {}, [state.comments]);
 
   return (
     <Box
@@ -138,14 +69,14 @@ const ProjCommentList = ({ mode }) => {
           overflowY: "scroll",
         }}
       >
-        {data.map((comment, i) => (
+        {state.comments.map((comment, i) => (
           <div key={i + 1}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
-                <Avatar alt={comment.name} src="/static/images/avatar/1.jpg" />
+                <Avatar alt={comment.name} src={comment.img} />
               </ListItemAvatar>
               <ListItemText
-                primary="Brunch this weekend?"
+                primary={comment.subject}
                 secondary={
                   <>
                     <Typography
@@ -171,6 +102,7 @@ const ProjCommentList = ({ mode }) => {
           mode={mode}
           isCommentModalOpen={commentModal}
           commentModalClose={handleAddCommentClose}
+          state={state}
         />
       )}
     </Box>

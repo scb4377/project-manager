@@ -14,13 +14,18 @@ const HomeList = () => {
 
   useEffect(() => {
     if (filteredList) {
-      for (let i = 0; i < filteredList.length; i++) {
-        for (let k = 0; k < projList.length; k++) {
-          if (filteredList[i].projId === projList[k].id) {
-            filteredList[i].projId = projList[k].projTitle;
-          }
+      projList.map(proj => filteredList.filter(bug => {
+        if (bug.projId === proj.id) {
+          return proj.projTitle
         }
-      }
+      }))
+      // for (let i = 0; i < filteredList.length; i++) {
+      //   for (let k = 0; k < projList.length; k++) {
+      //     if (filteredList[i].projId === projList[k].id) {
+      //       filteredList[i].projId = projList[k].projTitle;
+      //     }
+      //   }
+      // }
     }
   }, [bugList]);
 

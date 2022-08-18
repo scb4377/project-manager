@@ -1,8 +1,47 @@
-import { Box, Button, IconButton, Modal, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import React from "react";
+import { useState } from "react";
+import { useContext } from "react";
+import { AppContext } from "../../context/Context";
+import { AddComment } from "./AddComment";
 
-const ProjCommentModal = ({ isCommentModalOpen, commentModalClose }) => {
+const ProjCommentModal = ({ isCommentModalOpen, commentModalClose, state }) => {
+  const { user, pullBugs } = useContext(AppContext);
+
+  const initialState = {
+    name: user.firstName + " " + user.lastName,
+    img: user.img,
+    subject: "",
+    description: "",
+  };
+  
+  const [comment, setComment] = useState(initialState);
+
+  const handleChange = (e) => {
+    setComment({
+      ...comment,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleClick = () => {
+    if (comment.subject === "" || comment.description === "") {
+
+    } else {
+      AddComment(comment, state.id)
+      commentModalClose()
+      state.comments.push(comment)
+    }
+  };
+
   return (
     <Modal
       open={isCommentModalOpen}
@@ -18,7 +57,7 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose }) => {
           left: "50%",
           transform: "translate(-50%, -50%)",
           height: "max-content",
-          width: {xs: "95%", sm: "400px"},
+          width: { xs: "95%", sm: "400px" },
           bgcolor: "background.default",
           borderRadius: "5px",
           boxShadow: 24,
@@ -35,12 +74,12 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose }) => {
         </Typography>
 
         <IconButton
-            color="error"
-            sx={{ position: "absolute", right: "5px", top: '5px' }}
-            onClick={commentModalClose}
-          >
-            <CancelIcon />
-          </IconButton>
+          color="error"
+          sx={{ position: "absolute", right: "5px", top: "5px" }}
+          onClick={commentModalClose}
+        >
+          <CancelIcon />
+        </IconButton>
 
         <Box
           display="flex"
@@ -55,7 +94,9 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose }) => {
             variant="filled"
             label="Subject"
             name="subject"
+            value={comment.subject}
             fullWidth
+            onChange={handleChange}
           ></TextField>
           <TextField
             required
@@ -64,7 +105,9 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose }) => {
             variant="filled"
             label="Write something..."
             name="description"
+            value={comment.description}
             fullWidth
+            onChange={handleChange}
           ></TextField>
           <Button
             variant="contained"
@@ -75,8 +118,9 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose }) => {
               alignSelf: "center",
               "&:hover": { backgroundColor: "accent.hover" },
             }}
+            onClick={handleClick}
           >
-            Add Log
+            Add Comment
           </Button>
         </Box>
       </Box>

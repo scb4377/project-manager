@@ -186,7 +186,7 @@ const MyLogs = ({ mode }) => {
         mb={2}
         sx={{ borderBottom: "0.5px solid gray", width: "max-content" }}
       >
-        My Logs
+        Personal Logs
       </Typography>
       <IconButton
         edge="end"

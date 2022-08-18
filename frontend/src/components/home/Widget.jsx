@@ -151,8 +151,8 @@ const Widget = ({ type }) => {
           alignItems: "center",
         }}
       >
-        <KeyboardArrowUp />
-        <div>{data.percent}%</div>
+        {/* <KeyboardArrowUp />
+        <div>{data.percent}%</div> */}
         {type === "projects" ? (
           <AccountTree
             sx={{

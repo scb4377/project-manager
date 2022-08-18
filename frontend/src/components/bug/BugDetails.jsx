@@ -128,7 +128,7 @@ const BugDetails = ({ bug }) => {
             </span>
           </StyledDiv>
         </div>
-        <div>Statistics</div>
+        {/* <div>Statistics</div> */}
       </div>
 
       <div>

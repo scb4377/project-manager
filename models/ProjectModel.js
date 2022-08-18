@@ -28,9 +28,7 @@ const projectSchema = new Schema(
     },
     comments: [
       {
-        author: String,
-        date: () => Date.now(),
-        body: String,
+        
       },
     ],
   },
