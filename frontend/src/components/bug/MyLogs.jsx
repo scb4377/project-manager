@@ -14,6 +14,10 @@ import React from "react";
 import { useState } from "react";
 import { TransitionGroup } from "react-transition-group";
 import LogModal from "./LogModal";
+import { useContext } from "react";
+import { AppContext } from "../../context/Context"
+import { useEffect } from "react";
+import { GetLogs } from "./LogFuncs"
 
 const FRUITS = [
   "🍏 Apple",
@@ -102,9 +106,23 @@ const logData = [
   },
 ];
 
-const MyLogs = ({ mode }) => {
-  const [logs, setLogs] = useState(logData);
+const MyLogs = ({ bug }) => {
+  const { mode, user } = useContext(AppContext)
+  const [logs, setLogs] = useState("");
   const [logModalOpen, setLogModalOpen] = useState(false);
+
+  const getLogs = async () => {
+    const resp = await GetLogs(bug._id, user.id)
+
+    setLogs(resp)
+  }
+
+  useEffect(() => {
+    if (bug) {
+      getLogs()
+    }
+    
+  }, [bug])
 
   const logInitialState = {
     id: 1,
@@ -150,7 +168,7 @@ const MyLogs = ({ mode }) => {
   };
 
   const handleRemoveLog = (item) => {
-    setLogs((prev) => [...prev.filter((i) => i.id !== item.id)]);
+    setLogs((prev) => [...prev.filter((i) => i._id !== item._id)]);
   };
 
   const addLogButton = (
@@ -208,7 +226,7 @@ const MyLogs = ({ mode }) => {
           <TransitionGroup>
             {logs &&
               logs.map((item) => (
-                <Collapse key={item.id} sx={{borderBottom: '0.5px solid gray'}}>
+                <Collapse key={item._id} sx={{borderBottom: '0.5px solid gray'}}>
                   {renderItem({ item, handleRemoveLog })}
                 </Collapse>
               ))}

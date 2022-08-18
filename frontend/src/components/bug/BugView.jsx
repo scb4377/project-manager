@@ -50,7 +50,7 @@ const BugView = () => {
       >
         <BugDetails bug={bug} />
       </Box>
-      <MyLogs mode={mode} />
+      <MyLogs bug={bug}/>
       <Box mt={2}>
         <BugComments bug={bug} />
       </Box>

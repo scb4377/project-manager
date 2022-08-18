@@ -7,7 +7,7 @@ const {
   deleteLog,
 } = require("../controllers/logController");
 
-router.route("/").get(getLogs).post(createLog);
-router.route("/:id").put(updateLog).delete(deleteLog);
+
+router.route("/:id").get(getLogs).post(createLog).put(updateLog).delete(deleteLog);
 
 module.exports = router;

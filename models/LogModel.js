@@ -3,6 +3,14 @@ const Schema = mongoose.Schema;
 
 const logSchema = new Schema(
   {
+    subject: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
     user: {
       type: Schema.Types.ObjectId,
       required: true,
@@ -10,6 +18,7 @@ const logSchema = new Schema(
     },
     bug: {
       type: Schema.Types.ObjectId,
+      required: true,
       ref: "Bug",
     },
   },
