@@ -17,8 +17,13 @@ export const GetLogs = async (bugId, userId) => {
 }
 
 export const AddLog = async (bugId, data) => {
-    console.log(bugId, data)
     const response = await axios.post(API_URL + bugId, data)
+
+    if (!response) {
+        console.log("Error deleting log")
+    } else {
+        return response
+    }
 }
 
 export const DeleteLog = async (logId) => {

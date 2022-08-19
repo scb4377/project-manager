@@ -18,7 +18,7 @@ import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 import { useEffect } from "react";
 import TaskModal from "./TaskModal";
-import { AddTask } from "./AddTask";
+import { AddTask, DeleteTask, GetMe } from "./TaskFunc";
 //   import { GetLogs, AddLog, DeleteLog } from "./LogFuncs"
 
 const FRUITS = [
@@ -74,7 +74,7 @@ function renderItem({ item, handleRemoveTask, formatDate }) {
 }
 
 const TaskLogs = ({ tasks, setTasks }) => {
-  const { mode, user, formatDate } = useContext(AppContext);
+  const { mode, user, setUser, formatDate } = useContext(AppContext);
   const [taskModalOpen, setTaskModalOpen] = useState(false);
 
   // const getLogs = async () => {
@@ -91,6 +91,7 @@ const TaskLogs = ({ tasks, setTasks }) => {
   // }, [bug])
 
   const taskInitialState = {
+    id: Math.floor(Math.random() * 1000),
     subject: "",
     description: "",
     date: new Date(),
@@ -118,6 +119,16 @@ const TaskLogs = ({ tasks, setTasks }) => {
   //   const resp = await AddLog(bug._id, logFormInput)
   // }
 
+  const pullUser = async () => {
+    const resp = await GetMe()
+
+    if (!resp) {
+        console.log('Error Occured')
+    } else {
+        setUser(resp)
+    }
+  }
+
   const handleAddTask = () => {
     const nextHiddenItem = taskInput;
     if (
@@ -133,6 +144,7 @@ const TaskLogs = ({ tasks, setTasks }) => {
         setTasks((prev) => [...prev, nextHiddenItem]);
       }
       AddTask(user.id, taskInput);
+      pullUser()
       setTaskInput(taskInitialState);
       setTaskModalOpen(false);
     } else {
@@ -141,9 +153,18 @@ const TaskLogs = ({ tasks, setTasks }) => {
     }
   };
 
+  const deleteTask = async (id) => {
+    const resp = await DeleteTask(user.id, id)
+
+    if (!resp) {
+        console.log("error occurred")
+    }
+  }
+
   const handleRemoveTask = (item) => {
     setTasks((prev) => [...prev.filter((i) => i.id !== item.id)]);
-    //   DeleteLog(item._id)
+    deleteTask(item.id)
+    pullUser()
   };
 
   const handleAddTaskModalClose = () => setTaskModalOpen(false);
@@ -172,8 +193,8 @@ const TaskLogs = ({ tasks, setTasks }) => {
           <TransitionGroup>
             {tasks &&
               tasks.length > 0 &&
-              tasks.map((item, i) => (
-                <Collapse key={i} sx={{ borderBottom: "0.5px solid gray" }}>
+              tasks.map((item) => (
+                <Collapse key={item.id} sx={{ borderBottom: "0.5px solid gray" }}>
                   {renderItem({ item, handleRemoveTask, formatDate })}
                 </Collapse>
               ))}

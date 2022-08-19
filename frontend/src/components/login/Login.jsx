@@ -27,8 +27,7 @@ const Login = () => {
       let response = await loginFunc(formInput);
       if (response) {
         setAuth(true);
-        setUser(response)
-        console.log(response)
+        setUser(response);
       }
     } catch (err) {
       console.log("Login Error");
@@ -40,8 +39,7 @@ const Login = () => {
       let response = await demoFunc();
       if (response) {
         setAuth(true);
-        setUser(response)
-        console.log(response)
+        setUser(response);
       }
     } catch (err) {
       console.log("Login Error");

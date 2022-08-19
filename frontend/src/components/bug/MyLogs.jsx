@@ -92,6 +92,7 @@ const MyLogs = ({ bug }) => {
   }, [bug])
 
   const logInitialState = {
+    id: Math.floor(Math.random() * 1000),
     userId: user.id,
     subject: "",
     description: "",
@@ -117,6 +118,7 @@ const MyLogs = ({ bug }) => {
 
   const addLog = async () => {
     const resp = await AddLog(bug._id, logFormInput)
+      getLogs()
   }
 
   const handleAddLog = () => {

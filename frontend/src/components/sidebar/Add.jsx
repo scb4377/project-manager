@@ -17,11 +17,6 @@ import {
 } from "@mui/material";
 import { Add as AddIcon } from "@mui/icons-material";
 import React, { useState } from "react";
-import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
-import ImageIcon from "@mui/icons-material/Image";
-import VideoCameraBackIcon from "@mui/icons-material/VideoCameraBack";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import DateRange from "@mui/icons-material/DateRange";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -44,7 +39,7 @@ const UserBox = styled(Box)({
 
 const Add = () => {
   const [value, setValue] = useState(null);
-  const { projList, teamList, mode, user, pullBugs } = useContext(AppContext);
+  const { projList, mode, user, pullBugs } = useContext(AppContext);
   const [open, setOpen] = useState(false);
   const initialState = {
     creator: user.id,
@@ -178,6 +173,7 @@ const Add = () => {
               value={formInput.priority}
               name="priority"
               onChange={handleChange}
+              variant="filled"
             >
               <MenuItem value={1}>Low</MenuItem>
               <MenuItem value={2}>Minor</MenuItem>
@@ -203,6 +199,7 @@ const Add = () => {
               required
               labelId="demo-simple-select-label"
               id="demo-simple-select"
+              variant="filled"
               value={formInput.projId}
               name="projId"
               onChange={handleChange}
@@ -221,7 +218,7 @@ const Add = () => {
                 mode === "dark" ? "background.dark" : "background.default",
             }}
           >
-            <InputLabel
+            {/* <InputLabel
               id="demo-simple-select-label"
               variant="standard"
               size="small"
@@ -241,13 +238,14 @@ const Add = () => {
                   {team.teamName}
                 </MenuItem>
               ))}
-            </Select>
+            </Select> */}
           </FormControl>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              label="Basic example"
+              label="Due By"
               value={formInput.dueBy}
               name="dueBy"
+              variant="filled"
               onChange={(newValue) => {
                 setFormInput({
                   ...formInput,

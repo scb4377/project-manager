@@ -44,7 +44,8 @@ const userSchema = new Schema(
     ],
     logIds: [String],
     teamId: {
-      type: Number,
+      type: Schema.Types.ObjectId,
+      ref: "Team"
     },
   },
   {

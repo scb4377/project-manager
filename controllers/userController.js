@@ -8,7 +8,7 @@ const User = require("../models/UserModel");
 // @route:   GET /api/user/me
 // @access: Private
 const getMe = asyncHandler(async (req, res) => {
-  const { _id, username, firstName, lastName, email, phone, img } =
+  const { _id, username, firstName, lastName, email, phone, img, tasks } =
     await User.findById(req.user.id);
 
   res.status(200).json({
@@ -19,6 +19,7 @@ const getMe = asyncHandler(async (req, res) => {
     email,
     phone,
     img,
+    tasks
   });
 });
 
@@ -44,6 +45,7 @@ const loginUser = asyncHandler(async (req, res) => {
         phone: user.phone,
         img: user.img,
         tasks: user.tasks,
+        teamId: user.teamId,
         token: generateToken(user._id),
       });
     } else {
@@ -193,6 +195,23 @@ const addTask = asyncHandler(async (req, res) => {
   }
 })
 
+const deleteTask = asyncHandler(async (req, res) => {
+  const { id } = req.body
+  console.log(req.params.id, id)
+  const user = await User.findByIdAndUpdate(req.params.id, { $pull: {tasks: {id: id}}}, {
+    new: true,
+  }).select("-password");
+
+  console.log(user)
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User not found");
+  } else {
+    res.status(200).json(user);
+  }
+})
+
 // const generateCookie = asyncHandler(async (req, res, token) => {
 //   res.cookie("token", token, {
 //     httpOnly: false,
@@ -218,6 +237,7 @@ const generateToken = (id) => {
 };
 
 module.exports = {
+  deleteTask,
   getUsers,
   createUser,
   updateUser,

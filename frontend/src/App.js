@@ -21,13 +21,7 @@ import Bugs from "./components/bug/Bugs";
 import Tasks from "./components/tasks/Tasks";
 import Login from "./components/login/Login";
 import { AppContext } from "./context/Context";
-import {
-  getBugs,
-  getProjects,
-  getTasks,
-  getTeams,
-  getUsers,
-} from "./context/BugContext";
+import { getBugs, getProjects, getTeams, getUsers } from "./context/BugContext";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -38,6 +32,7 @@ function App() {
   const [projList, setProjList] = useState([]);
   const [teamList, setTeamList] = useState([]);
   const [taskList, setTaskList] = useState([]);
+  const [assigned, setAssigned] = useState([]);
 
   const formatDate = (date) => {
     let temp = new Date(date);
@@ -47,6 +42,14 @@ function App() {
 
     return newDate;
   };
+
+  const getAssigned = async () => {
+    let temp = bugList.filter((bug) => bug.teamId === user.teamId)
+
+    setAssigned(temp);
+
+    setTaskList(user.tasks);
+  }
 
   const pullBugs = async () => {
     let bugs = await getBugs();
@@ -64,18 +67,23 @@ function App() {
     let teams = await getTeams();
     setTeamList(teams);
 
-    let tasks = await getTasks();
-    setTaskList(tasks);
+    let assign = await getAssigned()
 
     let users = await getUsers();
     setUserList(users);
-
   };
 
   useEffect(() => {
     if (auth) {
-      pullBugs()
+      pullBugs();
     }
+
+    // if (user && bugList && bugList.length > 0) {
+    //   let temp = bugList.filter((bug) => console.log(bug));
+    //   setAssigned(temp);
+
+    //   setTaskList(user.tasks);
+    // }
   }, [auth]);
 
   const theme = createTheme({
@@ -115,13 +123,15 @@ function App() {
           setAuth,
           bugList,
           taskList,
+          setTaskList,
           projList,
           teamList,
           userList,
           formatDate,
           user,
           setUser,
-          pullBugs
+          pullBugs,
+          assigned,
         }}
       >
         {!auth ? (

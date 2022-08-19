@@ -1,21 +1,18 @@
 import { Box, Typography } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
 import { useContext } from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/Context";
 import Assigned from "./Assigned";
-import { rows, columns, mobileColumns } from "./TasksLayout";
 import TaskLogs from "./TaskLogs"
-import { useEffect } from "react";
 
 const Tasks = () => {
-  const { mode, bugList, user, teamList } = useContext(AppContext);
-  const [taskList, setTaskList] = useState([])
+  const { mode, taskList, setTaskList, assigned } = useContext(AppContext);
 
-  useEffect(() => {
-      setTaskList(user.tasks)
-  }, [user])
+  console.log(assigned)
+
+  // useEffect(() => {
+  //     setTaskList(user.tasks)
+  //     console.log(user)
+  // }, [user])
 
   
 
@@ -30,7 +27,6 @@ const Tasks = () => {
           "& .gridHeader": { color: "white", bgcolor: "accent.primary" },
         }}
       >
-        {console.log(taskList)}
         <Typography
           mb={2}
           variant="h5"
@@ -59,7 +55,7 @@ const Tasks = () => {
           Assigned
         </Typography>
         <Box height={500}>
-          <Assigned rows={rows} />
+          <Assigned rows={assigned} />
         </Box>
         
       </Box>

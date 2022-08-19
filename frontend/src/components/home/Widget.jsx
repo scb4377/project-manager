@@ -12,7 +12,7 @@ import { AppContext } from "../../context/Context";
 import { useEffect } from "react";
 
 const Widget = ({ type }) => {
-  const { mode, projList, bugList } = useContext(AppContext)
+  const { mode, projList, bugList, taskList } = useContext(AppContext)
   const [projectPer, setProjectPer] = useState(0)
 
   let data;
@@ -55,7 +55,6 @@ const Widget = ({ type }) => {
         title: "Projects",
         link: "See all projects",
         amt: projList.length,
-        percent: projectPer
       };
       break;
     case "issues":
@@ -69,7 +68,7 @@ const Widget = ({ type }) => {
       data = {
         title: "Tasks",
         link: "See all tasks",
-        amt: 5,
+        amt: taskList.length,
       };
       break;
     default:

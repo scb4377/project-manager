@@ -1,9 +1,11 @@
 import { DataGrid } from "@mui/x-data-grid";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router";
-import { rows, columns, mobileColumns } from "./TasksLayout";
+import { AppContext } from "../../context/Context";
+import { columns, mobileColumns } from "./TasksLayout";
 
 const Assigned = () => {
+  const { assigned } = useContext(AppContext)
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const initialState = window.innerWidth < 500 ? mobileColumns : columns;
   const [columnLayout, setColumnLayout] = useState(initialState);
@@ -20,9 +22,10 @@ const Assigned = () => {
       setColumnLayout(columns);
     }
   };
+
   return (
     <DataGrid
-      rows={rows}
+      rows={assigned}
       columns={columnLayout}
       pageSize={rowsPerPage}
       rowsPerPageOptions={[5, 10, 20, 50]}
