@@ -131,6 +131,7 @@ const ProjectView = () => {
         p={2}
         boxShadow={5}
         borderRadius="5px"
+        height="max-content"
         bgcolor={mode === "dark" ? "background.dark" : "background.default"}
         sx={{
           width: "100%",

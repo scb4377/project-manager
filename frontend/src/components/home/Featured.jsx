@@ -22,7 +22,7 @@ let data = [
     { name: 'Testing', value: 14 },
   ];
   
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF8042', '#FF8042'];
+  const COLORS = ['#5ABDC7', '#395CB4', '#291DA1', '#601DA1', '#931DA1', '#A11D7C'];
   
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {

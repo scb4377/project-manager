@@ -35,7 +35,7 @@ const ProjBugList = ({ state, filteredList }) => {
   return (
     <Box
       sx={{
-        height: 370,
+        height: filteredList.length > 0 ? 370 : 0,
         width: "100%",
         "& .gridHeader": { color: "white", bgcolor: "accent.primary" },
       }}
