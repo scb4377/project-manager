@@ -19,20 +19,20 @@ const Chart = ({data}) => {
       >
         <defs>
           <linearGradient id="critical" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#ff2800" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#ff2800" stopOpacity={0.3} />
+            <stop offset="5%" stopColor="#752c41" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#752c41" stopOpacity={0.3} />
           </linearGradient>
           <linearGradient id="major" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#ffae04" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#ffae04" stopOpacity={0.3} />
+            <stop offset="5%" stopColor="#75602c" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#75602c" stopOpacity={0.3} />
           </linearGradient>
           <linearGradient id="minor" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#d1d800" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#d1d800" stopOpacity={0.3} />
+            <stop offset="5%" stopColor="#2B7777" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#2B7777" stopOpacity={0.3} />
           </linearGradient>
           <linearGradient id="low" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#006a13" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#006a13" stopOpacity={0.3} />
+            <stop offset="5%" stopColor="#90c6d4" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#90c6d4" stopOpacity={0.3} />
           </linearGradient>
         </defs>
         <XAxis dataKey="name" />
@@ -42,28 +42,28 @@ const Chart = ({data}) => {
         <Area
           type="monotone"
           dataKey="critical"
-          stroke="#ff2800"
+          stroke="#752c41"
           fillOpacity={1}
           fill="url(#critical)"
         />
         <Area
           type="monotone"
           dataKey="major"
-          stroke="#ffae04"
+          stroke="#75602c"
           fillOpacity={1}
           fill="url(#major)"
         />
         <Area
           type="monotone"
           dataKey="minor"
-          stroke="#d1d800"
+          stroke="#2B7777"
           fillOpacity={1}
           fill="url(#minor)"
         />
         <Area
           type="monotone"
           dataKey="low"
-          stroke="#006a13"
+          stroke="#90c6d4"
           fillOpacity={1}
           fill="url(#low)"
         />
