@@ -13,7 +13,16 @@ const Projects = () => {
 
   let tempList = projList
 
-  
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  let initialState = window.innerWidth < 500 ? mobileColumns : columns;
+  const [columnLayout, setColumnLayout] = useState(initialState);
+
+  const navigate = useNavigate();
+
+  const handleProjClick = (project) => {
+    navigate("/projectview", { state: project });
+  };
+
   useEffect(() => {
     // Changes team id to team name
     // Need to work on date 
@@ -57,17 +66,7 @@ const Projects = () => {
       testing
     })
 
-  }, [projList])
-
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  let initialState = window.innerWidth < 500 ? mobileColumns : columns;
-  const [columnLayout, setColumnLayout] = useState(initialState);
-
-  const navigate = useNavigate();
-
-  const handleProjClick = (project) => {
-    navigate("/projectview", { state: project });
-  };
+  }, [projList, columnLayout])
 
   window.onresize = () => {
     if (window.innerHeight < 500) {

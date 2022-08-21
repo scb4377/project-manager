@@ -11,7 +11,7 @@ const BugsList = () => {
   const [columnLayout, setColumnLayout] = useState(initialState);
 
   useEffect(() => {
-  }, [bugList])
+  }, [bugList, columnLayout])
 
   const navigate = useNavigate();
 

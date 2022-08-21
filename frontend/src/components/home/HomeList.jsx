@@ -12,13 +12,13 @@ const HomeList = () => {
 
   let filteredList = bugList.filter(bug => bug.priority === 4)
 
-  useEffect(() => {
-  }, [bugList]);
-
   const navigate = useNavigate();
   const [rowsPerPage, setRowsPerPage] = useState(10);
   let initialState = window.innerHeight < 500 ? mobileColumns : columns;
   const [columnLayout, setColumnLayout] = useState(initialState);
+
+  useEffect(() => {
+  }, [bugList, columnLayout]);
 
   window.onresize = () => {
     if (window.innerWidth < 500) {

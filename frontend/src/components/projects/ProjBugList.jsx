@@ -30,7 +30,7 @@ const ProjBugList = ({ state, filteredList }) => {
 
   useEffect(() => {
 
-  }, [filteredList])
+  }, [filteredList, columnLayout])
 
   return (
     <Box
