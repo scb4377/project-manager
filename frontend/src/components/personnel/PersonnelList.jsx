@@ -22,17 +22,7 @@ const Row = ({ team }) => {
   const { userList, teamList } = useContext(AppContext);
 
   const [open, setOpen] = useState(false);
-  let employees = [];
-
-  if (team && userList) {
-    for (let i = 0; i < team.empIds.length; i++) {
-      for (let k = 0; k < userList.length; k++) {
-        if (team.empIds[i] === userList[k]._id) {
-          employees.push(userList[k]);
-        }
-      }
-    }
-  }
+  let employees = userList.filter(user => user.teamId === team._id)
 
   return (
     <>
@@ -93,12 +83,60 @@ const Row = ({ team }) => {
                     employees.map((person) => (
                       <TableRow key={person._id}>
                         <TableCell component="th" scope="row">
-                          {person.firstName}
+                          {person.firstName + " " + person.lastName}
                         </TableCell>
                         <TableCell align="center">
                           {person.roles.User === 2001
-                            ? "Software Engineer 1"
-                            : "Role"}
+                            ? "Software Engineer I"
+                            : person.roles.User === 2002
+                            ? "Software Engineer II"
+                            : person.roles.User === 2003
+                            ? "Senior Software Engineer"
+                            : person.roles.User === 1000
+                            ? "Team Lead"
+                            : person.roles.User === 1001
+                            ? "Assistant Manager"
+                            : person.roles.User === 1002
+                            ? "Operations Manager"
+                            : person.roles.User === 1003
+                            ? "Lead Manager"
+                            : person.roles.User === 3000
+                            ? "Test Engineer I"
+                            : person.roles.User === 3001
+                            ? "Test Engineer II"
+                            : person.roles.User === 3002
+                            ? "Test Engineer III"
+                            : person.roles.User === 3003
+                            ? "Test Engineer Lead"
+                            : person.roles.User === 4000
+                            ? "Designer I"
+                            : person.roles.User === 4001
+                            ? "Designer II"
+                            : person.roles.User === 4002
+                            ? "Designer III"
+                            : person.roles.User === 4003
+                            ? "Design Lead"
+                            : person.roles.User === 5000
+                            ? "QA Engineer I"
+                            : person.roles.User === 5001
+                            ? "QA Engineer II"
+                            : person.roles.User === 5002
+                            ? "QA Engineer III"
+                            : person.roles.User === 5003
+                            ? "QA Lead"
+                            : person.roles.User === 5004
+                            ? "QA Operations Manager"
+                            : person.roles.User === 6000
+                            ? "Associate I"
+                            : person.roles.User === 6001
+                            ? "Associate II"
+                            : person.roles.User === 6002
+                            ? "Associate III"
+                            : person.roles.User === 6003
+                            ? "Planning Lead"
+                            : person.roles.User === 6004
+                            ? "Planning Operations Manager"
+                            : "New Employee"}
                         </TableCell>
                         <TableCell align="right">{person.phone}</TableCell>
                       </TableRow>

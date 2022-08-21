@@ -40,7 +40,7 @@ const UserBox = styled(Box)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-  const { mode, setAuth } = useContext(AppContext);
+  const { mode, setAuth, user } = useContext(AppContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/')
+    navigate("/");
     setAuth(false);
   };
 
@@ -87,14 +87,14 @@ const Navbar = () => {
           <Avatar
             onClick={handleClick}
             sx={{ width: 30, height: 30 }}
-            src="https://miro.medium.com/max/909/1*_iikfMGYF3RH4OZ0yeQYnQ.png"
+            src={user.img}
           />
           <Typography variant="span">Jan</Typography>
         </Icons>
         <UserBox>
           <Avatar
             sx={{ width: 30, height: 30 }}
-            src="https://miro.medium.com/max/909/1*_iikfMGYF3RH4OZ0yeQYnQ.png"
+            src={user.img}
             onClick={handleClick}
           />
         </UserBox>
