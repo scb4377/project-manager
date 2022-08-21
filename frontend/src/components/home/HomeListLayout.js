@@ -1,6 +1,6 @@
 export const columns = [
   {
-    field: "projId",
+    field: "projTitle",
     headerName: "Project",
     headerClassName: "gridHeader",
     flex: 2,
@@ -59,7 +59,7 @@ export const columns = [
 
 export const mobileColumns = [
   {
-    field: "projId",
+    field: "projTitle",
     headerName: "Project",
     headerClassName: "gridHeader",
 

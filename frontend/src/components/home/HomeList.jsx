@@ -13,20 +13,6 @@ const HomeList = () => {
   let filteredList = bugList.filter(bug => bug.priority === 4)
 
   useEffect(() => {
-    if (filteredList) {
-      projList.map(proj => filteredList.filter(bug => {
-        if (bug.projId === proj.id) {
-          return proj.projTitle
-        }
-      }))
-      // for (let i = 0; i < filteredList.length; i++) {
-      //   for (let k = 0; k < projList.length; k++) {
-      //     if (filteredList[i].projId === projList[k].id) {
-      //       filteredList[i].projId = projList[k].projTitle;
-      //     }
-      //   }
-      // }
-    }
   }, [bugList]);
 
   const navigate = useNavigate();

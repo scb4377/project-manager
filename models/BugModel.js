@@ -42,6 +42,9 @@ const bugSchema = new Schema(
       required: true,
       ref: "Project",
     },
+    projTitle: {
+      type: String,
+    },
     logIds: [
       {
         type: Schema.Types.ObjectId,

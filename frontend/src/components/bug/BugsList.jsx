@@ -10,16 +10,7 @@ const BugsList = () => {
   const initialState = window.innerWidth < 500 ? mobileColumns : columns;
   const [columnLayout, setColumnLayout] = useState(initialState);
 
-  let tempList = bugList
-
   useEffect(() => {
-    for (let i = 0; i < tempList.length; i++) {
-      for (let k = 0; k < projList.length; k++) {
-        if (tempList[i].projId === projList[k].id) {
-          tempList[i].projId = projList[k].projTitle
-        }
-      }
-    }
   }, [bugList])
 
   const navigate = useNavigate();
@@ -38,7 +29,7 @@ const BugsList = () => {
 
   return (
     <DataGrid
-      rows={tempList}
+      rows={bugList}
       columns={columnLayout}
       pageSize={rowsPerPage}
       rowsPerPageOptions={[5, 10, 20, 50]}
