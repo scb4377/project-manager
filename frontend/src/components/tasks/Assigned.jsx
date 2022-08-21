@@ -1,5 +1,5 @@
 import { DataGrid } from "@mui/x-data-grid";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { AppContext } from "../../context/Context";
 import { columns, mobileColumns } from "./TasksLayout";
@@ -22,6 +22,10 @@ const Assigned = () => {
       setColumnLayout(columns);
     }
   };
+
+  useEffect(() => {
+
+  }, [assigned, columnLayout])
 
   return (
     <DataGrid

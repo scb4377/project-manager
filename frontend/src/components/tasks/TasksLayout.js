@@ -1,6 +1,6 @@
 export const columns = [
   {
-    field: "projId",
+    field: "projTitle",
     headerName: "Project",
     headerClassName: "gridHeader",
     flex: 2,

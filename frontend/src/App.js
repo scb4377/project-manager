@@ -53,15 +53,10 @@ function App() {
 
   const pullBugs = async () => {
     let bugs = await getBugs();
-    for (let i = 0; i < bugs.length; i++) {
-      bugs[i].createdAt = formatDate(bugs[i].createdAt);
-    }
     setBugList(bugs);
 
     let projects = await getProjects();
-    for (let i = 0; i < projects.length; i++) {
-      projects[i].createdAt = formatDate(projects[i].createdAt);
-    }
+    projects.forEach(proj => proj.createdAt = formatDate(proj.createdAt))
     setProjList(projects);
 
     let teams = await getTeams();
