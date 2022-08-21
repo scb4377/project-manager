@@ -27,6 +27,9 @@ const bugSchema = new Schema(
       required: true,
       ref: "Team"
     },
+    teamName: {
+      type: String,
+    },
     creator: {
       type: Schema.Types.ObjectId,
       required: true,

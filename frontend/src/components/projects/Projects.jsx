@@ -8,10 +8,8 @@ import { AppContext } from "../../context/Context";
 import { columns, mobileColumns } from "./ProjectListLayout";
 
 const Projects = () => {
-  const { mode, projList, teamList, formatDate } = useContext(AppContext);
+  const { mode, projList } = useContext(AppContext);
   const [data, setData] = useState({})
-
-  let tempList = projList
 
   const [rowsPerPage, setRowsPerPage] = useState(10);
   let initialState = window.innerWidth < 500 ? mobileColumns : columns;
@@ -24,16 +22,6 @@ const Projects = () => {
   };
 
   useEffect(() => {
-    // Changes team id to team name
-    // Need to work on date 
-    for (let i = 0; i < tempList.length; i++) {
-      
-      for (let k = 0; k < teamList.length; k++) {
-        if (tempList[i].team === teamList[k]._id) {
-          tempList[i].team = teamList[k].teamName
-        }
-      }
-    }
 
     let defining = 0
     let planning = 0
@@ -172,7 +160,7 @@ const Projects = () => {
         sx={{ "& .gridHeader": { color: "white", bgcolor: "accent.primary" } }}
       >
         <DataGrid
-          rows={tempList}
+          rows={projList}
           columns={columnLayout}
           pageSize={rowsPerPage}
           rowsPerPageOptions={[5, 10, 20, 50]}

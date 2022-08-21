@@ -29,6 +29,7 @@ const createProject = asyncHandler(async (req, res) => {
 
   // check if team exists
   const projectExists = await Project.findOne({ projTitle });
+  const foundTeam = await Team.findOne({ teamId })
 
   if (projectExists) {
     res.status(400);
@@ -41,6 +42,7 @@ const createProject = asyncHandler(async (req, res) => {
     projTitle,
     company,
     stage,
+    teamName: foundTeam.teamName
   });
 
   if (project) {

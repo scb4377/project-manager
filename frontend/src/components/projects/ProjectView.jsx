@@ -99,16 +99,9 @@ const ProjectView = () => {
     getState();
     setList()
 
-    findTeam = teamList.filter((team) => team.teamName === state.team);
-    let temp = findTeam[0];
-    let usersTemp = [];
 
-    for (let user in userList) {
-      if (temp.empIds.indexOf(userList[user]._id) !== -1) {
-        usersTemp.push(userList[user]);
-      }
-    }
-    setUsers(usersTemp);
+    let users = userList.filter(user => user.teamId === state.team)
+    setUsers(users);
 
     // calcPriorities(filteredList);
   }, [teamList, bugList, state]);

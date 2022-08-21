@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Bug = require("../models/BugModel");
+const Team = require("../models/TeamModel")
 const Project = require("../models/ProjectModel");
 
 const getBug = asyncHandler(async (req, res) => {
@@ -28,6 +29,9 @@ const createBug = asyncHandler(async (req, res) => {
   const { issue, priority, dueBy, creator, projId, teamId, description } =
     req.body;
 
+  const teamName = await Team.findOne({_id: teamId}).select("teamName")
+  const projName = await Project.findOne({_id: projId}).select("projTitle")
+
   const status = "Open";
 
   // create the user
@@ -40,6 +44,8 @@ const createBug = asyncHandler(async (req, res) => {
     teamId,
     description,
     status,
+    teamName: teamName.teamName,
+    projTitle: projName.projTitle
   });
 
   const project = await Project.updateOne(

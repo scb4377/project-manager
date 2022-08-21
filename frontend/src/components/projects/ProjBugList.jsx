@@ -3,16 +3,15 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router";
 import { Box } from "@mui/material";
 import { columns, mobileColumns } from "./ProjBugListLayout";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
-import { useEffect } from "react";
 
 const ProjBugList = ({ state, filteredList }) => {
-  const { bugList } = useContext(AppContext);
-
+  const { formatDate } = useContext(AppContext)
   const navigate = useNavigate();
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  
+
   let initialState = window.innerHeight < 500 ? mobileColumns : columns;
   const [columnLayout, setColumnLayout] = useState(initialState);
 
@@ -29,8 +28,10 @@ const ProjBugList = ({ state, filteredList }) => {
   };
 
   useEffect(() => {
-
-  }, [filteredList, columnLayout])
+    filteredList.forEach(bug => {
+      bug.createdAt = formatDate(bug.createdAt)
+    })
+  }, [filteredList, columnLayout]);
 
   return (
     <Box

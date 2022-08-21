@@ -7,7 +7,7 @@ export const columns = [
     },
     { field: "createdAt", headerName: "Start Date", flex: 1, headerClassName: 'gridHeader' },
     { field: "stage", headerName: "Stage", flex: 1, headerClassName: 'gridHeader' },
-    { field: "team", headerName: "Team", flex: 1, headerClassName: 'gridHeader' },
+    { field: "teamName", headerName: "Team", flex: 1, headerClassName: 'gridHeader' },
   ];
 
   export const mobileColumns = [

@@ -7,10 +7,17 @@ export const loginFunc = async (userData) => {
 
   if (response.data) {
     localStorage.setItem("token", JSON.stringify(response.data.token));
-    const { _id, firstName, lastName, username, email, phone, img, tasks, teamId } =
-      response.data;
-
-      console.log(response.data)
+    const {
+      _id,
+      firstName,
+      lastName,
+      username,
+      email,
+      phone,
+      img,
+      tasks,
+      teamId,
+    } = response.data;
 
     const user = {
       id: _id,
@@ -21,7 +28,7 @@ export const loginFunc = async (userData) => {
       phone,
       img,
       tasks,
-      teamId
+      teamId,
     };
     return user;
   } else {
@@ -34,8 +41,17 @@ export const demoFunc = async () => {
 
   if (response.data) {
     localStorage.setItem("token", JSON.stringify(response.data.token));
-    const { _id, firstName, lastName, username, email, phone, img, tasks, teamId } =
-      response.data;
+    const {
+      _id,
+      firstName,
+      lastName,
+      username,
+      email,
+      phone,
+      img,
+      tasks,
+      teamId,
+    } = response.data;
 
     const user = {
       id: _id,
@@ -46,7 +62,7 @@ export const demoFunc = async () => {
       phone,
       img,
       tasks,
-      teamId
+      teamId,
     };
     return user;
   } else {
