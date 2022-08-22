@@ -15,19 +15,11 @@ import { useNavigate } from "react-router-dom";
 import { Add as AddIcon } from "@mui/icons-material";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
-
-const actions = [
-  { icon: <Home sx={{ color: "accent.primary" }} />, name: "Home" },
-  { icon: <AccountTree sx={{ color: "accent.primary" }} />, name: "Projects" },
-  { icon: <Group sx={{ color: "accent.primary" }} />, name: "Personnel" },
-  { icon: <Settings sx={{ color: "accent.primary" }} />, name: "Settings" },
-  { icon: <AccountBox sx={{ color: "accent.primary" }} />, name: "Profile" },
-  { icon: <AddIcon />, name: "Add Bug" },
-  { icon: <Switch onChange />, name: "Night Mode" },
-];
+import MobileAdd from "./MobileAdd"
 
 const MobileSpeedDial = () => {
-  const { mode, setMode } = useContext(AppContext);
+  const { mode, setMode, open, setOpen } = useContext(AppContext);
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const actions = [
     { icon: <Home sx={{ color: "accent.primary" }} />, name: "Home" },
@@ -37,9 +29,9 @@ const MobileSpeedDial = () => {
     },
     { icon: <Group sx={{ color: "accent.primary" }} />, name: "Personnel" },
     { icon: <BugReport sx={{ color: "accent.primary" }} />, name: "Issues" },
-    { icon: <Settings sx={{ color: "accent.primary" }} />, name: "Settings" },
+    // { icon: <Settings sx={{ color: "accent.primary" }} />, name: "Settings" },
     { icon: <AccountBox sx={{ color: "accent.primary" }} />, name: "Profile" },
-    { icon: <AddIcon sx={{ color: "accent.primary" }} />, name: "Add Bug" },
+    { icon: <AddIcon sx={{ color: "accent.primary" }} onClick={() => setOpen(true)} />, name: "Add Bug" },
     {
       icon: (
         <Switch
@@ -50,13 +42,12 @@ const MobileSpeedDial = () => {
     },
   ];
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => setMenuOpen(true);
 
   const navigate = useNavigate();
 
   const handleClose = (link) => {
-    setOpen(false);
+    setMenuOpen(false);
     let destination =
       link.name === "Home"
         ? "/"
@@ -87,14 +78,14 @@ const MobileSpeedDial = () => {
         display: { xs: "block", sm: "none" },
       }}
     >
-      <Backdrop open={open} />
+      <Backdrop open={menuOpen} />
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
         sx={{ position: "absolute", bottom: 16, right: 16 }}
         icon={<SpeedDialIcon />}
         onClose={handleClose}
         onOpen={handleOpen}
-        open={open}
+        open={menuOpen}
       >
         {actions.map((action) => (
           <SpeedDialAction

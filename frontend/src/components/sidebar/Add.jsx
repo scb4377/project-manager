@@ -38,9 +38,10 @@ const UserBox = styled(Box)({
 });
 
 const Add = () => {
+  const { open, setOpen } = useContext(AppContext)
   const [value, setValue] = useState(null);
   const { projList, mode, user, pullBugs } = useContext(AppContext);
-  const [open, setOpen] = useState(false);
+  
   const initialState = {
     creator: user.id,
     issue: "",

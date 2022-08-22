@@ -33,6 +33,7 @@ function App() {
   const [teamList, setTeamList] = useState([]);
   const [taskList, setTaskList] = useState([]);
   const [assigned, setAssigned] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const formatDate = (date) => {
     let temp = new Date(date);
@@ -120,6 +121,8 @@ function App() {
           pullBugs,
           assigned,
           setAssigned,
+          open,
+          setOpen
         }}
       >
         {!auth ? (
