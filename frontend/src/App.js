@@ -43,26 +43,16 @@ function App() {
     return newDate;
   };
 
-  const getAssigned = async () => {
-    let temp = bugList.filter((bug) => bug.teamId === user.teamId)
-
-    setAssigned(temp);
-
-    setTaskList(user.tasks);
-  }
-
   const pullBugs = async () => {
     let bugs = await getBugs();
     setBugList(bugs);
 
     let projects = await getProjects();
-    projects.forEach(proj => proj.createdAt = formatDate(proj.createdAt))
+    projects.forEach((proj) => (proj.createdAt = formatDate(proj.createdAt)));
     setProjList(projects);
 
     let teams = await getTeams();
     setTeamList(teams);
-
-    let assign = await getAssigned()
 
     let users = await getUsers();
     setUserList(users);
@@ -71,6 +61,8 @@ function App() {
   useEffect(() => {
     if (auth) {
       pullBugs();
+      
+      
     }
 
     // if (user && bugList && bugList.length > 0) {
@@ -127,6 +119,7 @@ function App() {
           setUser,
           pullBugs,
           assigned,
+          setAssigned,
         }}
       >
         {!auth ? (

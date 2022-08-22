@@ -1,20 +1,13 @@
 import { Box, Typography } from "@mui/material";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 import Assigned from "./Assigned";
-import TaskLogs from "./TaskLogs"
+import TaskLogs from "./TaskLogs";
 
 const Tasks = () => {
-  const { mode, taskList, setTaskList, assigned } = useContext(AppContext);
-
-  console.log(assigned)
-
-  // useEffect(() => {
-  //     setTaskList(user.tasks)
-  //     console.log(user)
-  // }, [user])
-
-  
+  const { mode, user } = useContext(AppContext);
+  useEffect(() => {}, [user]);
 
   return (
     <Box display="flex" gap={2} flexDirection="column">
@@ -35,7 +28,7 @@ const Tasks = () => {
         >
           Tasks
         </Typography>
-        <TaskLogs tasks={taskList} setTasks={setTaskList} />
+        <TaskLogs />
       </Box>
       <Box
         borderRadius={2}
@@ -55,9 +48,8 @@ const Tasks = () => {
           Assigned
         </Typography>
         <Box height={500}>
-          <Assigned rows={assigned} />
+          <Assigned />
         </Box>
-        
       </Box>
     </Box>
   );

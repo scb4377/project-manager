@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import {
-  KeyboardArrowUp,
+  AssignmentInd,
   AccountTree,
   BugReport,
   Assignment,
@@ -12,42 +12,51 @@ import { AppContext } from "../../context/Context";
 import { useEffect } from "react";
 
 const Widget = ({ type }) => {
-  const { mode, projList, bugList, taskList } = useContext(AppContext)
-  const [projectPer, setProjectPer] = useState(0)
+  const {
+    mode,
+    projList,
+    bugList,
+    taskList,
+    setTaskList,
+    user,
+    assigned,
+    setAssigned,
+  } = useContext(AppContext);
+  const [projectPer, setProjectPer] = useState(0);
 
   let data;
   let pastMonthCount = 0;
-  let currentMonth = 0
+  let currentMonth = 0;
 
   let myFunc = () => {
-    let todaysDate = new Date()
-    let month = todaysDate.getMonth()
+    let todaysDate = new Date();
+    let month = todaysDate.getMonth();
 
     for (let i = 0; i < projList.length; i++) {
-      let tempDate = new Date(projList[i].createdAt)
-      let tempMonth = tempDate.getMonth()
+      let tempDate = new Date(projList[i].createdAt);
+      let tempMonth = tempDate.getMonth();
 
       if (tempMonth === month) {
-        currentMonth += 1
-      } else if ((tempMonth - 1) === (month - 1)) {
-        pastMonthCount += 1
+        currentMonth += 1;
+      } else if (tempMonth - 1 === month - 1) {
+        pastMonthCount += 1;
       }
     }
-    
-    let total = pastMonthCount + currentMonth
 
-    let percentage = (currentMonth / total) * 100
+    let total = pastMonthCount + currentMonth;
 
-    setProjectPer(percentage)
+    let percentage = (currentMonth / total) * 100;
 
-  }
+    setProjectPer(percentage);
+  };
 
   useEffect(() => {
     if (projList) {
-      myFunc()
+      myFunc();
     }
-    
-  }, [projList])
+    setAssigned(bugList.filter((bug) => bug.teamId === user.teamId));
+    setTaskList(user.tasks);
+  }, [projList]);
 
   switch (type) {
     case "projects":
@@ -71,6 +80,13 @@ const Widget = ({ type }) => {
         amt: taskList.length,
       };
       break;
+    case "assigned":
+      data = {
+        title: "Assigned",
+        link: "See all Assigned",
+        amt: assigned.length,
+      };
+      break;
     default:
       break;
   }
@@ -84,6 +100,8 @@ const Widget = ({ type }) => {
       : type === "issues"
       ? navigate("/bugs")
       : type === "tasks"
+      ? navigate("/tasks")
+      : type === "assigned"
       ? navigate("/tasks")
       : navigate("/");
   };
@@ -174,8 +192,19 @@ const Widget = ({ type }) => {
               color: "white",
             }}
           />
-        ) : (
+        ) : type === "tasks" ? (
           <Assignment
+            sx={{
+              fontSize: "30px",
+              padding: "5px",
+              backgroundColor: "accent.primary",
+              borderRadius: "5px",
+              alignSelf: "flex-end",
+              color: "white",
+            }}
+          />
+        ) : (
+          <AssignmentInd
             sx={{
               fontSize: "30px",
               padding: "5px",

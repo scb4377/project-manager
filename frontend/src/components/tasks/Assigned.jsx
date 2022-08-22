@@ -24,8 +24,7 @@ const Assigned = () => {
   };
 
   useEffect(() => {
-
-  }, [assigned, columnLayout])
+  }, [columnLayout])
 
   return (
     <DataGrid

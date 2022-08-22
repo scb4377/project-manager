@@ -81,15 +81,15 @@ const Navbar = () => {
           Dev
         </Typography>
         <Icons>
-          <Badge badgeContent={4} color="warning">
+          {/* <Badge badgeContent={4} color="warning">
             <Notifications color="primary" />
-          </Badge>
+          </Badge> */}
           <Avatar
             onClick={handleClick}
             sx={{ width: 30, height: 30 }}
             src={user.img}
           />
-          <Typography variant="span">Jan</Typography>
+          <Typography variant="span" sx={{color: mode === "dark" ? "white" : "black"}}>{user.firstName + " " + user.lastName}</Typography>
         </Icons>
         <UserBox>
           <Avatar
@@ -97,6 +97,7 @@ const Navbar = () => {
             src={user.img}
             onClick={handleClick}
           />
+          <Typography variant="span" sx={{color: mode === "dark" ? "white" : "black"}}>{user.firstName}</Typography>
         </UserBox>
       </StyledToolbar>
       <Menu
@@ -104,11 +105,10 @@ const Navbar = () => {
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "left" }}
       >
         <MenuItem onClick={handleMenuClick}>Profile</MenuItem>
-        <MenuItem>My Account</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </AppBar>

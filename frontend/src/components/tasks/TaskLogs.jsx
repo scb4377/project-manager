@@ -73,8 +73,8 @@ function renderItem({ item, handleRemoveTask, formatDate }) {
   );
 }
 
-const TaskLogs = ({ tasks, setTasks }) => {
-  const { mode, user, setUser, formatDate } = useContext(AppContext);
+const TaskLogs = () => {
+  const { mode, user, setUser, formatDate, taskList, setTaskList } = useContext(AppContext);
   const [taskModalOpen, setTaskModalOpen] = useState(false);
 
   // const getLogs = async () => {
@@ -138,10 +138,10 @@ const TaskLogs = ({ tasks, setTasks }) => {
     ) {
       inputValidation();
       // addLog()
-      if (!tasks) {
-        setTasks([nextHiddenItem]);
+      if (!taskList) {
+        setTaskList([nextHiddenItem]);
       } else {
-        setTasks((prev) => [...prev, nextHiddenItem]);
+        setTaskList((prev) => [...prev, nextHiddenItem]);
       }
       AddTask(user.id, taskInput);
       pullUser()
@@ -162,7 +162,7 @@ const TaskLogs = ({ tasks, setTasks }) => {
   }
 
   const handleRemoveTask = (item) => {
-    setTasks((prev) => [...prev.filter((i) => i.id !== item.id)]);
+    setTaskList((prev) => [...prev.filter((i) => i.id !== item.id)]);
     deleteTask(item.id)
     pullUser()
   };
@@ -191,9 +191,9 @@ const TaskLogs = ({ tasks, setTasks }) => {
       <Box>
         <List>
           <TransitionGroup>
-            {tasks &&
-              tasks.length > 0 &&
-              tasks.map((item) => (
+            {taskList &&
+              taskList.length > 0 &&
+              taskList.map((item) => (
                 <Collapse key={item.id} sx={{ borderBottom: "0.5px solid gray" }}>
                   {renderItem({ item, handleRemoveTask, formatDate })}
                 </Collapse>

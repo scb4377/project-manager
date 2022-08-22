@@ -52,6 +52,7 @@ const Home = () => {
         <Widget type="projects" />
         <Widget type="issues" />
         <Widget type="tasks" />
+        <Widget type="assigned" />
       </Box>
       <Box
         gap={3}
