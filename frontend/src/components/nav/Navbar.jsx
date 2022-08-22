@@ -15,10 +15,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { AppContext } from "../../context/Context";
 import { logout } from "../profile/ProfileService";
+import lightLogo from "../../images/logoLight.png";
+import darkLogo from "../../images/logoDark.png";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
+  padding: "0 10px",
 });
 
 const Icons = styled(Box)(({ theme }) => ({
@@ -65,21 +68,29 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{ borderRadius: "0px", boxShadow: "10px" }}>
+    <AppBar
+      position="sticky"
+      sx={{ borderRadius: "0px", boxShadow: "10px", paddingLeft: "0" }}
+    >
       <StyledToolbar
+        disableGutters
         sx={{
           backgroundColor:
             mode === "dark" ? "background.dark" : "background.default",
         }}
       >
-        <Typography
-          p={1}
-          m={0}
-          variant="h6"
-          sx={{ backgroundColor: "accent.primary", borderRadius: "5px" }}
-        >
-          Dev
-        </Typography>
+        {mode === "dark" ? (
+          <img
+            src={darkLogo}
+            style={{ maxHeight: "40px", paddingLeft: "5px" }}
+          />
+        ) : (
+          <img
+            src={lightLogo}
+            style={{ maxHeight: "40px", paddingLeft: "5px" }}
+          />
+        )}
+
         <Icons>
           {/* <Badge badgeContent={4} color="warning">
             <Notifications color="primary" />
@@ -89,7 +100,12 @@ const Navbar = () => {
             sx={{ width: 30, height: 30 }}
             src={user.img}
           />
-          <Typography variant="span" sx={{color: mode === "dark" ? "white" : "black"}}>{user.firstName + " " + user.lastName}</Typography>
+          <Typography
+            variant="span"
+            sx={{ color: mode === "dark" ? "white" : "black" }}
+          >
+            {user.firstName + " " + user.lastName}
+          </Typography>
         </Icons>
         <UserBox>
           <Avatar
@@ -97,7 +113,12 @@ const Navbar = () => {
             src={user.img}
             onClick={handleClick}
           />
-          <Typography variant="span" sx={{color: mode === "dark" ? "white" : "black"}}>{user.firstName}</Typography>
+          <Typography
+            variant="span"
+            sx={{ color: mode === "dark" ? "white" : "black" }}
+          >
+            {user.firstName}
+          </Typography>
         </UserBox>
       </StyledToolbar>
       <Menu
