@@ -22,6 +22,8 @@ import Tasks from "./components/tasks/Tasks";
 import Login from "./components/login/Login";
 import { AppContext } from "./context/Context";
 import { getBugs, getProjects, getTeams, getUsers } from "./context/BugContext";
+import {ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -62,7 +64,6 @@ function App() {
   useEffect(() => {
     if (auth) {
       pullBugs();
-      
       
     }
 
@@ -125,12 +126,14 @@ function App() {
           setOpen
         }}
       >
+        <ToastContainer />
         {!auth ? (
           <Login />
         ) : (
           <Paper
             sx={{ height: { xs: "100%", sm: "100%" }, overflowY: "scroll" }}
           >
+            
             <Box sx={{ maxHeight: "100vh" }}>
               <Router>
                 <Navbar />
@@ -186,6 +189,7 @@ function App() {
                         <Route path="/tasks" element={<Tasks />} />
                       </Routes>
                       <div style={{color: "transparent"}}>hello</div>
+                      
                     </Box>
                   </Box>
                 </Box>

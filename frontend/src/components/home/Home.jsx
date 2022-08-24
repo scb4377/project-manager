@@ -5,12 +5,16 @@ import HomeList from "./HomeList";
 import Featured from "./Featured";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/Context";
+import { toast } from 'react-toastify'
 
 const Home = () => {
   const { mode, bugList } = useContext(AppContext);
   const [data, setData] = useState([]);
+  
 
   useEffect(() => {
+    toast.success("Welome", {position: toast.POSITION.BOTTOM_RIGHT})
+
     let critical = 0;
     let major = 0;
     let minor = 0;

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { loginFunc, demoFunc } from "./LoginService";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
+import { toast } from 'react-toastify'
 
 const Login = () => {
   const { setAuth, setUser } = useContext(AppContext);
@@ -47,7 +48,7 @@ const Login = () => {
           setUser(response);
         }
       } catch (err) {
-        console.log("Login Error");
+        toast.error("Incorrect Username/Password Combination", {position: toast.POSITION.BOTTOM_RIGHT})
       }
     } else {
       inputValidation()
