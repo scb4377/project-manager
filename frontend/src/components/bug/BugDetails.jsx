@@ -12,12 +12,11 @@ const StyledDiv = styled("div")({
 
 const BugDetails = ({ bug }) => {
   const { formatDate, userList } = useContext(AppContext);
-  const [creator, setCreator] = useState(bug.creator)
+  const [creator, setCreator] = useState(bug.creator);
 
   useEffect(() => {
-    setCreator(userList.filter(user => user._id === bug.creator)[0])
-    console.log(creator)
-  }, [bug])
+    setCreator(userList.filter((user) => user._id === bug.creator)[0]);
+  }, [bug]);
 
   return (
     <div
@@ -75,9 +74,7 @@ const BugDetails = ({ bug }) => {
             >
               Due By:
             </label>
-            <span style={{ minWidth: "100px" }}>
-              {formatDate(bug.dueBy)}
-            </span>
+            <span style={{ minWidth: "100px" }}>{formatDate(bug.dueBy)}</span>
           </StyledDiv>
           <StyledDiv sx={{ flex: 1, gap: "50px" }}>
             <label
@@ -89,7 +86,9 @@ const BugDetails = ({ bug }) => {
             >
               Created:
             </label>
-            <span style={{ minWidth: "100px" }}>{formatDate(bug.createdAt)}</span>
+            <span style={{ minWidth: "100px" }}>
+              {formatDate(bug.createdAt)}
+            </span>
           </StyledDiv>
           <StyledDiv
             sx={{
@@ -132,9 +131,7 @@ const BugDetails = ({ bug }) => {
         >
           Information
         </h4>
-        <p>
-          {bug.description}
-        </p>
+        <p>{bug.description}</p>
       </div>
     </div>
   );

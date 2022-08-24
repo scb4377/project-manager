@@ -42,7 +42,7 @@ const ProjCommentList = ({ state }) => {
         onClick={handleAddCommentOpen}
         sx={{
           position: "absolute",
-          top: "15px",
+          top: "0",
           right: "30px",
           color: "white",
           bgcolor: "accent.primary",

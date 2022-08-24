@@ -267,7 +267,7 @@ const ProjectView = () => {
           borderRadius="5px"
           overflowY="scroll"
           maxHeight="500px"
-          bgcolor={mode === "dark" ? "background.dark" : "background.default"}
+          mt={2}
           sx={{ width: "100%" }}
         >
           <ProjCommentList state={project} />

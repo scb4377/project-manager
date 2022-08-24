@@ -29,6 +29,22 @@ export const BugCommentModal = ({
 
   const [comment, setComment] = useState(initialState);
 
+  const [subjectError, setSubjectError] = useState(false);
+  const [descError, setDescError] = useState(false);
+
+  const inputValidation = () => {
+    if (comment.subject === "") {
+      setSubjectError(true);
+    } else {
+      setSubjectError(false);
+    }
+    if (comment.description === "") {
+      setDescError(true);
+    } else {
+      setDescError(false);
+    }
+  };
+
   const handleChange = (e) => {
     setComment({
       ...comment,
@@ -38,6 +54,7 @@ export const BugCommentModal = ({
 
   const handleClick = async () => {
     if (comment.subject === "" || comment.description === "") {
+      inputValidation()
     } else {
       await AddBugComment(comment, bug._id);
       await commentModalClose();
@@ -97,6 +114,7 @@ export const BugCommentModal = ({
             variant="filled"
             label="Subject"
             name="subject"
+            error={subjectError}
             value={comment.subject}
             fullWidth
             onChange={handleChange}
@@ -108,6 +126,7 @@ export const BugCommentModal = ({
             variant="filled"
             label="Write something..."
             name="description"
+            error={descError}
             value={comment.description}
             fullWidth
             onChange={handleChange}

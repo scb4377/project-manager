@@ -15,9 +15,9 @@ import { useState } from "react";
 import { TransitionGroup } from "react-transition-group";
 import LogModal from "./LogModal";
 import { useContext } from "react";
-import { AppContext } from "../../context/Context"
+import { AppContext } from "../../context/Context";
 import { useEffect } from "react";
-import { GetLogs, AddLog, DeleteLog } from "./LogFuncs"
+import { GetLogs, AddLog, DeleteLog } from "./LogFuncs";
 
 const FRUITS = [
   "🍏 Apple",
@@ -72,24 +72,21 @@ function renderItem({ item, handleRemoveLog, formatDate }) {
 }
 
 const MyLogs = ({ bug }) => {
-  const { mode, user, formatDate } = useContext(AppContext)
+  const { mode, user, formatDate } = useContext(AppContext);
   const [logs, setLogs] = useState("");
   const [logModalOpen, setLogModalOpen] = useState(false);
 
-  
-
   const getLogs = async () => {
-    const resp = await GetLogs(bug._id, user.id)
+    const resp = await GetLogs(bug._id, user.id);
 
-    setLogs(resp)
-  }
+    setLogs(resp);
+  };
 
   useEffect(() => {
     if (bug) {
-      getLogs()
+      getLogs();
     }
-    
-  }, [bug])
+  }, [bug]);
 
   const logInitialState = {
     id: Math.floor(Math.random() * 1000),
@@ -117,9 +114,9 @@ const MyLogs = ({ bug }) => {
   };
 
   const addLog = async () => {
-    const resp = await AddLog(bug._id, logFormInput)
-      getLogs()
-  }
+    const resp = await AddLog(bug._id, logFormInput);
+    getLogs();
+  };
 
   const handleAddLog = () => {
     const nextHiddenItem = logFormInput;
@@ -129,7 +126,7 @@ const MyLogs = ({ bug }) => {
       logFormInput.description !== ""
     ) {
       inputValidation();
-      addLog()
+      addLog();
       setLogs((prev) => [...prev, nextHiddenItem]);
       setLogFormInput(logInitialState);
       setLogModalOpen(false);
@@ -141,7 +138,7 @@ const MyLogs = ({ bug }) => {
 
   const handleRemoveLog = (item) => {
     setLogs((prev) => [...prev.filter((i) => i._id !== item._id)]);
-    DeleteLog(item._id)
+    DeleteLog(item._id);
   };
 
   const addLogButton = (
@@ -199,7 +196,10 @@ const MyLogs = ({ bug }) => {
           <TransitionGroup>
             {logs &&
               logs.map((item) => (
-                <Collapse key={item._id} sx={{borderBottom: '0.5px solid gray'}}>
+                <Collapse
+                  key={item._id}
+                  sx={{ borderBottom: "0.5px solid gray" }}
+                >
                   {renderItem({ item, handleRemoveLog, formatDate })}
                 </Collapse>
               ))}

@@ -23,6 +23,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { createBug } from "./AddBug";
+import { useEffect } from "react";
 
 const StyledModal = styled(Modal)({
   display: "flex",
@@ -53,6 +54,41 @@ const Add = () => {
   };
   const [formInput, setFormInput] = useState(initialState);
 
+  const [issueError, setIssueError] = useState(false);
+  const [descError, setDescError] = useState(false);
+  const [dueByError, setDueByError] = useState(false);
+  const [projError, setProjError] = useState(false);
+
+  useEffect(() => {
+    setIssueError(false)
+    setDescError(false)
+    setDueByError(false)
+    setProjError(false)
+  }, [open])
+
+  const inputValidation = () => {
+    if (formInput.issue === "") {
+      setIssueError(true);
+    } else {
+      setIssueError(false);
+    }
+    if (formInput.description === "") {
+      setDescError(true);
+    } else {
+      setDescError(false);
+    }
+    if (formInput.dueBy === null) {
+      setDueByError(true)
+    } else {
+      setDueByError(false)
+    }
+    if (formInput.projId === "") {
+      setProjError(true)
+    } else {
+      setProjError(false)
+    }
+  };
+
   const handleChange = (e) => {
     setFormInput({
       ...formInput,
@@ -75,12 +111,12 @@ const Add = () => {
       creator === "" ||
       issue === "" ||
       priority === "" ||
-      dueBy === "" ||
+      dueBy === null ||
       description === "" ||
       projId === "" ||
       teamId === ""
     ) {
-      console.log("error");
+      inputValidation()
     } else {
       myAsyncFunc();
     }
@@ -117,7 +153,8 @@ const Add = () => {
           color={"text.primary"}
           p={3}
           gap={2}
-          borderRadius={5}
+          borderRadius={1}
+          boxShadow={3}
           display="flex"
           flexDirection="column"
         >
@@ -142,6 +179,7 @@ const Add = () => {
             label="Issue"
             variant="filled"
             name="issue"
+            error={issueError}
             onChange={handleChange}
           />
           <TextField
@@ -152,10 +190,12 @@ const Add = () => {
             label="Description"
             variant="filled"
             name="description"
+            error={descError}
             onChange={handleChange}
           />
           <FormControl
             fullWidth
+            required
             sx={{
               bgcolor: mode === "dark" ? "background.dark" : "background.light",
             }}
@@ -164,11 +204,13 @@ const Add = () => {
               id="demo-simple-select-label"
               variant="standard"
               size="small"
+              sx={{padding: '10px'}}
             >
               Priority
             </InputLabel>
             <Select
               required
+              label="priority"
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={formInput.priority}
@@ -184,6 +226,8 @@ const Add = () => {
           </FormControl>
           <FormControl
             fullWidth
+            error={projError}
+            required
             sx={{
               bgcolor:
                 mode === "dark" ? "background.dark" : "background.default",
@@ -193,6 +237,7 @@ const Add = () => {
               id="demo-simple-select-label"
               variant="standard"
               size="small"
+              sx={{padding: '10px'}}
             >
               Project
             </InputLabel>
@@ -204,6 +249,7 @@ const Add = () => {
               value={formInput.projId}
               name="projId"
               onChange={handleChange}
+              
             >
               {projList.map((proj) => (
                 <MenuItem key={proj.id} value={proj.id}>
@@ -211,35 +257,6 @@ const Add = () => {
                 </MenuItem>
               ))}
             </Select>
-          </FormControl>
-          <FormControl
-            fullWidth
-            sx={{
-              bgcolor:
-                mode === "dark" ? "background.dark" : "background.default",
-            }}
-          >
-            {/* <InputLabel
-              id="demo-simple-select-label"
-              variant="standard"
-              size="small"
-            >
-              Team
-            </InputLabel>
-            <Select
-              required
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={formInput.teamId}
-              name="teamId"
-              onChange={handleChange}
-            >
-              {teamList.map((team) => (
-                <MenuItem key={team._id} value={team._id}>
-                  {team.teamName}
-                </MenuItem>
-              ))}
-            </Select> */}
           </FormControl>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
@@ -253,7 +270,7 @@ const Add = () => {
                   dueBy: newValue,
                 });
               }}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => <TextField required {...params} error={dueByError} />}
             />
           </LocalizationProvider>
           {/* <Stack direction="row" gap={1} mt={2} mb={3}>

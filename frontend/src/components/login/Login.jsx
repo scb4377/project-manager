@@ -22,15 +22,35 @@ const Login = () => {
     });
   };
 
+  const [nameError, setNameError] = useState(false);
+  const [passError, setPassError] = useState(false);
+
+  const inputValidation = () => {
+    if (formInput.username === "") {
+      setNameError(true);
+    } else {
+      setNameError(false);
+    }
+    if (formInput.password === "") {
+      setPassError(true);
+    } else {
+      setPassError(false);
+    }
+  };
+
   const handleLogin = async (e) => {
-    try {
-      let response = await loginFunc(formInput);
-      if (response) {
-        setAuth(true);
-        setUser(response);
+    if (formInput.username !== "" || formInput.password !== "") {
+      try {
+        let response = await loginFunc(formInput);
+        if (response) {
+          setAuth(true);
+          setUser(response);
+        }
+      } catch (err) {
+        console.log("Login Error");
       }
-    } catch (err) {
-      console.log("Login Error");
+    } else {
+      inputValidation()
     }
   };
 
@@ -94,6 +114,7 @@ const Login = () => {
             value={formInput.username}
             label="Username"
             onChange={handleChange}
+            error={nameError}
           />
           <TextField
             variant="filled"
@@ -102,6 +123,7 @@ const Login = () => {
             value={formInput.password}
             label="Password"
             onChange={handleChange}
+            error={passError}
           />
           <div style={{ display: "flex", justifyContent: "space-evenly" }}>
             <Button

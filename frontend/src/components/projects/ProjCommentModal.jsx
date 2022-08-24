@@ -25,6 +25,22 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose, state }) => {
   
   const [comment, setComment] = useState(initialState);
 
+  const [subjectError, setSubjectError] = useState(false);
+  const [descError, setDescError] = useState(false);
+
+  const inputValidation = () => {
+    if (comment.subject === "") {
+      setSubjectError(true);
+    } else {
+      setSubjectError(false);
+    }
+    if (comment.description === "") {
+      setDescError(true);
+    } else {
+      setDescError(false);
+    }
+  };
+
   const handleChange = (e) => {
     setComment({
       ...comment,
@@ -34,7 +50,7 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose, state }) => {
 
   const handleClick = async () => {
     if (comment.subject === "" || comment.description === "") {
-
+      inputValidation()
     } else {
       await AddComment(comment, state._id)
       await commentModalClose()
@@ -94,6 +110,7 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose, state }) => {
             variant="filled"
             label="Subject"
             name="subject"
+            error={subjectError}
             value={comment.subject}
             fullWidth
             onChange={handleChange}
@@ -105,6 +122,7 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose, state }) => {
             variant="filled"
             label="Write something..."
             name="description"
+            error={descError}
             value={comment.description}
             fullWidth
             onChange={handleChange}
