@@ -42,12 +42,12 @@ const ProjectView = () => {
   const setList = async () => {
     let temp = [];
     for (let i = 0; i < state.bugs.length; i++) {
-      temp.push(bugList.find(obj => obj.id === state.bugs[i]))
+      temp.push(bugList.find((obj) => obj.id === state.bugs[i]));
     }
-    setFilteredList(temp)
-  }
+    setFilteredList(temp);
+  };
 
-  const check = filteredList === null
+  const check = filteredList === null;
 
   let findTeam = teamList;
 
@@ -97,33 +97,24 @@ const ProjectView = () => {
 
   useEffect(() => {
     getState();
-    setList()
+    setList();
 
-
-    let users = userList.filter(user => user.teamId === state.team)
+    let users = userList.filter((user) => user.teamId === state.team);
     setUsers(users);
 
     // calcPriorities(filteredList);
   }, [teamList, bugList, state]);
 
   return (
-    <Box
-      display="flex"
-      justifyContent="space-evenly"
-      flexDirection="column"
-      width="100%"
-      margin="auto"
-      gap={3}
-      height="100%"
-    >
+    <>
       {/* <StyledDiv>
         <ProjWidget mode={mode} type="barchart" />
         <ProjWidget mode={mode} type="radialbar" />
       </StyledDiv> */}
       <Box
-        p={2}
-        boxShadow={5}
-        borderRadius="5px"
+      p={2}
+      boxShadow={3}
+        borderRadius={1}
         height="max-content"
         bgcolor={mode === "dark" ? "background.dark" : "background.default"}
         sx={{
@@ -131,6 +122,7 @@ const ProjectView = () => {
           position: "relative",
           display: "flex",
           flexDirection: "column",
+          gap: "20px",
         }}
       >
         <Box
@@ -218,8 +210,6 @@ const ProjectView = () => {
         </Box> */}
 
         <Box
-          mb={2}
-          p={0}
           display="flex"
           justifyContent="space-between"
           flexDirection="row"
@@ -229,7 +219,9 @@ const ProjectView = () => {
           sx={{ width: { xs: "100%", sm: "max-content" } }}
         >
           <span style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontWeight: "bold" }}>{project !== null && project.company}</span>
+            <span style={{ fontWeight: "bold" }}>
+              {project !== null && project.company}
+            </span>
             <label>Company</label>
           </span>
           <span style={{ display: "flex", flexDirection: "column" }}>
@@ -245,7 +237,7 @@ const ProjectView = () => {
             <label>Issues</label>
           </span>
         </Box>
-        <Box mb={2} alignItems="left" sx={{ textAlign: "left" }}>
+        <Box alignItems="left" sx={{ textAlign: "left" }}>
           <Typography mb={2}>Assignees</Typography>
           <Stack
             direction="row"
@@ -256,20 +248,32 @@ const ProjectView = () => {
             height="max-content"
             sx={{ marginBottom: "40px" }}
           >
-            {userList.length > 0 && users.map((user) => (
-              <Avatar
-                key={user._id}
-                alt={user.firstName + user.lastName}
-                src={user.img}
-              />
-            ))}
+            {userList.length > 0 &&
+              users.map((user) => (
+                <Avatar
+                  key={user._id}
+                  alt={user.firstName + user.lastName}
+                  src={user.img}
+                />
+              ))}
           </Stack>
+          {project !== null && <ProjBugList filteredList={filteredList} />}
         </Box>
-        {project !== null && <ProjBugList filteredList={filteredList} />}
-        
+
+        <Box
+          display="flex"
+          flexDirection="column"
+          position="relative"
+          borderRadius="5px"
+          overflowY="scroll"
+          maxHeight="500px"
+          bgcolor={mode === "dark" ? "background.dark" : "background.default"}
+          sx={{ width: "100%" }}
+        >
+          <ProjCommentList state={project} />
+        </Box>
       </Box>
-      <ProjCommentList state={project} />
-    </Box>
+    </>
   );
 };
 

@@ -67,13 +67,11 @@ const Projects = () => {
   return (
     <Box
       p={2}
-      m={2}
-      mr={4}
       bgcolor={mode === "dark" ? "background.dark" : "background.default"}
-      borderRadius="5px"
+      borderRadius={1}
       gap={3}
-      boxShadow={5}
-      sx={{ margin: { xs: 0 }, height: "100%" }}
+      boxShadow={3}
+      sx={{ margin: { xs: 0 }, height: "100%", minHeight: "100%", maxHeight: 'max-content' }}
     >
       <Typography
         mb={2}
@@ -85,7 +83,6 @@ const Projects = () => {
         Projects
       </Typography>
       <Box
-        mb={2}
         p={0}
         display="flex"
         justifyContent="space-evenly"
@@ -156,8 +153,7 @@ const Projects = () => {
         </span>
       </Box>
       <Box
-        style={{ height: 370, width: "100%" }}
-        sx={{ "& .gridHeader": { color: "white", bgcolor: "accent.primary" } }}
+        sx={{ height: {xs: "70%", sm: "80%"}, width: "100%", "& .gridHeader": { color: "white", bgcolor: "accent.primary" } }}
       >
         <DataGrid
           rows={projList}

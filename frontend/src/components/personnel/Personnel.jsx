@@ -11,8 +11,8 @@ const Personnel = () => {
       p={2}
       bgcolor={mode === "dark" ? "background.dark" : "background.default"}
       gap={3}
-      boxShadow={5}
-      borderRadius={2}
+      boxShadow={3}
+      borderRadius={1}
     >
       <Typography
         mb={2}

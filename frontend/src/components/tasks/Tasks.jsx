@@ -12,8 +12,8 @@ const Tasks = () => {
   return (
     <Box display="flex" gap={2} flexDirection="column">
       <Box
-        borderRadius={2}
-        boxShadow={5}
+        borderRadius={1}
+        boxShadow={3}
         p={2}
         sx={{
           bgcolor: mode === "dark" ? "background.dark" : "background.default",
@@ -31,8 +31,8 @@ const Tasks = () => {
         <TaskLogs />
       </Box>
       <Box
-        borderRadius={2}
-        boxShadow={5}
+        borderRadius={1}
+        boxShadow={3}
         p={2}
         sx={{
           bgcolor: mode === "dark" ? "background.dark" : "background.default",

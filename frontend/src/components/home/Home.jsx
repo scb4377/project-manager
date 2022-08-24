@@ -69,9 +69,9 @@ const Home = () => {
           bgcolor={mode === "dark" ? "background.dark" : "background.default"}
           flex={2}
           p={2}
+          boxShadow={3}
+          borderRadius={1}
           sx={{
-            borderRadius: "5px",
-            boxShadow: 5,
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
@@ -94,12 +94,8 @@ const Home = () => {
           bgcolor={mode === "dark" ? "background.dark" : "background.default"}
           flex={4}
           p={2}
-          sx={{
-            borderRadius: "5px",
-            boxShadow: 5,
-            backdropFilter: "blur(20px) saturate(100%)",
-            marginRight: { xs: 0 },
-          }}
+          boxShadow={3}
+          borderRadius={1}
         >
           <Typography
             mb={2}
@@ -117,10 +113,8 @@ const Home = () => {
         bgcolor={mode === "dark" ? "background.dark" : "background.default"}
         flex={6}
         p={2}
-        sx={{
-          borderRadius: "5px",
-          boxShadow: 5,
-        }}
+        boxShadow={3}
+        borderRadius={1}
       >
         <Typography
           mb={2}

@@ -26,14 +26,7 @@ const ProjCommentList = ({ state }) => {
   useEffect(() => {}, [state]);
 
   return (
-    <Box
-      p={2}
-      position="relative"
-      boxShadow={5}
-      borderRadius="5px"
-      bgcolor={mode === "dark" ? "background.dark" : "background.default"}
-      sx={{ width: "100%" }}
-    >
+    <>
       <Typography
         mb={2}
         variant="h6"
@@ -62,7 +55,7 @@ const ProjCommentList = ({ state }) => {
       <List
         sx={{
           width: "100%",
-          height: "100%",
+          height: "85%",
           borderRadius: "5px",
           maxHeight: "450px",
           bgcolor: "background.dark",
@@ -105,7 +98,8 @@ const ProjCommentList = ({ state }) => {
           state={state}
         />
       )}
-    </Box>
+    </>
+    
   );
 };
 

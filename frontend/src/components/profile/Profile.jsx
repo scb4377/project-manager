@@ -86,9 +86,10 @@ const Profile = () => {
     <Box
       p={2}
       bgcolor={mode === "dark" ? "background.dark" : "background.default"}
-      borderRadius="5px"
+      borderRadius={1}
       gap={3}
-      boxShadow={5}
+      boxShadow={3}
+      height="100%"
     >
       <Typography
         variant="h5"

@@ -23,7 +23,7 @@ const BugView = () => {
   }, [])
 
   return (
-    <div>
+    <Box display="flex" flexDirection="column" gap={2}>
       {/* <Box
         flex={6}
         p={2}
@@ -42,19 +42,18 @@ const BugView = () => {
       <Box
         flex={6}
         p={2}
-        mb={2}
-        boxShadow={5}
-        borderRadius="5px"
+        boxShadow={3}
+        borderRadius={1}
         bgcolor={mode === "dark" ? "background.dark" : "background.default"}
         sx={{ display: "flex", justifyContent: "space-evenly" }}
       >
         <BugDetails bug={bug} />
       </Box>
       <MyLogs bug={bug}/>
-      <Box mt={2}>
+      <Box>
         <BugComments bug={bug} />
       </Box>
-    </div>
+    </Box>
   );
 };
 

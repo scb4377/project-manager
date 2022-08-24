@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 
 const ProjBugList = ({ state, filteredList }) => {
-  const { formatDate } = useContext(AppContext)
+  const { formatDate } = useContext(AppContext);
   const navigate = useNavigate();
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -28,9 +28,9 @@ const ProjBugList = ({ state, filteredList }) => {
   };
 
   useEffect(() => {
-    filteredList.forEach(bug => {
-      bug.createdAt = formatDate(bug.createdAt)
-    })
+    filteredList.forEach((bug) => {
+      bug.createdAt = formatDate(bug.createdAt);
+    });
   }, [filteredList, columnLayout]);
 
   return (

@@ -33,8 +33,8 @@ const Sidebar = () => {
   });
 
   return (
-    <Paper position="fixed" gap="20px" sx={{ height: "calc(100vh - 65px)", display: {xs: 'none', sm: 'block'} }}>
-      <List sx={{ backgroundColor: "background.dark", height: "100%" }}>
+    <Paper position="fixed" gap="20px" pb={0} sx={{ paddingBottom: 0, height: "calc(100vh - 65px)", display: {xs: 'none', sm: 'block'} }}>
+      <List pb={0} sx={{ backgroundColor: "background.dark", height: "100%" }}>
         <StyledNavLink to="/">
           <ListItem disablePadding>
             <ListItemButton>

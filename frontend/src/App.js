@@ -149,11 +149,12 @@ function App() {
                   </Box>
                   <MobileSpeedDial />
                   <Box
+                  position="relative"
                     sx={{
                       overflowY: "scroll",
                       width: "100%",
-                      minHeight: { xs: "100%", sm: "max-content" },
-                      maxHeight: { sm: "calc(100vh - 65px)" },
+                      minHeight: "100%",
+                      maxHeight: { sm: "calc(100vh - 64px)" },
                       bgcolor:
                         mode === "dark"
                           ? "background.primary"
@@ -164,10 +165,13 @@ function App() {
                       flex={11}
                       maxWidth="1100px"
                       p={2}
+                      pb={10}
+                      mb={2}
+                      postiton="relative"
                       sx={{
                         width: "100%",
                         margin: "auto",
-                        height: { xs: "100%", sm: "max-content" },
+                        height: { xs: "100%", sm: "100%" },
                       }}
                     >
                       <Routes>
@@ -181,6 +185,7 @@ function App() {
                         <Route path="/bugs" element={<Bugs />} />
                         <Route path="/tasks" element={<Tasks />} />
                       </Routes>
+                      <div style={{color: "transparent"}}>hello</div>
                     </Box>
                   </Box>
                 </Box>

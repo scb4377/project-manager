@@ -11,18 +11,13 @@ const StyledDiv = styled("div")({
 });
 
 const BugDetails = ({ bug }) => {
-  const { mode, userList, formatDate } = useContext(AppContext);
-  const [creatorName, setCreatorName] = useState(bug.creator)
-  const [creator, setCreator] = useState('');
-  
-  useEffect(() => {
-    let temp = userList.filter(user => user.id === bug.id)
+  const { formatDate, userList } = useContext(AppContext);
+  const [creator, setCreator] = useState(bug.creator)
 
-    setCreator(temp)
-    
-    let fullName = temp.firstName + " " + temp.lastName
-    setCreatorName(fullName)
-  }, [bug]);
+  useEffect(() => {
+    setCreator(userList.filter(user => user._id === bug.creator)[0])
+    console.log(creator)
+  }, [bug])
 
   return (
     <div
@@ -116,7 +111,7 @@ const BugDetails = ({ bug }) => {
             </label>
             <span style={{ minWidth: "100px" }}>
               <Avatar
-                alt={creatorName}
+                alt={creator.firstName + " " + creator.lastName}
                 src={creator.img}
                 sx={{ marginLeft: "auto" }}
               />

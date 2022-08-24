@@ -28,8 +28,8 @@ const BugComments = ({ bug }) => {
     <Box
       p={2}
       position="relative"
-      boxShadow={5}
-      borderRadius={2}
+      boxShadow={3}
+      borderRadius={1}
       bgcolor={mode === "dark" ? "background.dark" : "background.default"}
       sx={{ width: "100%" }}
     >

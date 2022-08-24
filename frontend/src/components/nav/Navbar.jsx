@@ -91,13 +91,13 @@ const Navbar = () => {
           />
         )}
 
-        <Icons>
+        <Icons onClick={handleClick} sx={{ height: "50px", padding: "5px 10px", borderRadius: "5px", transition: "all 0.2s ease-in-out", "&:hover": {cursor: "pointer", backgroundColor: mode === "dark" ? "background.dark" : '#ededed'} }}>
           {/* <Badge badgeContent={4} color="warning">
             <Notifications color="primary" />
           </Badge> */}
           <Avatar
-            onClick={handleClick}
-            sx={{ width: 30, height: 30 }}
+            
+            sx={{ width: 30, height: 30, "&:hover": {cursor: "pointer"} }}
             src={user.img}
           />
           <Typography
