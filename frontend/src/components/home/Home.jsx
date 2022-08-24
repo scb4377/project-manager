@@ -11,9 +11,8 @@ const Home = () => {
   const { mode, bugList } = useContext(AppContext);
   const [data, setData] = useState([]);
   
-
   useEffect(() => {
-    toast.success("Welome", {position: toast.POSITION.BOTTOM_RIGHT})
+    
 
     let critical = 0;
     let major = 0;

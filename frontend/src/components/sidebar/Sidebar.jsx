@@ -3,7 +3,6 @@ import {
   Group,
   Home,
   ModeNight,
-  Settings,
   AccountTree,
   Assignment,
   BugReport
@@ -18,10 +17,12 @@ import {
   styled,
   Switch,
 } from "@mui/material";
+import { useEffect } from "react";
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AppContext } from "../../context/Context";
 import Add from "./Add";
+import { toast } from "react-toastify"
 
 const Sidebar = () => {
   const { mode, setMode } = useContext(AppContext)
@@ -31,6 +32,10 @@ const Sidebar = () => {
     listStyleType: "none",
     color: mode === "dark" ? "white" : "black",
   });
+
+  useEffect(() => {
+    toast.success("Welome", {position: toast.POSITION.BOTTOM_RIGHT})
+  }, [])
 
   return (
     <Paper position="fixed" gap="20px" pb={0} sx={{ paddingBottom: 0, height: "calc(100vh - 65px)", display: {xs: 'none', sm: 'block'} }}>
