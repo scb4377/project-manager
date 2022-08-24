@@ -129,6 +129,7 @@ const Home = () => {
         </Typography>
         <HomeList />
       </Box>
+      <Box sx={{display: {xs: 'none', sm: 'block'}, color: "transparent"}}>H</Box>
     </>
   );
 };

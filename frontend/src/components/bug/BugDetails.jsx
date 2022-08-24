@@ -13,6 +13,28 @@ const StyledDiv = styled("div")({
 const BugDetails = ({ bug }) => {
   const { formatDate, userList } = useContext(AppContext);
   const [creator, setCreator] = useState(bug.creator);
+  const { status, priority } = bug;
+
+  const statusStyle = {
+    minWidth: "100px",
+    color: status === "Open" ? "#5da56b" : "#a8382c",
+    fontWeight: "bold",
+  };
+
+  const priorityStyles = {
+    minWidth: "100px",
+    color:
+      priority === 4
+        ? "#ff2800"
+        : priority === 3
+        ? "#ffae04"
+        : priority === 2
+        ? "#a0a500"
+        : priority === 1
+        ? "#006a13"
+        : "transparent",
+    fontWeight: "bold"
+  };
 
   useEffect(() => {
     setCreator(userList.filter((user) => user._id === bug.creator)[0]);
@@ -62,7 +84,29 @@ const BugDetails = ({ bug }) => {
             >
               Status:
             </label>
-            <span style={{ minWidth: "100px" }}>{bug.status}</span>
+            <span style={statusStyle}>{bug.status}</span>
+          </StyledDiv>
+          <StyledDiv sx={{ flex: 1, gap: "50px" }}>
+            <label
+              style={{
+                textAlign: "left",
+                minWidth: "100px",
+                fontWeight: "500",
+              }}
+            >
+              Priority:
+            </label>
+            <span style={priorityStyles}>
+              {bug.priority === 4
+                ? "CRITICAL"
+                : bug.priority === 3
+                ? "MAJOR"
+                : bug.priority === 2
+                ? "MINOR"
+                : bug.priority === 1
+                ? "LOW"
+                : ""}
+            </span>
           </StyledDiv>
           <StyledDiv sx={{ flex: 1, gap: "50px" }}>
             <label

@@ -136,7 +136,6 @@ const MyLogs = ({ bug }) => {
     ) {
       inputValidation();
       addLog();
-      setLogs((prev) => [...prev, nextHiddenItem]);
       setLogFormInput(logInitialState);
       setLogModalOpen(false);
     } else {

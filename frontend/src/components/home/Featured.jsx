@@ -12,12 +12,12 @@ let data = [
 ];
 
 const COLORS = [
-  "#cce5eb",
-  "#9dcdd9",
-  "#7abbcc",
-  "#57a8be",
-  "#3f8fa5",
-  "#317181",
+  "#88CFFE",
+  "#55BBFE",
+  "#5685fd",
+  "#2461fc",
+  "#a288fe",
+  "#7a55fe",
 ];
 
 const RADIAN = Math.PI / 180;

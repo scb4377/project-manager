@@ -168,7 +168,6 @@ function App() {
                       flex={11}
                       maxWidth="1100px"
                       p={2}
-                      pb={10}
                       mb={2}
                       postiton="relative"
                       sx={{
@@ -188,7 +187,6 @@ function App() {
                         <Route path="/bugs" element={<Bugs />} />
                         <Route path="/tasks" element={<Tasks />} />
                       </Routes>
-                      <div style={{color: "transparent"}}>hello</div>
                       
                     </Box>
                   </Box>

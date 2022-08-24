@@ -51,6 +51,7 @@ const Tasks = () => {
           <Assigned />
         </Box>
       </Box>
+      <Box sx={{display: {xs: 'none', sm: 'inline'}, color: "transparent"}}>H</Box>
     </Box>
   );
 };

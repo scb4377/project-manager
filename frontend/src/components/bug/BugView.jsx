@@ -53,6 +53,7 @@ const BugView = () => {
       <Box>
         <BugComments bug={bug} />
       </Box>
+      <Box sx={{display: {xs: 'none', sm: 'block'}, color: "transparent"}}>H</Box>
     </Box>
   );
 };

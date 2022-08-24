@@ -112,8 +112,8 @@ const ProjectView = () => {
         <ProjWidget mode={mode} type="radialbar" />
       </StyledDiv> */}
       <Box
-      p={2}
-      boxShadow={3}
+        p={2}
+        boxShadow={3}
         borderRadius={1}
         height="max-content"
         bgcolor={mode === "dark" ? "background.dark" : "background.default"}
@@ -160,7 +160,7 @@ const ProjectView = () => {
             <Typography fontWeight={200} variant="label">
               Project Stage
             </Typography>
-            <Typography>Design</Typography>
+            <Typography>{project !== null && project.stage}</Typography>
           </Box>
         </Box>
         {/* <Box
@@ -211,12 +211,14 @@ const ProjectView = () => {
 
         <Box
           display="flex"
-          justifyContent="space-between"
           flexDirection="row"
           gap={4}
           flexWrap="wrap"
           textAlign="center"
-          sx={{ width: { xs: "100%", sm: "max-content" } }}
+          sx={{
+            width: { xs: "100%", sm: "max-content" },
+            justifyContent: { xs: "space-around", sm: "space-between" },
+          }}
         >
           <span style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontWeight: "bold" }}>
@@ -241,12 +243,11 @@ const ProjectView = () => {
           <Typography mb={2}>Assignees</Typography>
           <Stack
             direction="row"
-            spacing={3}
             display="flex"
             flexWrap="wrap"
             maxWidth={400}
             height="max-content"
-            sx={{ marginBottom: "40px" }}
+            sx={{ marginBottom: "40px", gap: { xs: 1, sm: 2 }, justifyContent: {xs: 'center', sm: 'left'} }}
           >
             {userList.length > 0 &&
               users.map((user) => (
@@ -273,6 +274,7 @@ const ProjectView = () => {
           <ProjCommentList state={project} />
         </Box>
       </Box>
+      <Box sx={{display: {xs: 'none', sm: 'block'}, color: "transparent"}}>H</Box>
     </>
   );
 };
