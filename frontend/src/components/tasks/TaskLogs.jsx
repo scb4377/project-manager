@@ -19,6 +19,7 @@ import { AppContext } from "../../context/Context";
 import { useEffect } from "react";
 import TaskModal from "./TaskModal";
 import { AddTask, DeleteTask, GetMe } from "./TaskFunc";
+import { toast } from "react-toastify";
 //   import { GetLogs, AddLog, DeleteLog } from "./LogFuncs"
 
 const FRUITS = [
@@ -74,7 +75,8 @@ function renderItem({ item, handleRemoveTask, formatDate }) {
 }
 
 const TaskLogs = () => {
-  const { mode, user, setUser, formatDate, taskList, setTaskList } = useContext(AppContext);
+  const { mode, user, setUser, formatDate, taskList, setTaskList } =
+    useContext(AppContext);
   const [taskModalOpen, setTaskModalOpen] = useState(false);
 
   // const getLogs = async () => {
@@ -120,16 +122,16 @@ const TaskLogs = () => {
   // }
 
   const pullUser = async () => {
-    const resp = await GetMe()
+    const resp = await GetMe();
 
     if (!resp) {
-        console.log('Error Occured')
+      console.log("Error Occured");
     } else {
-        setUser(resp)
+      setUser(resp);
     }
-  }
+  };
 
-  const handleAddTask = () => {
+  const handleAddTask = async () => {
     const nextHiddenItem = taskInput;
     if (
       nextHiddenItem &&
@@ -143,10 +145,20 @@ const TaskLogs = () => {
       } else {
         setTaskList((prev) => [...prev, nextHiddenItem]);
       }
-      AddTask(user.id, taskInput);
-      pullUser()
-      setTaskInput(taskInitialState);
-      setTaskModalOpen(false);
+      const response = await AddTask(user.id, taskInput);
+      console.log(response)
+
+      if (response) {
+        await pullUser();
+        setTaskModalOpen(false);
+        setTaskInput(taskInitialState);
+
+        toast.success("Task Added", { position: toast.POSITION.BOTTOM_RIGHT });
+      } else {
+        toast.error("Error Adding Task", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      }
     } else {
       inputValidation();
       return false;
@@ -154,17 +166,17 @@ const TaskLogs = () => {
   };
 
   const deleteTask = async (id) => {
-    const resp = await DeleteTask(user.id, id)
+    const resp = await DeleteTask(user.id, id);
 
     if (!resp) {
-        console.log("error occurred")
+      console.log("error occurred");
     }
-  }
+  };
 
   const handleRemoveTask = (item) => {
     setTaskList((prev) => [...prev.filter((i) => i.id !== item.id)]);
-    deleteTask(item.id)
-    pullUser()
+    deleteTask(item.id);
+    pullUser();
   };
 
   const handleAddTaskModalClose = () => setTaskModalOpen(false);
@@ -194,7 +206,10 @@ const TaskLogs = () => {
             {taskList &&
               taskList.length > 0 &&
               taskList.map((item) => (
-                <Collapse key={item.id} sx={{ borderBottom: "0.5px solid gray" }}>
+                <Collapse
+                  key={item.id}
+                  sx={{ borderBottom: "0.5px solid gray" }}
+                >
                   {renderItem({ item, handleRemoveTask, formatDate })}
                 </Collapse>
               ))}

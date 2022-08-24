@@ -19,7 +19,7 @@ const getMe = asyncHandler(async (req, res) => {
     email,
     phone,
     img,
-    tasks
+    tasks,
   });
 });
 
@@ -181,11 +181,13 @@ const deleteUser = asyncHandler(async (req, res) => {
 });
 
 const addTask = asyncHandler(async (req, res) => {
-  const user = await User.findByIdAndUpdate(req.params.id, { $push: { tasks: req.body }}, {
-    new: true,
-  }).select("-password");
-
-  console.log(user)
+  const user = await User.findByIdAndUpdate(
+    req.params.id,
+    { $push: { tasks: req.body } },
+    {
+      new: true,
+    }
+  ).select("-password");
 
   if (!user) {
     res.status(400);
@@ -193,16 +195,17 @@ const addTask = asyncHandler(async (req, res) => {
   } else {
     res.status(200).json(user);
   }
-})
+});
 
 const deleteTask = asyncHandler(async (req, res) => {
-  const { id } = req.body
-  console.log(req.params.id, id)
-  const user = await User.findByIdAndUpdate(req.params.id, { $pull: {tasks: {id: id}}}, {
-    new: true,
-  }).select("-password");
-
-  console.log(user)
+  const { id } = req.body;
+  const user = await User.findByIdAndUpdate(
+    req.params.id,
+    { $pull: { tasks: { id: id } } },
+    {
+      new: true,
+    }
+  ).select("-password");
 
   if (!user) {
     res.status(400);
@@ -210,7 +213,7 @@ const deleteTask = asyncHandler(async (req, res) => {
   } else {
     res.status(200).json(user);
   }
-})
+});
 
 // const generateCookie = asyncHandler(async (req, res, token) => {
 //   res.cookie("token", token, {

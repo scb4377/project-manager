@@ -34,7 +34,7 @@ const Sidebar = () => {
   });
 
   useEffect(() => {
-    toast.success("Welome", {position: toast.POSITION.BOTTOM_RIGHT})
+    toast.success("Welcome", {position: toast.POSITION.BOTTOM_RIGHT})
   }, [])
 
   return (

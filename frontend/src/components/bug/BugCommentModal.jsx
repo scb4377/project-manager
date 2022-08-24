@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 import { AddBugComment } from "./AddBugComment";
+import { toast } from 'react-toastify'
 
 export const BugCommentModal = ({
   isCommentModalOpen,
@@ -54,11 +55,21 @@ export const BugCommentModal = ({
 
   const handleClick = async () => {
     if (comment.subject === "" || comment.description === "") {
-      inputValidation()
+      inputValidation();
     } else {
-      await AddBugComment(comment, bug._id);
-      await commentModalClose();
-      await bug.comments.push(comment);
+      const response = await AddBugComment(comment, bug._id);
+
+      if (response) {
+        await commentModalClose();
+        await bug.comments.push(comment);
+        toast.success("Comment Added", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      } else {
+        toast.error("Error adding comment", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      }
     }
   };
 

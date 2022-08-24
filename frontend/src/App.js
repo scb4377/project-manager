@@ -126,7 +126,7 @@ function App() {
           setOpen
         }}
       >
-        <ToastContainer />
+        <ToastContainer theme={mode} />
         {!auth ? (
           <Login />
         ) : (

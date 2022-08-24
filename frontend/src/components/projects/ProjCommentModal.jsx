@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 import { AddComment } from "./AddComment";
+import { toast } from "react-toastify";
 
 const ProjCommentModal = ({ isCommentModalOpen, commentModalClose, state }) => {
   const { user, pullBugs } = useContext(AppContext);
@@ -22,7 +23,7 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose, state }) => {
     subject: "",
     description: "",
   };
-  
+
   const [comment, setComment] = useState(initialState);
 
   const [subjectError, setSubjectError] = useState(false);
@@ -50,11 +51,21 @@ const ProjCommentModal = ({ isCommentModalOpen, commentModalClose, state }) => {
 
   const handleClick = async () => {
     if (comment.subject === "" || comment.description === "") {
-      inputValidation()
+      inputValidation();
     } else {
-      await AddComment(comment, state._id)
-      await commentModalClose()
-      await state.comments.push(comment)
+      const response = await AddComment(comment, state._id);
+
+      if (response) {
+        await commentModalClose();
+        await state.comments.push(comment);
+        toast.success("Added Comment", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      } else {
+        toast.error("Error adding comment", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      }
     }
   };
 

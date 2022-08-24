@@ -14,7 +14,7 @@ export const createBug = async (data) => {
   const response = await axios.post(API_URL, data, config);
 
   if (!response) {
-    console.log("createBug error");
+    console.log("Create Bug error");
   } else {
     return response;
   }

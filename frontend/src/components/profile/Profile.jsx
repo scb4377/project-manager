@@ -11,14 +11,7 @@ import { useEffect } from "react";
 import { getMyProfile, updateProfile } from "./ProfileService";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
-
-const user = {
-  firstName: "Jan",
-  lastName: "Reynolds",
-  email: "jReynolds@gmail.com",
-  phone: "(706) 329-1900",
-  picture: "https://miro.medium.com/max/909/1*_iikfMGYF3RH4OZ0yeQYnQ.png",
-};
+import { toast } from "react-toastify"
 
 const StyledSpan = styled("span")({
   display: "flex",
@@ -31,9 +24,7 @@ const StyledSpan = styled("span")({
 });
 
 const Profile = () => {
-  const { mode } = useContext(AppContext);
-
-  const [pic, setPic] = useState(null);
+  const { mode, setUser, user } = useContext(AppContext);
   const initialState = {
     username: "",
     firstName: "",
@@ -76,9 +67,11 @@ const Profile = () => {
 
   const handleUpdate = async () => {
     let response = await updateProfile(formInput);
-
     if (!response) {
-      console.log("error updating");
+      toast.error("Error Updating Profile", {position: toast.POSITION.BOTTOM_RIGHT})
+    } else {
+      setUser(response)
+      toast.success("Updated Profile", {position: toast.POSITION.BOTTOM_RIGHT})
     }
   };
 

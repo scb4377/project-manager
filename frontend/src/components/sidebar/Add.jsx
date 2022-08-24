@@ -24,6 +24,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { createBug } from "./AddBug";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const StyledModal = styled(Modal)({
   display: "flex",
@@ -39,10 +40,10 @@ const UserBox = styled(Box)({
 });
 
 const Add = () => {
-  const { open, setOpen } = useContext(AppContext)
+  const { open, setOpen } = useContext(AppContext);
   const [value, setValue] = useState(null);
   const { projList, mode, user, pullBugs } = useContext(AppContext);
-  
+
   const initialState = {
     creator: user.id,
     issue: "",
@@ -60,11 +61,11 @@ const Add = () => {
   const [projError, setProjError] = useState(false);
 
   useEffect(() => {
-    setIssueError(false)
-    setDescError(false)
-    setDueByError(false)
-    setProjError(false)
-  }, [open])
+    setIssueError(false);
+    setDescError(false);
+    setDueByError(false);
+    setProjError(false);
+  }, [open]);
 
   const inputValidation = () => {
     if (formInput.issue === "") {
@@ -78,14 +79,14 @@ const Add = () => {
       setDescError(false);
     }
     if (formInput.dueBy === null) {
-      setDueByError(true)
+      setDueByError(true);
     } else {
-      setDueByError(false)
+      setDueByError(false);
     }
     if (formInput.projId === "") {
-      setProjError(true)
+      setProjError(true);
     } else {
-      setProjError(false)
+      setProjError(false);
     }
   };
 
@@ -99,8 +100,16 @@ const Add = () => {
   const myAsyncFunc = async () => {
     setOpen(false);
     setFormInput(initialState);
-    await createBug(formInput);
-    await pullBugs();
+    let resp = await createBug(formInput);
+
+    if (resp) {
+      await pullBugs();
+      toast.success("Created Bug", { position: toast.POSITION.BOTTOM_RIGHT });
+    } else {
+      toast.error("Error Creating Bug", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+    }
   };
 
   const handleSubmit = () => {
@@ -116,7 +125,7 @@ const Add = () => {
       projId === "" ||
       teamId === ""
     ) {
-      inputValidation()
+      inputValidation();
     } else {
       myAsyncFunc();
     }
@@ -204,7 +213,7 @@ const Add = () => {
               id="demo-simple-select-label"
               variant="standard"
               size="small"
-              sx={{padding: '10px'}}
+              sx={{ padding: "10px" }}
             >
               Priority
             </InputLabel>
@@ -237,7 +246,7 @@ const Add = () => {
               id="demo-simple-select-label"
               variant="standard"
               size="small"
-              sx={{padding: '10px'}}
+              sx={{ padding: "10px" }}
             >
               Project
             </InputLabel>
@@ -249,7 +258,6 @@ const Add = () => {
               value={formInput.projId}
               name="projId"
               onChange={handleChange}
-              
             >
               {projList.map((proj) => (
                 <MenuItem key={proj.id} value={proj.id}>
@@ -270,7 +278,9 @@ const Add = () => {
                   dueBy: newValue,
                 });
               }}
-              renderInput={(params) => <TextField required {...params} error={dueByError} />}
+              renderInput={(params) => (
+                <TextField required {...params} error={dueByError} />
+              )}
             />
           </LocalizationProvider>
           {/* <Stack direction="row" gap={1} mt={2} mb={3}>

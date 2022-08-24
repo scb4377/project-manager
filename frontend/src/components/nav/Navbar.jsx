@@ -17,6 +17,7 @@ import { AppContext } from "../../context/Context";
 import { logout } from "../profile/ProfileService";
 import lightLogo from "../../images/logoLight.png";
 import darkLogo from "../../images/logoDark.png";
+import { useEffect } from "react";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -47,6 +48,8 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
+
+  useEffect(() => {}, [user]);
 
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
@@ -91,13 +94,24 @@ const Navbar = () => {
           />
         )}
 
-        <Icons onClick={handleClick} sx={{ height: "50px", padding: "5px 10px", borderRadius: "5px", transition: "all 0.2s ease-in-out", "&:hover": {cursor: "pointer", backgroundColor: mode === "dark" ? "background.dark" : '#ededed'} }}>
+        <Icons
+          onClick={handleClick}
+          sx={{
+            height: "50px",
+            padding: "5px 10px",
+            borderRadius: "5px",
+            transition: "all 0.2s ease-in-out",
+            "&:hover": {
+              cursor: "pointer",
+              backgroundColor: mode === "dark" ? "background.dark" : "#ededed",
+            },
+          }}
+        >
           {/* <Badge badgeContent={4} color="warning">
             <Notifications color="primary" />
           </Badge> */}
           <Avatar
-            
-            sx={{ width: 30, height: 30, "&:hover": {cursor: "pointer"} }}
+            sx={{ width: 30, height: 30, "&:hover": { cursor: "pointer" } }}
             src={user.img}
           />
           <Typography

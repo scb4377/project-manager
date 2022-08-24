@@ -18,6 +18,7 @@ import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 import { useEffect } from "react";
 import { GetLogs, AddLog, DeleteLog } from "./LogFuncs";
+import { toast } from "react-toastify";
 
 const FRUITS = [
   "🍏 Apple",
@@ -115,6 +116,14 @@ const MyLogs = ({ bug }) => {
 
   const addLog = async () => {
     const resp = await AddLog(bug._id, logFormInput);
+
+    if (resp) {
+      toast.success("Added Log", { position: toast.POSITION.BOTTOM_RIGHT });
+    } else {
+      toast.error("Error adding log", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+    }
     getLogs();
   };
 

@@ -4,20 +4,26 @@ const API_URL = "/api/user/";
 
 export const AddTask = async (userId, data) => {
   const response = await axios.put(API_URL + "tasks/" + userId, data);
+
+  if (!response) {
+    console.log("error");
+  } else {
+    return response;
+  }
 };
 
 export const DeleteTask = async (userId, id) => {
-    const data = {
-        id
-    }
-    const response = await axios.put(API_URL + "tasks/delete/" + userId, data)
+  const data = {
+    id,
+  };
+  const response = await axios.put(API_URL + "tasks/delete/" + userId, data);
 
-    if (!response) {
-        console.log("Error Occurred")
-    } else {
-        return response.data;
-    }
-}
+  if (!response) {
+    console.log("Error Occurred");
+  } else {
+    return response;
+  }
+};
 
 export const GetMe = async () => {
   const token = JSON.parse(localStorage.getItem("token"));
