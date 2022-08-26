@@ -10,10 +10,10 @@ import {
 
 const Chart = ({data}) => {
   return (
-    <ResponsiveContainer width="99%" aspect={2 / 1} style={{ padding: "20px" }}>
+    <ResponsiveContainer width="100%" height="80%" style={{ padding: "20px" }}>
       <AreaChart
         width={730}
-        height={250}
+        height={300}
         data={data}
         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
       >

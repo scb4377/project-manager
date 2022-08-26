@@ -62,10 +62,10 @@ const Home = () => {
         mt={3}
         mb={3}
         sx={{
-          display: "flex",
+          display: {xs: "none", sm: "flex"},
           flexWrap: "wrap",
           gap: { xs: "20px" },
-          minHeight: "320px",
+          minHeight: "300px",
         }}
       >
         <Box
@@ -82,6 +82,7 @@ const Home = () => {
             width: "300px",
             minWidth: { xs: "100%", sm: "300px" },
             minHeight: "300px",
+            height: '300px'
           }}
         >
           <Typography
@@ -99,6 +100,7 @@ const Home = () => {
           p={2}
           boxShadow={3}
           borderRadius={1}
+          sx={{width: {sm: "100%", md: "678px"}}}
         >
           <Typography
             mb={2}
@@ -118,6 +120,7 @@ const Home = () => {
         p={2}
         boxShadow={3}
         borderRadius={1}
+        sx={{margin: {xs: "16px 0", sm: "0"}}}
       >
         <Typography
           mb={2}

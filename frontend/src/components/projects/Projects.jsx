@@ -84,6 +84,7 @@ const Projects = () => {
       </Typography>
       <Box
         p={0}
+        mb={2}
         display="flex"
         justifyContent="space-evenly"
         flexWrap="wrap"
@@ -96,6 +97,7 @@ const Projects = () => {
             display: "flex",
             flexDirection: "column",
             textAlign: "center",
+            minWidth: "76px"
           }}
         >
           <span style={{ fontWeight: "bold" }}>{projList.length}</span>
@@ -106,6 +108,7 @@ const Projects = () => {
             display: "flex",
             flexDirection: "column",
             textAlign: "center",
+            minWidth: "76px"
           }}
         >
           <span style={{ fontWeight: "bold" }}>{data.defining}</span>
@@ -116,6 +119,7 @@ const Projects = () => {
             display: "flex",
             flexDirection: "column",
             textAlign: "center",
+            minWidth: "76px"
           }}
         >
           <span style={{ fontWeight: "bold" }}>{data.planning}</span>
@@ -126,6 +130,7 @@ const Projects = () => {
             display: "flex",
             flexDirection: "column",
             textAlign: "center",
+            minWidth: "76px"
           }}
         >
           <span style={{ fontWeight: "bold" }}>{data.designing}</span>
@@ -136,6 +141,7 @@ const Projects = () => {
             display: "flex",
             flexDirection: "column",
             textAlign: "center",
+            minWidth: "76px"
           }}
         >
           <span style={{ fontWeight: "bold" }}>{data.building}</span>
@@ -146,6 +152,7 @@ const Projects = () => {
             display: "flex",
             flexDirection: "column",
             textAlign: "center",
+            minWidth: "76px"
           }}
         >
           <span style={{ fontWeight: "bold" }}>{data.testing}</span>
