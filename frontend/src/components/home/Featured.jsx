@@ -49,6 +49,7 @@ let data = [
 // };
 
 const renderActiveShape = (props) => {
+
   const RADIAN = Math.PI / 180;
   const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
   const sin = Math.sin(-RADIAN * midAngle);
@@ -63,7 +64,7 @@ const renderActiveShape = (props) => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={props.stroke === "white" ? fill : "white"}>
         {payload.name}
       </text>
       <Sector
@@ -94,7 +95,7 @@ const renderActiveShape = (props) => {
 };
 
 const Featured = () => {
-  const { projList } = useContext(AppContext);
+  const { projList, mode } = useContext(AppContext);
 
   useEffect(() => {
     let planning = 0;
@@ -149,11 +150,12 @@ const Featured = () => {
             data={data}
             cx="50%"
             cy="50%"
-            innerRadius={50}
+            innerRadius={45}
             outerRadius={60}
             fill="#2D6675"
             dataKey="value"
             onMouseEnter={onPieEnter}
+            stroke={mode === "dark" ? "#393939" : "white"}
           />
         </PieChart>
       {/* <PieChart width={400} height={400}>

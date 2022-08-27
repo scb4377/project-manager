@@ -22,22 +22,22 @@ const LogModal = ({
       aria-describedby="modal-modal-description"
     >
       <Box
+      borderRadius={1}
         sx={{
           position: "absolute",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           height: "max-content",
-          width: "50%",
+          width: {xs: "95%", sm: "500px"},
           bgcolor: "background.default",
-          borderRadius: "5px",
           boxShadow: 24,
         }}
       >
         <Box
           p={2}
           bgcolor={"background.dark"}
-          borderRadius={5}
+          borderRadius={1}
           boxShadow={0}
           sx={{ position: "relative", width: "100%", height: "100%" }}
         >
@@ -63,7 +63,8 @@ const LogModal = ({
           <Box
             flexDirection="column"
             justifyContent="space-between"
-            sx={{ display: "flex", gap: "30px" }}
+            display="flex"
+            gap={4}
           >
             <TextField
               required
@@ -72,10 +73,7 @@ const LogModal = ({
               id="outlined-required"
               name="subject"
               label="Subject"
-              sx={{
-                backgroundColor:
-                  mode === "dark" ? "background.dark" : "background.light",
-              }}
+              variant="filled"
               onChange={(e) =>
                 setLogFormInput({
                   ...logFormInput,
@@ -91,10 +89,7 @@ const LogModal = ({
               name="description"
               label="Description"
               value={logFormInput.description}
-              sx={{
-                backgroundColor:
-                  mode === "dark" ? "background.dark" : "background.light",
-              }}
+              variant="filled"
               onChange={(e) =>
                 setLogFormInput({
                   ...logFormInput,

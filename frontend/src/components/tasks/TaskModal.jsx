@@ -38,22 +38,22 @@ const TaskModal = ({
       aria-describedby="modal-modal-description"
     >
       <Box
+      borderRadius={1}
         sx={{
           position: "absolute",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           height: "max-content",
-          width: "50%",
+          width: {xs: "95%", sm: "500px"},
           bgcolor: "background.default",
-          borderRadius: "5px",
           boxShadow: 24,
         }}
       >
         <Box
           p={2}
           bgcolor={"background.dark"}
-          borderRadius={5}
+          borderRadius={1}
           boxShadow={0}
           sx={{ position: "relative", width: "100%", height: "100%" }}
         >
@@ -88,10 +88,7 @@ const TaskModal = ({
               id="outlined-required"
               name="subject"
               label="Subject"
-              sx={{
-                backgroundColor:
-                  mode === "dark" ? "background.dark" : "background.light",
-              }}
+              variant="filled"
               onChange={(e) =>
                 setTaskFormInput({
                   ...taskFormInput,
@@ -107,10 +104,7 @@ const TaskModal = ({
               name="description"
               label="Description"
               value={taskFormInput.description}
-              sx={{
-                backgroundColor:
-                  mode === "dark" ? "background.dark" : "background.light",
-              }}
+              variant="filled"
               onChange={(e) =>
                 setTaskFormInput({
                   ...taskFormInput,

@@ -5,6 +5,7 @@ import {
   ButtonGroup,
   Fab,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Modal,
@@ -15,7 +16,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { Add as AddIcon } from "@mui/icons-material";
+import { Add as AddIcon, Cancel } from "@mui/icons-material";
 import React, { useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
@@ -156,18 +157,28 @@ const Add = () => {
         aria-describedby="modal-modal-desc"
       >
         <Box
-          width={400}
           height="max-content"
-          bgcolor={"background.default"}
           color={"text.primary"}
           p={3}
-          gap={2}
+          gap={3}
           borderRadius={1}
           boxShadow={3}
           display="flex"
           flexDirection="column"
+          position="relative"
+          sx={{
+            width: { xs: "95%", sm: "500px" },
+            bgcolor: mode === "dark" ? "#1c1c1c" : "white",
+          }}
         >
-          <Typography variant="h6" color="gray" textAlign="center">
+          <IconButton
+            color="error"
+            sx={{ position: "absolute", right: "20px" }}
+            onClick={() => setOpen(false)}
+          >
+            <Cancel />
+          </IconButton>
+          <Typography variant="h6" textAlign="center">
             Create Bug
           </Typography>
           <UserBox>
@@ -226,6 +237,12 @@ const Add = () => {
               name="priority"
               onChange={handleChange}
               variant="filled"
+              sx={{
+                bgcolor:
+                  mode === "dark"
+                    ? "rgba(255, 255, 255, 0.04)"
+                    : "rgba(0, 0, 0, 0.06)",
+              }}
             >
               <MenuItem value={1}>Low</MenuItem>
               <MenuItem value={2}>Minor</MenuItem>
@@ -258,6 +275,12 @@ const Add = () => {
               value={formInput.projId}
               name="projId"
               onChange={handleChange}
+              sx={{
+                bgcolor:
+                  mode === "dark"
+                    ? "rgba(255, 255, 255, 0.04)"
+                    : "rgba(0, 0, 0, 0.06)",
+              }}
             >
               {projList.map((proj) => (
                 <MenuItem key={proj.id} value={proj.id}>
@@ -279,25 +302,31 @@ const Add = () => {
                 });
               }}
               renderInput={(params) => (
-                <TextField required {...params} error={dueByError} />
+                <TextField
+                  required
+                  {...params}
+                  sx={{
+                    background:
+                      mode === "dark"
+                        ? "rgba(255, 255, 255, 0.07)"
+                        : "rgba(0,0,0,0.06)",
+                  }}
+                  error={dueByError}
+                />
               )}
             />
           </LocalizationProvider>
-          {/* <Stack direction="row" gap={1} mt={2} mb={3}>
-            <EmojiEmotionsIcon color="primary" />
-            <ImageIcon color="secondary" />
-            <VideoCameraBackIcon color="success" />
-            <PersonAddIcon color="error" />
-          </Stack> */}
           <ButtonGroup
             fullWidth
             variant="contained"
             aria-label="outlined primary button group"
           >
-            <Button onClick={handleSubmit}>Post</Button>
-            {/* <Button sx={{ width: "100px" }}>
-              <DateRange />
-            </Button> */}
+            <Button
+              onClick={handleSubmit}
+              sx={{ "&:hover": { backgroundColor: "accent.hover" } }}
+            >
+              Post
+            </Button>
           </ButtonGroup>
         </Box>
       </StyledModal>

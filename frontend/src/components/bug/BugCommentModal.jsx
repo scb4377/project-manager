@@ -82,15 +82,15 @@ export const BugCommentModal = ({
     >
       <Box
         p={2}
+        borderRadius={1}
         sx={{
           position: "absolute",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           height: "max-content",
-          width: { xs: "95%", sm: "400px" },
-          bgcolor: "background.default",
-          borderRadius: "5px",
+          width: { xs: "95%", sm: "500px" },
+          bgcolor: mode === "dark" ? "#1c1c1c" : "white",
           boxShadow: 24,
         }}
       >
@@ -115,7 +115,7 @@ export const BugCommentModal = ({
         <Box
           display="flex"
           flexDirection="column"
-          gap={2}
+          gap={4}
           justifyContent="space-evenly"
         >
           <TextField
