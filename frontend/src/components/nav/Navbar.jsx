@@ -1,4 +1,4 @@
-import { Notifications } from "@mui/icons-material";
+import { Lightbulb, Notifications } from "@mui/icons-material";
 import {
   AppBar,
   Avatar,
@@ -16,6 +16,8 @@ import { useNavigate } from "react-router";
 import { AppContext } from "../../context/Context";
 import { logout } from "../profile/ProfileService";
 import lightLogo from "../../images/logoLight.png";
+import lightBugLogo from "../../images/lightBugLogo.png";
+import darkBugLogo from "../../images/darkBugLogo.png";
 import darkLogo from "../../images/logoDark.png";
 import { useEffect } from "react";
 
@@ -83,15 +85,51 @@ const Navbar = () => {
         }}
       >
         {mode === "dark" ? (
-          <img
-            src={darkLogo}
-            style={{ maxHeight: "40px", paddingLeft: "5px" }}
-          />
+          <div
+            style={{
+              display: "flex",
+              gap: "10px",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={darkBugLogo}
+              style={{
+                maxHeight: "40px",
+                paddingLeft: "5px",
+                display: mode === "dark" ? "block" : "none",
+                transition: "all 3s ease-in",
+              }}
+            />
+            <img
+              src={darkLogo}
+              style={{ maxHeight: "40px", paddingLeft: "5px" }}
+            />
+          </div>
         ) : (
-          <img
-            src={lightLogo}
-            style={{ maxHeight: "40px", paddingLeft: "5px" }}
-          />
+          <div
+            style={{
+              display: "flex",
+              gap: "10px",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={lightBugLogo}
+              style={{
+                maxHeight: "40px",
+                paddingLeft: "5px",
+                display: mode === "light" ? "block" : "none",
+                transition: "3s ease-in"
+              }}
+            />
+            <img
+              src={lightLogo}
+              style={{ maxHeight: "40px", paddingLeft: "5px" }}
+            />
+          </div>
         )}
 
         <Icons
