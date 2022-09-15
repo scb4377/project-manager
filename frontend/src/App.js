@@ -22,8 +22,8 @@ import Tasks from "./components/tasks/Tasks";
 import Login from "./components/login/Login";
 import { AppContext } from "./context/Context";
 import { getBugs, getProjects, getTeams, getUsers } from "./context/BugContext";
-import {ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -49,31 +49,32 @@ function App() {
   const pullBugs = async () => {
     let bugs = await getBugs();
     setBugList(bugs);
+  };
 
+  const retrieveProjects = async () => {
     let projects = await getProjects();
     projects.forEach((proj) => (proj.createdAt = formatDate(proj.createdAt)));
     setProjList(projects);
+  };
 
+  const retrieveTeams = async () => {
     let teams = await getTeams();
     setTeamList(teams);
+  };
 
+  const getPersonnel = async () => {
     let users = await getUsers();
     setUserList(users);
   };
 
   useEffect(() => {
-    if (auth) {
+    if (auth && user) {
       pullBugs();
-      
+      getPersonnel();
+      retrieveTeams();
+      retrieveProjects();
     }
-
-    // if (user && bugList && bugList.length > 0) {
-    //   let temp = bugList.filter((bug) => console.log(bug));
-    //   setAssigned(temp);
-
-    //   setTaskList(user.tasks);
-    // }
-  }, [auth]);
+  }, [auth, user]);
 
   const theme = createTheme({
     root: {
@@ -123,7 +124,7 @@ function App() {
           assigned,
           setAssigned,
           open,
-          setOpen
+          setOpen,
         }}
       >
         <ToastContainer theme={mode} />
@@ -133,7 +134,6 @@ function App() {
           <Paper
             sx={{ height: { xs: "100%", sm: "100%" }, overflowY: "scroll" }}
           >
-            
             <Box sx={{ maxHeight: "100vh" }}>
               <Router>
                 <Navbar />
@@ -152,7 +152,7 @@ function App() {
                   </Box>
                   <MobileSpeedDial />
                   <Box
-                  position="relative"
+                    position="relative"
                     sx={{
                       overflowY: "scroll",
                       width: "100%",
@@ -187,7 +187,6 @@ function App() {
                         <Route path="/bugs" element={<Bugs />} />
                         <Route path="/tasks" element={<Tasks />} />
                       </Routes>
-                      
                     </Box>
                   </Box>
                 </Box>

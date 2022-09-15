@@ -43,7 +43,7 @@ const UserBox = styled(Box)({
 const Add = () => {
   const { open, setOpen } = useContext(AppContext);
   const [value, setValue] = useState(null);
-  const { projList, mode, user, pullBugs } = useContext(AppContext);
+  const { projList, mode, user, pullBugs, bugList } = useContext(AppContext);
 
   const initialState = {
     creator: user.id,
@@ -52,7 +52,7 @@ const Add = () => {
     dueBy: value,
     description: "",
     projId: "",
-    teamId: "62f6b2e9eb86a1acd86885c1",
+    teamId: user.teamId,
   };
   const [formInput, setFormInput] = useState(initialState);
 

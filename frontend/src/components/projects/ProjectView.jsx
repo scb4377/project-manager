@@ -1,94 +1,30 @@
 import {
   Avatar,
-  AvatarGroup,
   Box,
   Stack,
-  styled,
   Typography,
 } from "@mui/material";
 import React, { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import {
-  Legend,
-  RadialBar,
-  RadialBarChart,
-  ResponsiveContainer,
-} from "recharts";
 import { AppContext } from "../../context/Context";
 import ProjBugList from "./ProjBugList";
 import ProjCommentList from "./ProjCommentList";
-import ProjWidget from "./ProjWidget";
 import { GetProject } from "./GetProject";
-
-const StyledDiv = styled("div")({
-  display: "flex",
-  width: "100%",
-  justifyContent: "space-between",
-  flexWrap: "wrap",
-  gap: "20px",
-});
 
 const ProjectView = () => {
   const { mode, teamList, userList, bugList, formatDate } =
     useContext(AppContext);
   const [users, setUsers] = useState([]);
-  const [lowPriority, setLowPriority] = useState(0);
   const [filteredList, setFilteredList] = useState(null);
   const { state } = useLocation();
   const [project, setProject] = useState(null);
 
   const setList = async () => {
-    let temp = [];
-    for (let i = 0; i < state.bugs.length; i++) {
-      temp.push(bugList.find((obj) => obj.id === state.bugs[i]));
-    }
+    let temp = bugList.filter(bug => bug.projId === state.id)
     setFilteredList(temp);
   };
-
-  const check = filteredList === null;
-
-  let findTeam = teamList;
-
-  let minorPriority = 0;
-
-  // let data = [
-  //   {
-  //     name: "Low",
-  //     uv: lowPriority,
-  //     pv: 9800,
-  //     fill: "#55ff04",
-  //   },
-  //   {
-  //     name: "Minor",
-  //     uv: minorPriority,
-  //     pv: 1398,
-  //     fill: "#eaf600",
-  //   },
-  //   {
-  //     name: "Major",
-  //     uv: 12,
-  //     pv: 4567,
-  //     fill: "#ffae04",
-  //   },
-  //   {
-  //     name: "Critical",
-  //     uv: 5,
-  //     pv: 2400,
-  //     fill: "#ff2800",
-  //   },
-  // ];
-
-  // const calcPriorities = (list) => {
-  //   for (let i = 0; i < list.length; i++) {
-  //     if (list[i].priority === 1) {
-  //       setLowPriority(lowPriority += 1)
-  //     } else if (list[i].priority === 2) {
-  //       minorPriority += 1;
-  //     }
-  //   }
-  // };
 
   const getState = async () => {
     const resp = await GetProject(state.id);
@@ -101,16 +37,10 @@ const ProjectView = () => {
 
     let users = userList.filter((user) => user.teamId === state.team);
     setUsers(users);
-
-    // calcPriorities(filteredList);
   }, [teamList, bugList, state]);
 
   return (
     <>
-      {/* <StyledDiv>
-        <ProjWidget mode={mode} type="barchart" />
-        <ProjWidget mode={mode} type="radialbar" />
-      </StyledDiv> */}
       <Box
         p={2}
         boxShadow={3}
@@ -163,52 +93,6 @@ const ProjectView = () => {
             <Typography>{project !== null && project.stage}</Typography>
           </Box>
         </Box>
-        {/* <Box
-          height={300}
-          sx={{
-            top: 0,
-            right: 0,
-            width: { xs: "100%", sm: "45%" },
-            height: { xs: "170px" },
-            position: { xs: "relative", sm: "absolute" },
-          }}
-        >
-          {console.log(data)}
-          {data.length > 0 && (
-            <ResponsiveContainer>
-              <RadialBarChart
-                width={400}
-                height={250}
-                innerRadius="20%"
-                // outerRadius="100%"
-                data={data}
-                startAngle={180}
-                endAngle={0}
-                barCategoryGap={3}
-                cy={"80%"}
-                cx={"60%"}
-                outerRadius="120%"
-              >
-                <RadialBar
-                  minAngle={15}
-                  label={{ fill: "#666", position: "insideStart" }}
-                  background
-                  clockWise={true}
-                  dataKey="uv"
-                />
-                <Legend
-                  iconSize={10}
-                  width={120}
-                  height={140}
-                  layout="vertical"
-                  verticalAlign="middle"
-                  align="left"
-                />
-              </RadialBarChart>
-            </ResponsiveContainer>
-          )}
-        </Box> */}
-
         <Box
           display="flex"
           flexDirection="row"

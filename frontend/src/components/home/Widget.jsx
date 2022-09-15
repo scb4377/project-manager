@@ -56,7 +56,7 @@ const Widget = ({ type }) => {
     }
     setAssigned(bugList.filter((bug) => bug.teamId === user.teamId));
     setTaskList(user.tasks);
-  }, [projList]);
+  }, [projList, bugList]);
 
   switch (type) {
     case "projects":
