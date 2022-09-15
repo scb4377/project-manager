@@ -10,7 +10,7 @@ import { columns, mobileColumns } from "./HomeListLayout";
 const HomeList = () => {
   const { bugList, projList } = useContext(AppContext);
 
-  let filteredList = bugList.filter(bug => bug.priority === 4)
+  let filteredList = bugList.filter(bug => bug.priority === 4 && bug.status === "Open")
 
   const navigate = useNavigate();
   const [rowsPerPage, setRowsPerPage] = useState(10);

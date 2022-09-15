@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Project = require("../models/ProjectModel");
+const Team = require("../models/TeamModel");
 
 // @desc    get project
 // @route   GET /api/project/
@@ -29,7 +30,7 @@ const createProject = asyncHandler(async (req, res) => {
 
   // check if team exists
   const projectExists = await Project.findOne({ projTitle });
-  const foundTeam = await Team.findOne({ teamId })
+  const foundTeam = await Team.findOne({ _id: teamId })
 
   if (projectExists) {
     res.status(400);

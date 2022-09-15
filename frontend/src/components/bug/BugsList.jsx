@@ -6,7 +6,7 @@ import { AppContext } from "../../context/Context";
 
 const BugsList = () => {
   const { bugList, projList } = useContext(AppContext);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(15);
   const initialState = window.innerWidth < 500 ? mobileColumns : columns;
   const [columnLayout, setColumnLayout] = useState(initialState);
 
@@ -32,7 +32,7 @@ const BugsList = () => {
       rows={bugList}
       columns={columnLayout}
       pageSize={rowsPerPage}
-      rowsPerPageOptions={[5, 10, 20, 50]}
+      rowsPerPageOptions={[5, 10, 15, 20, 50]}
       onPageSizeChange={(newPageSize) => setRowsPerPage(newPageSize)}
       disableSelectionOnClick={true}
       disableColumnSelector={true}

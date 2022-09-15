@@ -62,28 +62,28 @@ const Widget = ({ type }) => {
     case "projects":
       data = {
         title: "Projects",
-        link: "See all projects",
+        link: "See all",
         amt: projList.length,
       };
       break;
     case "issues":
       data = {
         title: "Issues",
-        link: "See all issues",
+        link: "See all",
         amt: bugList.length,
       };
       break;
     case "tasks":
       data = {
         title: "Tasks",
-        link: "See all tasks",
+        link: "See all",
         amt: taskList.length,
       };
       break;
     case "assigned":
       data = {
         title: "Assigned",
-        link: "See all Assigned",
+        link: "See all",
         amt: assigned.length,
       };
       break;

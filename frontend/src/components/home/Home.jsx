@@ -5,38 +5,69 @@ import HomeList from "./HomeList";
 import Featured from "./Featured";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/Context";
-import { toast } from 'react-toastify'
+import { toast } from "react-toastify";
 
 const Home = () => {
-  const { mode, bugList } = useContext(AppContext);
+  const { mode, bugList, formatDate } = useContext(AppContext);
   const [data, setData] = useState([]);
-  
+  let aug = {
+    critical: 0,
+    major: 0,
+    minor: 0,
+    low: 0,
+  };
+  let sep = {
+    critical: 0,
+    major: 0,
+    minor: 0,
+    low: 0,
+  };
   useEffect(() => {
-    
-
-    let critical = 0;
-    let major = 0;
-    let minor = 0;
-    let low = 0;
     bugList.forEach((bug) => {
-      if (bug.priority === 4) {
-        critical += 1;
-      } else if (bug.priority === 3) {
-        major += 1;
-      } else if (bug.priority === 2) {
-        minor += 1;
-      } else if (bug.priority === 1) {
-        low += 1;
+      let date = formatDate(bug.createdAt).split(" ")[1].toLowerCase();
+
+      if (date === "aug") {
+        if (bug.priority === 4) {
+          aug.critical += 1;
+        } else if (bug.priority === 3) {
+          aug.major += 1;
+        } else if (bug.priority === 2) {
+          aug.minor += 1;
+        } else if (bug.priority === 1) {
+          aug.low += 1;
+        }
+      } else if (date === "sep") {
+        if (bug.priority === 4) {
+          sep.critical += 1;
+        } else if (bug.priority === 3) {
+          sep.major += 1;
+        } else if (bug.priority === 2) {
+          sep.minor += 1;
+        } else if (bug.priority === 1) {
+          sep.low += 1;
+        }
       }
     });
 
     setData([
-      { name: "Mar", critical: 10, major: 9, minor: 2, low: 13 },
       { name: "Apr", critical: 15, major: 13, minor: 18, low: 8 },
       { name: "May", critical: 14, major: 16, minor: 13, low: 4 },
       { name: "Jun", critical: 10, major: 7, minor: 4, low: 13 },
       { name: "July", critical: 5, major: 3, minor: 11, low: 15 },
-      { name: "Aug", critical: critical, major: major, minor: minor, low: low },
+      {
+        name: "Aug",
+        critical: aug.critical,
+        major: aug.major,
+        minor: aug.minor,
+        low: aug.low,
+      },
+      {
+        name: "Sep",
+        critical: sep.critical,
+        major: sep.major,
+        minor: sep.minor,
+        low: sep.low,
+      },
     ]);
   }, [bugList]);
 
@@ -62,7 +93,7 @@ const Home = () => {
         mt={3}
         mb={3}
         sx={{
-          display: {xs: "none", sm: "flex"},
+          display: { xs: "none", sm: "flex" },
           flexWrap: "wrap",
           gap: { xs: "20px" },
           minHeight: "300px",
@@ -82,7 +113,7 @@ const Home = () => {
             width: "300px",
             minWidth: { xs: "100%", sm: "300px" },
             minHeight: "300px",
-            height: '300px'
+            height: "300px",
           }}
         >
           <Typography
@@ -90,7 +121,7 @@ const Home = () => {
             variant="h6"
             sx={{ borderBottom: "0.5px solid gray", width: "max-content" }}
           >
-            Stages
+            Project Stages
           </Typography>
           <Featured />
         </Box>
@@ -100,7 +131,7 @@ const Home = () => {
           p={2}
           boxShadow={3}
           borderRadius={1}
-          sx={{width: {sm: "100%", md: "678px"}}}
+          sx={{ width: { sm: "100%", md: "678px" } }}
         >
           <Typography
             mb={2}
@@ -120,7 +151,7 @@ const Home = () => {
         p={2}
         boxShadow={3}
         borderRadius={1}
-        sx={{margin: {xs: "16px 0", sm: "0"}}}
+        sx={{ margin: { xs: "16px 0", sm: "0" } }}
       >
         <Typography
           mb={2}
@@ -132,7 +163,9 @@ const Home = () => {
         </Typography>
         <HomeList />
       </Box>
-      <Box sx={{display: {xs: 'none', sm: 'block'}, color: "transparent"}}>H</Box>
+      <Box sx={{ display: { xs: "none", sm: "block" }, color: "transparent" }}>
+        H
+      </Box>
     </>
   );
 };
