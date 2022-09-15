@@ -1,15 +1,13 @@
-import { Alert, Button, IconButton, Modal, TextField, Typography } from "@mui/material";
+import { Button, IconButton, Modal, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import CancelIcon from "@mui/icons-material/Cancel";
 import React from "react";
-import { useState } from "react";
 
 const TaskModal = ({
   taskFormInput,
   setTaskFormInput,
   close,
   taskModalOpen,
-  mode,
   subjectError,
   descError,
   addTask,

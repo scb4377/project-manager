@@ -12,7 +12,6 @@ import Sidebar from "./components/sidebar/Sidebar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Projects from "./components/projects/Projects";
 import Personnel from "./components/personnel/Personnel";
-import Settings from "./components/settings/Settings";
 import BugView from "./components/bug/BugView";
 import ProjectView from "./components/projects/ProjectView";
 import Profile from "./components/profile/Profile";
@@ -180,7 +179,6 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/projects" element={<Projects />} />
                         <Route path="/personnel" element={<Personnel />} />
-                        <Route path="/settings" element={<Settings />} />
                         <Route path="/bugview" element={<BugView />} />
                         <Route path="/projectview" element={<ProjectView />} />
                         <Route path="/profile" element={<Profile />} />

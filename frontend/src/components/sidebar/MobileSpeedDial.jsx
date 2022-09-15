@@ -8,17 +8,15 @@ import {
   AccountTree,
   Group,
   Home,
-  Settings,
   BugReport,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { Add as AddIcon } from "@mui/icons-material";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
-import MobileAdd from "./MobileAdd"
 
 const MobileSpeedDial = () => {
-  const { mode, setMode, open, setOpen } = useContext(AppContext);
+  const { mode, setMode, setOpen } = useContext(AppContext);
   const [menuOpen, setMenuOpen] = useState(false)
 
   const actions = [

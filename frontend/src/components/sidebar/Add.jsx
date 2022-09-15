@@ -10,7 +10,6 @@ import {
   MenuItem,
   Modal,
   Select,
-  Stack,
   styled,
   TextField,
   Tooltip,
@@ -43,7 +42,7 @@ const UserBox = styled(Box)({
 const Add = () => {
   const { open, setOpen } = useContext(AppContext);
   const [value, setValue] = useState(null);
-  const { projList, mode, user, pullBugs, bugList } = useContext(AppContext);
+  const { projList, mode, user, pullBugs } = useContext(AppContext);
 
   const initialState = {
     creator: user.id,

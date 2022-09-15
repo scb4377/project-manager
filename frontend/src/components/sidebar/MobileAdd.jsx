@@ -3,19 +3,15 @@ import {
   Box,
   Button,
   ButtonGroup,
-  Fab,
   FormControl,
   InputLabel,
   MenuItem,
   Modal,
   Select,
-  Stack,
   styled,
   TextField,
-  Tooltip,
   Typography,
 } from "@mui/material";
-import { Add as AddIcon } from "@mui/icons-material";
 import React, { useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
@@ -49,7 +45,7 @@ const Add = () => {
     dueBy: value,
     description: "",
     projId: "",
-    teamId: "62f6b2e9eb86a1acd86885c1",
+    teamId: user.teamId,
   };
   const [formInput, setFormInput] = useState(initialState);
 
@@ -96,14 +92,6 @@ const Add = () => {
 
   return (
     <>
-      {/* <Tooltip
-          onClick={(e) => setOpen(true)}
-          title="Add Bug"
-        >
-          <Fab aria-label="add">
-            <AddIcon  />
-          </Fab>
-        </Tooltip> */}
       <StyledModal
         open={open}
         onClose={(e) => setOpen(false)}
@@ -219,27 +207,6 @@ const Add = () => {
                 mode === "dark" ? "background.dark" : "background.default",
             }}
           >
-            {/* <InputLabel
-                id="demo-simple-select-label"
-                variant="standard"
-                size="small"
-              >
-                Team
-              </InputLabel>
-              <Select
-                required
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={formInput.teamId}
-                name="teamId"
-                onChange={handleChange}
-              >
-                {teamList.map((team) => (
-                  <MenuItem key={team._id} value={team._id}>
-                    {team.teamName}
-                  </MenuItem>
-                ))}
-              </Select> */}
           </FormControl>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
@@ -256,21 +223,12 @@ const Add = () => {
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
-          {/* <Stack direction="row" gap={1} mt={2} mb={3}>
-              <EmojiEmotionsIcon color="primary" />
-              <ImageIcon color="secondary" />
-              <VideoCameraBackIcon color="success" />
-              <PersonAddIcon color="error" />
-            </Stack> */}
           <ButtonGroup
             fullWidth
             variant="contained"
             aria-label="outlined primary button group"
           >
             <Button onClick={handleSubmit}>Post</Button>
-            {/* <Button sx={{ width: "100px" }}>
-                <DateRange />
-              </Button> */}
           </ButtonGroup>
         </Box>
       </StyledModal>

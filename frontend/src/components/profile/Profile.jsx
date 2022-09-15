@@ -7,8 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect } from "react";
-import { getMyProfile, updateProfile } from "./ProfileService";
+import { updateProfile } from "./ProfileService";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
 import { toast } from "react-toastify"
@@ -26,28 +25,14 @@ const StyledSpan = styled("span")({
 const Profile = () => {
   const { mode, setUser, user } = useContext(AppContext);
   const initialState = {
-    username: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    img: "",
+    username: user.username,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    phone: user.phone,
+    img: user.img,
   };
   const [formInput, setFormInput] = useState(initialState);
-
-  const setProfile = async () => {
-    let user = await getMyProfile();
-
-    if (user) {
-      setFormInput(user);
-    } else {
-      console.log("error");
-    }
-  };
-
-  useEffect(() => {
-    setProfile();
-  }, []);
 
   const handlePictureUpload = (e) => {
     // setPic(e.target.files[0])

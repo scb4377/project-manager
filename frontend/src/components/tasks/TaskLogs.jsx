@@ -4,7 +4,6 @@ import {
   ListItem,
   Typography,
   ListItemText,
-  Button,
   List,
   Collapse,
 } from "@mui/material";
@@ -13,22 +12,11 @@ import { Add } from "@mui/icons-material";
 import React from "react";
 import { useState } from "react";
 import { TransitionGroup } from "react-transition-group";
-import LogModal from "../bug/LogModal";
 import { useContext } from "react";
 import { AppContext } from "../../context/Context";
-import { useEffect } from "react";
 import TaskModal from "./TaskModal";
 import { AddTask, DeleteTask, GetMe } from "./TaskFunc";
 import { toast } from "react-toastify";
-//   import { GetLogs, AddLog, DeleteLog } from "./LogFuncs"
-
-const FRUITS = [
-  "🍏 Apple",
-  "🍌 Banana",
-  "🍍 Pineapple",
-  "🥥 Coconut",
-  "🍉 Watermelon",
-];
 
 function renderItem({ item, handleRemoveTask, formatDate }) {
   return (
